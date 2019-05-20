@@ -15,15 +15,14 @@ if (env == undefined || env == '' || env == null) {
 /**
  * 模块及组件引用
  */
+const fs = require('fs');
+const https = require('https');
 const express = require('express'); //express网络框架
 const request = require('request');
-var uuidv1 = require('uuid/v1');
 const bodyParser = require('body-parser');
-let serverData = require('./serverSerData');
-var getUserInfoSer = require('./user/getUserInfoSer');
-let jsSdkConfig = require('./jssdk/jsSdkConfigSer');
-
+const serverData = require('./serverSerData');
 require('./db/mongo');
+
 
 /**
  * 初始化操作
@@ -31,42 +30,27 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use("/resource", express.static(serverData.resourcePath));
+app.use("/public/assets", express.static(serverData.projectPath + '/assets'));
+app.use("/",express.static(serverData.projectPath));
 
-let getUserInfo = new getUserInfoSer();
-let jsSdk = new jsSdkConfig();
 
 /**
- * 获取JS Ticket的方法
+ * 开启http和https服务
  */
-app.get("/jsSdkConfig", function (req, res) {
-    jsSdk.signJsSdk(req, res)
-});
+var privateKey = fs.readFileSync(serverData.targetSetting.certConfig.key);
+var certificate = fs.readFileSync(serverData.targetSetting.certConfig.cert);
+var credentials = {key: privateKey, cert: certificate};
 
 /**
- * 获取微信用户详细信
- */
-app.get('/getWxUserInfo', function (req, res) {
-    getUserInfo.getWxUserInfo(req, res);
-});
-
-/**
- * 用于https请求时响应
+ * 如果部署到生产环境则用https协议打开端口，否则直接使用http协议端口
  */
 if(global.env=='prod'){
-    app.use("/public/assets", express.static('/root/powerh5/public/assets'));
-    app.use(express.static('/root/powerh5/public'));
-
+    https.createServer(credentials, app).listen(serverData.port); //开启http设置s配置
 }else {
-    app.use("/public/assets",express.static('G:\\SoftwareOutSourcing\\Peng\\H5\\movie\\五四青年主题\\project\\public\\assets'));
-    app.use(express.static('G:\\SoftwareOutSourcing\\Peng\\H5\\movie\\五四青年主题\\project\\public'));
+    app.listen(serverData.port);
 }
-app.use("/public/assets", express.static(serverData.basePath + '/assets'));
-app.use(express.static(serverData.basePath));
-
-
-//开启监听端口
-app.listen(3023);
-console.log('Server proxy on port 3023');
+console.log('Server proxy on port: ', serverData.port, ' , on environment: ', global.env);
 
 
 

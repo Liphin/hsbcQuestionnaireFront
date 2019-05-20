@@ -2,32 +2,32 @@
  * Created by Administrator on 2018/11/3.
  */
 var settingData = {
-    basePath: "/root/arbitration/front", //基础路径
-    domainName: "http://arbitration.liphin.com", //域名设置
+    basePath: "/root/hsbc/questionnaire/front", //基础路径
+    domainName: "http://questionnaire.hsbc.liphin.com", //域名设置
     isProd: true, //是否为生产环境
     frontPort: 3301, //前端port
 };
 //其他配置
-settingData['projectPath'] = settingData['basePath'] + "/output";
+settingData['projectPath'] = settingData['basePath'] + "/output/public";
 settingData['resourcePath'] = settingData['basePath'] + "/resource";
 
 
 //http和https服务开启
-var serverConfig = {
-    key: '/root/ca/https/node/cert-1541484604580_liphin.com.key',
-    cert:'/root/ca/https/node/cert-1541484604580_liphin.com.crt',
+var certConfig = {
+    key: '/root/hsbc/questionnaire/front/cert/questionnaire.hsbc.liphin.com.key',
+    cert:'/root/hsbc/questionnaire/front/cert/questionnaire.hsbc.liphin.com.crt',
 };
 
 
-//应用配置
+//小程序应用配置
 var appConfig = {
-    appid: 'wx8c0feed4f5d17636',
-    secret: 'da618efecb2ca815dd7779d2b93e43fc',
+    appid: 'wx6da8ac15c2cf2279',
+    secret: '36e8e2e94793348b2c7abf73fadcfa43',
 };
 
 
 module.exports = {
     settingData: settingData,
     appConfig: appConfig,
-    serverConfig:serverConfig,
+    certConfig:certConfig,
 };
