@@ -30,9 +30,10 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use("/aPLup5NS9o.txt", express.static(serverData.basePath) + "/aPLup5NS9o.txt");
 app.use("/resource", express.static(serverData.resourcePath));
 app.use("/public/assets", express.static(serverData.projectPath + '/assets'));
-app.use("/",express.static(serverData.projectPath));
+app.use("/", express.static(serverData.projectPath));
 
 
 /**
@@ -45,9 +46,9 @@ var credentials = {key: privateKey, cert: certificate};
 /**
  * 如果部署到生产环境则用https协议打开端口，否则直接使用http协议端口
  */
-if(global.env=='prod'){
+if (global.env == 'prod') {
     https.createServer(credentials, app).listen(serverData.port); //开启http设置s配置
-}else {
+} else {
     app.listen(serverData.port);
 }
 console.log('Server proxy on port: ', serverData.port, ' , on environment: ', global.env);
