@@ -30,7 +30,6 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use("/aPLup5NS9o.txt", express.static(serverData.basePath) + "/aPLup5NS9o.txt");
 app.use("/resource", express.static(serverData.resourcePath));
 app.use("/public/assets", express.static(serverData.projectPath + '/assets'));
 app.use("/", express.static(serverData.projectPath));
