@@ -19,7 +19,7 @@ designModule.factory('DesignDataSer', function () {
             data: {
                 required: '1',
                 title: '选择一种颜色',
-                selected: '0',
+                selected: 'none',
                 option: [
                     {text: '红色'},
                     {text: '黄色'},

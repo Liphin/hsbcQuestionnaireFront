@@ -294,7 +294,10 @@ iframe, embed {
 .widgetChoose:hover {
     border-color: #7bb0cc;
     background: #7bb0cc;
+}
 
+.blueColor{
+    color: #3376ab;
 }
 
 

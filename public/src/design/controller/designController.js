@@ -15,6 +15,34 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer) {
      */
     design.addOption= function () {
         WidgetSer.addOptions();
+    };
+
+    /**
+     * 删除选项操作
+     */
+    design.deleteOption = function (index) {
+        WidgetSer.deleteOption(index);
+    };
+
+    /**
+     * 调整位置，上移一个位置
+     */
+    design.positionUp = function (index) {
+        WidgetSer.positionUp(index);
+    };
+
+    /**
+     * 调整位置，下移一个位置
+     */
+    design.positionDown = function (index) {
+        WidgetSer.positionDown(index);
+    };
+
+    /**
+     * 设置或取消设置为默认选中选项
+     */
+    design.setAsDefault = function (index) {
+        WidgetSer.setAsDefault(index);
     }
 
 });
