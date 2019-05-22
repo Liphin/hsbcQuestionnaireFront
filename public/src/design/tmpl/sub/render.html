@@ -1,11 +1,17 @@
 <!--渲染页面-->
-<div style="display: flex;flex-direction: row;align-items: stretch;height: 100%">
-    <div style="background: #f4f4f4; flex: 1"></div>
-    <div style="background: white; width: 400px">
-        <div ng-repeat="value in design.sheet">
-            <!--单选题数据渲染页面-->
-            <design-render-single-select></design-render-single-select>
+<div style="display: flex;flex-direction: row;align-items: stretch;height: 100%; background: #f4f4f4; border: 1px solid gainsboro; border-width: 0 1px 0 1px">
+    <div style="flex: 1"></div>
+    <div class="scrollBar-7" style="overflow-y: auto;background: white; width: 400px;display: flex; padding: 20px 0; box-shadow: 0 0 7px #a8a8a8; margin-top: 15px; position: relative">
+        <div style="flex: 1"></div>
+        <div style="flex: 8">
+            <div ng-repeat="value in design.sheet">
+                <!--单选题数据渲染页面-->
+                <design-render-single-select></design-render-single-select>
+                <!--占位空间-->
+                <div style="width: 100%;height: 50px"></div>
+            </div>
         </div>
+        <div style="flex: 1"></div>
     </div>
-    <div style="background: #f4f4f4; flex: 1"></div>
+    <div style="flex: 1"></div>
 </div>

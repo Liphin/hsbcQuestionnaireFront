@@ -33,6 +33,16 @@ designModule.directive('designEdit', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 编辑页面头部
+ */
+designModule.directive('designHeader', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/header.html'
+    };
+}]);
+
 
 //***************************** 分别对组件edit和render的HTML页面数据进行渲染操作 ********************************
 designModule.directive('designRenderSingleSelect', ['$document', function ($document) {

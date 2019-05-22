@@ -11,17 +11,19 @@ designModule.factory('DesignDataSer', function () {
 
     };
 
+
     //问卷、表单页面
     let sheet = [
         {
             type: 'single_select',
             data: {
+                required: '1',
                 title: '选择一种颜色',
-                selected: 'red',
+                selected: '0',
                 option: [
-                    {text: '红色', value: 1},
-                    {text: '黄色', value: 2},
-                    {text: '橙色', value: 3},
+                    {text: '红色'},
+                    {text: '黄色'},
+                    {text: '橙色'},
                 ]
             },
         },
