@@ -1,0 +1,8 @@
+<!--单项选择题-->
+<div ng-if="value.type=='single_select'">
+    <div style="font-weight: bold">{{value.data.title}}</div>
+    <label ng-repeat="subValue in value.data.option">
+        <input type="radio" ng-model="value.data.selected" value="{{subValue.value}}">
+        <span style="font-weight: normal">{{subValue.text}}</span>
+    </label>
+</div>

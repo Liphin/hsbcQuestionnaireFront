@@ -1,0 +1,11 @@
+<!--渲染页面-->
+<div style="display: flex;flex-direction: row;align-items: stretch;height: 100%">
+    <div style="background: #f4f4f4; flex: 1"></div>
+    <div style="background: white; width: 400px">
+        <div ng-repeat="value in design.sheet">
+            <!--单选题数据渲染页面-->
+            <design-render-single-select></design-render-single-select>
+        </div>
+    </div>
+    <div style="background: #f4f4f4; flex: 1"></div>
+</div>

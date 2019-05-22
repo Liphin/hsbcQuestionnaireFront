@@ -1,0 +1,25 @@
+<!--单项选择题-->
+<div ng-if="design.sheet[design.overallData.editRenderIndex]['type']=='single_select'">
+
+    <!--题干信息输入描述-->
+    <div>
+        <span>题干：</span>
+        <textarea placeholder="请输入题干信息" ng-model="design.sheet[design.overallData.editRenderIndex]['data']['title']"></textarea>
+    </div>
+
+    <!--选项操作-->
+    <div>
+        <i class="fa fa-caret-right"></i>
+        <div>选项</div>
+        <span>添加</span>
+        <i class="fa fa-plus"></i>
+    </div>
+
+    <!--每个选项展示-->
+    <div>
+        <div ng-repeat="value in design.sheet[design.overallData.editRenderIndex]['data']['option']">
+            <input type="text" ng-model="value['text']">
+        </div>
+    </div>
+
+</div>
