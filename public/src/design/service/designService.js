@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.factory('DesignSer', function (OverallDataSer, PackSer) {
+designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, PackSer) {
 
     /**
      * 预览页面
@@ -14,11 +14,21 @@ designModule.factory('DesignSer', function (OverallDataSer, PackSer) {
      */
     let viewPage = function () {
         //1、拼装组件并生成HTML数据
-        let packHtmlData = PackSer.packSelectData();
+        let packWidgetHtmlData = PackSer.packSelectData();
+        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
 
         //2、保存该HTML到后台文件
-
-        //OverallDataSer.overallData.phoneView.showPhoneView = true;
+        let jsonData = {
+            uniqueId: 323232332,
+            htmlData: fullPhoneHtmlData,
+            dbData: DesignDataSer.sheet,
+        };
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetData, jsonData, function (result) {
+            if (result == 'OK') {
+                OverallDataSer.overallData.phoneView.viewSheetUrl = OverallDataSer.urlData.resourceBaseUrl + "html/323232332.html";
+                OverallDataSer.overallData.phoneView.showPhoneView = true;
+            }
+        });
     };
 
     /**

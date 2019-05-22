@@ -11,7 +11,7 @@ overallModule.factory('OverallSer', function ($rootScope, OverallDataSer, $locat
      */
     let initData = function () {
         //加载手机拼装页面数据
-        OverallGeneralSer.httpGetFiles(OverallDataSer.urlData.frontEndHttp.getPhoneHtmlFrame, function (result) {
+        OverallGeneralSer.httpGetFiles(OverallDataSer.urlData.getPhoneHtmlFrame, function (result) {
             OverallDataSer.overallData.phoneView.htmlFrameData = result;
         })
     };

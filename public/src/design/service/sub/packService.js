@@ -14,7 +14,7 @@ designModule.factory('PackSer', function (DesignDataSer) {
             let widget = DesignDataSer.sheet[i];
             switch (widget.type) {
                 case 'single_select': {
-                    phoneHtmlData += singleSelectPackage(widget);
+                    phoneHtmlData += singleSelectPackage(widget, i);
                     break;
                 }
             }
@@ -26,22 +26,25 @@ designModule.factory('PackSer', function (DesignDataSer) {
     /**
      * 打包单项选择题目的操作，返回打包后的HTML数据
      * @param widget
+     * @param i
      */
-    let singleSelectPackage = function (widget) {
+    let singleSelectPackage = function (widget, i) {
         let str = "<div style=\"font-weight: bold\">" + widget.data.title + "</div>";
-        for (let i in widget.data.option) {
+        str += "<div style=\"border: 1px solid gainsboro; border-radius: 7px ; margin-top: 10px\">";
+        for (let j in widget.data.option) {
             str += "<div style=\"border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px\">";
             str += "<label style=\"width: 100%;display: block\">";
-            str += "<input type=\"radio\" value=\"" + i + "\" name=\"" + widget.type + i + "\">";
-            str += "<span style=\"font-weight: normal\">" + widget.data.option[i] + "</span>";
+            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + i + "\">";
+            str += "<span style=\"font-weight: normal\">" + widget.data.option[j].text + "</span>";
             str += "</label>";
             str += "</div>";
         }
+        str += "</div>";
         return str;
     };
 
 
     return {
-        packSelectData:packSelectData,
+        packSelectData: packSelectData,
     }
 });

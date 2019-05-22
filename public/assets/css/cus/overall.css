@@ -133,12 +133,6 @@ body {
     color: grey;
 }
 
-/*富文本框上传视频时操作*/
-iframe, embed {
-    width: 350px !important;
-    height: 280px !important;
-}
-
 /*end demo-specific*/
 .loader {
     position: relative;

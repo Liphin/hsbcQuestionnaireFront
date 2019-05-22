@@ -115,16 +115,9 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     /**
-     * http post获取资源数据
+     * http post发送表单数据
      */
-    var httpPostData = function (url, obj, callback, markLoadData) {
-        //设置loading状态
-        if (markLoadData != undefined) {
-            OverallDataSer.overallData['loadingData'] = markLoadData;
-        } else {
-            OverallDataSer.overallData['loadingData'] = true;
-        }
-
+    let httpPostFormData = function (url, obj, callback) {
         //初始化表单数据
         var fd = new FormData();
         //动态装载数据
@@ -136,19 +129,23 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
             headers: {'Content-Type': undefined},
 
         }).success(function (response) {
-            if (response['status_code'] == 200) {
-                //返回正确操作后执行回调函数
-                callback(response['data']);
+            callback(response);
 
-            } else {
-                alert(OverallDataSer.overallData['requestDataErrorMsg'] + ".");
-            }
         }).error(function (err) {
-            alert(OverallDataSer.overallData['requestDataErrorMsg'] + ",");
+            alert(OverallDataSer.overallData.requestDataErrorMsg + ",");
+        });
+    };
 
-        }).finally(function () {
-            //设置loading状态
-            OverallDataSer.overallData['loadingData'] = false;
+
+    /**
+     * http post发送json数据
+     */
+    let httpPostJsonData = function (url, obj, callback) {
+        $http.post(url, obj).success(function (response) {
+            callback(response);
+
+        }).error(function (err) {
+            alert(OverallDataSer.overallData.requestDataErrorMsg + ",");
         });
     };
 
@@ -270,22 +267,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     };
 
 
-    /**
-     * 组装生成新闻时间
-     * @returns {string}
-     * @param dateTime
-     * @param optType
-     */
-    var generateSearchTime = function (dateTime, optType) {
-        if (optType == 1) {
-            var searchTime = dateTime + " 00:00:00";
-        }
-        else if (optType == 2) {
-            var searchTime = dateTime + " 23:59:59";
-        }
-
-        return searchTime;
-    };
 
     /**
      * http 请求错误返回的处理
@@ -340,7 +321,8 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
     return {
         httpGetFiles: httpGetFiles,
-        httpPostData: httpPostData,
+        httpPostFormData: httpPostFormData,
+        httpPostJsonData: httpPostJsonData,
         getTimeStamp: getTimeStamp,
         getCurrentDataTime: getCurrentDataTime,
         httpPostData2: httpPostData2,
@@ -349,7 +331,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         uploadResource: uploadResource,
         checkDataNotEmpty: checkDataNotEmpty,
         getNewCookiesExpireDate: getNewCookiesExpireDate,
-        generateSearchTime: generateSearchTime,
         alertHttpRequestError: alertHttpRequestError,
     }
 });

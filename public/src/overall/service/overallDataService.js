@@ -15,19 +15,20 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         phoneView:{
             showPhoneView: false, //是否展开手机页面
             htmlFrameData:'', //HTML框架页面
+            viewSheetUrl:'',//查看生成的表单页面url
         },
     };
 
     // Url系统各种文件获取的URL设置
     let baseUrlData = {
-        frontEndHttp: "http://127.0.0.1:3080/", //前端url
+        frontEndHttp: "http://127.0.0.1:3301/", //前端url
     };
 
     //http请求的具体路径
     let urlData = {
-        frontEndHttp: {
-            getPhoneHtmlFrame: baseUrlData.frontEndHttp + "assets/helper/phoneHtmlFrame.html", //手机框架HTML数据
-        }
+        getPhoneHtmlFrame: baseUrlData.frontEndHttp + "assets/helper/phoneHtmlFrame.html", //手机框架HTML数据
+        saveSheetData: baseUrlData.frontEndHttp + "saveSheetData", //保存表单设计数据
+        resourceBaseUrl: baseUrlData.frontEndHttp + "resource/", //保存表单设计数据
     };
 
     //用于sql注入filter
