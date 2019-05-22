@@ -5,44 +5,28 @@ var overallModule = angular.module('Angular');
 
 overallModule.factory('OverallDataSer', function ($rootScope) {
 
-    var overallData = {
+    let overallData = {
         'screen': {'width': '', 'height': ''},
         'loginStatus': false,
         'loadingData': false, //
         'requestDataErrorMsg': '尊敬的客户，服务出错，请稍后重试',
         'fileSuffix': ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'png', 'jpeg', 'jpg', 'gif', 'pfx', 'zip'], //文件后缀辅助数据
+
+        phoneView:{
+            showPhoneView: false, //是否展开手机页面
+            htmlFrameData:'', //HTML框架页面
+        },
     };
 
-    /* Url 系统各种文件获取的URL设置 */
-    var baseUrlData = {
-        'frontEndHttp': "http://127.0.0.1:3080/",
-        'ossHttp': 'https://output-service.oss-cn-shenzhen.aliyuncs.com',
+    // Url系统各种文件获取的URL设置
+    let baseUrlData = {
+        frontEndHttp: "http://127.0.0.1:3080/", //前端url
     };
 
-    // http请求的具体路径
-    var urlData = {
-        'frontEndHttp': {
-            'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',
-            'managerLogin': baseUrlData['frontEndHttp'] + 'managerLogin',
-            'uploadResource': baseUrlData['frontEndHttp'] + 'uploadResource',
-            'submitNewArbiData': baseUrlData['frontEndHttp'] + 'submitNewArbiData',
-            'getArbiList': baseUrlData['frontEndHttp'] + 'getArbiList',
-            'saveArbiInfo': baseUrlData['frontEndHttp'] + 'saveArbiInfo',
-            'viewArbiOpt': baseUrlData['frontEndHttp'] + 'viewArbiOpt',
-            'progressArbiOpt': baseUrlData['frontEndHttp'] + 'progressArbiOpt',
-            'withdrawArbiOpt': baseUrlData['frontEndHttp'] + 'withdrawArbiOpt',
-            'getResource': baseUrlData['frontEndHttp'] + 'resource',
-            'getArbiJson': baseUrlData['frontEndHttp'] + 'json',
-            'deleteBatchArbi': baseUrlData['frontEndHttp'] + 'deleteBatchArbi',
-
-
-            'getAllGdufsKnowledgeMysqlData': baseUrlData['frontEndHttp'] + 'getAllGdufsKnowledgeMysqlData',
-            'addVisitNewsData': baseUrlData['frontEndHttp'] + 'addVisitNewsData',
-            'getAllFillData': baseUrlData['frontEndHttp'] + 'getAllFillData',
-            'updateNodeInfo': baseUrlData['frontEndHttp'] + 'updateNodeInfo',
-            'getAllNodeAndLinksData': baseUrlData['frontEndHttp'] + 'getAllNodeAndLinksData',
-            // 'searchTargetNodes': baseUrlData['frontEndHttp'] + 'searchTargetNodes',
-            'gdufsNewsOssUrl': baseUrlData['ossHttp'] + '/gdufs/knowledge/',
+    //http请求的具体路径
+    let urlData = {
+        frontEndHttp: {
+            getPhoneHtmlFrame: baseUrlData.frontEndHttp + "assets/helper/phoneHtmlFrame.html", //手机框架HTML数据
         }
     };
 
@@ -59,10 +43,8 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
 
     var zIndexHelper = {
-        'loading': 500000,
-        'manager': 100,
-        'viewReport': 1000,
-        'viewPicture': 1001
+        loading: 5000,
+        phoneView: 1000
     };
 
     //电脑键盘按键操作

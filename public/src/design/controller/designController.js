@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer) {
+designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer) {
 
     let design = this;
     design.overallData = DesignDataSer.overallData;
@@ -43,6 +43,20 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer) {
      */
     design.setAsDefault = function (index) {
         WidgetSer.setAsDefault(index);
+    };
+
+
+    /**
+     * 预览页面数据结果
+     */
+    design.viewPage=function () {
+        DesignSer.viewPage();
     }
 
 });
+
+
+
+
+
+

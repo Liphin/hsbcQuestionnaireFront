@@ -38,6 +38,7 @@
     <script src="src/design/service/designDataService.js"></script>
     <script src="src/design/service/designService.js"></script>
     <script src="src/design/service/sub/widgetService.js"></script>
+    <script src="src/design/service/sub/packService.js"></script>
     <script src="src/design/controller/designController.js"></script>
 
     <title>问卷Demo</title>
@@ -45,7 +46,7 @@
 <body resize>
 
 <!--页面加载动画-->
-<div ng-if="loading" style="font-family: 微软雅黑;background: rgba(255,255,255,1);position: fixed;left: 0;right: 0; top: 0;bottom: 0;z-index:{{zIndexHelper['loading']}};text-align: center;">
+<div ng-if="loading" style="background: rgba(255,255,255,1);position: fixed;left: 0;right: 0; top: 0;bottom: 0;z-index:{{zIndexHelper['loading']}};text-align: center;">
     <div style="vertical-align: middle;display: inline-block">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -58,7 +59,7 @@
 </div>
 
 <!--具体渲染页面-->
-<div ng-view=""></div>
+<div ng-view="" style="font-family: 微软雅黑;"></div>
 
 </body>
 </html>

@@ -62,15 +62,15 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 若出现则返回false验证，否则返回true通过
      * @param content
      */
-    var sqlInjectFilter = function (content) {
-        //循环每个sql key word进行监测
-        for (var i in OverallDataSer.sqlVerify) {
-            if (String(content).indexOf(OverallDataSer.sqlVerify[i]) >= 0) {
-                return false;
-            }
-        }
-        return true;
-    };
+    // var sqlInjectFilter = function (content) {
+    //     //循环每个sql key word进行监测
+    //     for (var i in OverallDataSer.sqlVerify) {
+    //         if (String(content).indexOf(OverallDataSer.sqlVerify[i]) >= 0) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // };
 
 
     /**
@@ -99,85 +99,17 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     /**
-     * 设置需要添加完成动画时添加此句
-     */
-    var setSubmitAnimateSuccess = function (successWord) {
-        $rootScope['saveAnimate'] = true;
-        if (OverallGeneralSer.checkDataNotEmpty(successWord)) {
-            $rootScope['successWord'] = successWord;
-        } else {
-            $rootScope['successWord'] = "Save Successfully";
-        }
-        /*设置timeout时间为2秒，2秒后该$rootScope['saveAnimate']变为false，下次可通过再次变为true继续出现动画*/
-        $timeout(function () {
-            $rootScope['saveAnimate'] = false;
-        }, 1700);
-    };
-
-
-    /**
      * http get获取资源数据
      */
-    var httpGetFiles = function (url, callback, loader) {
-        //设置该loader加载项设置加载动画
-        if (loader != undefined) {
-            loader['status'] = true;
-        }
-
-        //设置loading状态
-        OverallDataSer.overallData['loadingData'] = true;
-        $http({
-            method: 'GET',
-            url: url
-        }).then(function successCallback(response) {
-            if (response['status'] == 200) {
-                //返回正确操作后执行回调函数
-                callback(response['data'])
-
-            } else {
-                alert(OverallDataSer.overallData['requestDataErrorMsg'] + ",.");
-            }
-        }, function errorCallback(err) {
-            alert(OverallDataSer.overallData['requestDataErrorMsg'] + ".," + err);
-
-        }).finally(function () {
-            if (loader != undefined) {
-                //关闭该加载动画
-                loader['status'] = false;
-            }
-        });
-    };
-
-
-    /**
-     * http get获取资源数据
-     */
-    var httpGetFiles2 = function (url, callback) {
-        OverallDataSer.overallData['loadingData'] = true;
+    let httpGetFiles = function (url, callback) {
         $http({
             method: 'Get',
             url: url,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            responseType: 'blob'
         }).success(function (result) {
-            var blob = new Blob([result], {type: 'application/octet-stream'});
-            //读取Blob数据
-            var reader = new FileReader();
-            reader.readAsText(blob, 'utf-8');
-            reader.onload = function (e) {
-                var strInline = reader.result.replace(/\s/g, ''); //把数据转为一行
-                var strNoComment = strInline.replace(/\/\*.+?\*\/|\/\/.*(?=[\n\r])/g, ''); //取消注释操作
-                var jsonDoc = JSON.parse(strNoComment); //json解析
-                OverallDataSer.overallData['loadingData'] = false; //重置loading状态
-                callback(jsonDoc);
-            }
+            callback(result);
 
         }).error(function (result) {
-            //console.log("download error：",result);
-            alert("很抱歉，获取约束文档失败，请稍后重试！" + JSON.stringify(result))
-
-        }).finally(function () {
-            OverallDataSer.overallData['loadingData'] = false;
+            alert("很抱歉，获取失败，请稍后重试！" + JSON.stringify(result))
         });
     };
 
@@ -407,7 +339,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     return {
-        httpGetFiles2: httpGetFiles2,
         httpGetFiles: httpGetFiles,
         httpPostData: httpPostData,
         getTimeStamp: getTimeStamp,
@@ -416,10 +347,8 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         httpPostData3: httpPostData3,
         uploadFileToYJW: uploadFileToYJW,
         uploadResource: uploadResource,
-        sqlInjectFilter: sqlInjectFilter,
         checkDataNotEmpty: checkDataNotEmpty,
         getNewCookiesExpireDate: getNewCookiesExpireDate,
-        setSubmitAnimateSuccess: setSubmitAnimateSuccess,
         generateSearchTime: generateSearchTime,
         alertHttpRequestError: alertHttpRequestError,
     }

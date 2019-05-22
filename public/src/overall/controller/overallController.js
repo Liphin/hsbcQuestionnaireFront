@@ -12,8 +12,9 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
     $rootScope.saveAnimate = false;
     $rootScope.overallData = OverallDataSer.overallData;
     $rootScope.zIndexHelper = OverallDataSer.zIndexHelper;
-    //OverallSer.getSqlInjectFilterWords(); //获取所有sql注入key words匹配对
 
+    //全局应用初始化方法
+    OverallSer.initData();
 
     /**
      * 切换路由path

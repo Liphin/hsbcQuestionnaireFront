@@ -20,7 +20,12 @@ const https = require('https');
 const express = require('express'); //express网络框架
 const request = require('request');
 const bodyParser = require('body-parser');
+
+/**
+ * 自定义模块数据
+ */
 const serverData = require('./serverSerData');
+const designRouter = require('./router/designSer');
 require('./db/mongo');
 
 
@@ -30,6 +35,9 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+//路由数据访问
+app.use(designRouter);
+//资源数据访问
 app.use("/resource", express.static(serverData.resourcePath));
 app.use("/public/assets", express.static(serverData.projectPath + '/assets'));
 app.use("/", express.static(serverData.projectPath));

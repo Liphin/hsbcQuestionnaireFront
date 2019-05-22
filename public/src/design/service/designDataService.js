@@ -6,9 +6,7 @@
 designModule.factory('DesignDataSer', function () {
 
     let overallData = {
-
         editRenderIndex: 0,
-
     };
 
 
@@ -17,7 +15,6 @@ designModule.factory('DesignDataSer', function () {
         {
             type: 'single_select',
             data: {
-                required: '1',
                 title: '选择一种颜色',
                 selected: 'none',
                 option: [
