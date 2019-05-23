@@ -18,9 +18,15 @@
             </div>
 
             <!--展示预览HTML界面-->
-            <div class="scrollBar-8"
-                 style="background: white;text-align: left;overflow-y: auto;overflow-x: hidden;position: absolute; top: 50px;width: 336px;bottom: 67px;display: block;border: 1px solid #C4CEDC;border-width: 1px 0 1px 0">
-                <iframe ng-src="{{overallData.phoneView.viewSheetUrl}}" style="border: none; width: 100%; height: 100%"></iframe>
+            <!--<div class="scrollBar-8"-->
+                 <!--style="background: white;text-align: left;overflow-y: auto;overflow-x: hidden;position: absolute; top: 50px;width: 336px;bottom: 67px;display: block;border: 1px solid #C4CEDC;border-width: 1px 0 1px 0">-->
+                <!--<iframe ng-src="{{overallData.phoneView.viewSheetUrl}}" style="border: none; width: 100%; height: 100%"></iframe>-->
+            <!--</div>-->
+            <!--直接在页面上渲染，无需保存文件操作，更快捷更好用户体验感-->
+            <div class="scrollBar-7" style="background: white;text-align: left;overflow-y: auto;overflow-x: hidden;position: absolute; top: 50px;width: 336px;bottom: 67px;display: flex;border: 1px solid #C4CEDC;border-width: 1px 0 1px 0">
+                <div style="flex: 1"></div>
+                <div style="flex: 8" phone-view></div>
+                <div style="flex: 1"></div>
             </div>
 
             <!--手机图标尾部标识-->

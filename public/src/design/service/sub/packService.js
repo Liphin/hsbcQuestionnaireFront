@@ -29,7 +29,8 @@ designModule.factory('PackSer', function (DesignDataSer) {
      * @param i
      */
     let singleSelectPackage = function (widget, i) {
-        let str = "<div style=\"font-weight: bold\">" + widget.data.title + "</div>";
+        let str = "<div style=\"padding: 20px 0;\">";
+        str += "<div style=\"font-weight: bold\">" + widget.data.title + "</div>";
         str += "<div style=\"border: 1px solid gainsboro; border-radius: 7px ; margin-top: 10px\">";
         for (let j in widget.data.option) {
             str += "<div style=\"border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px\">";
@@ -39,7 +40,7 @@ designModule.factory('PackSer', function (DesignDataSer) {
             str += "</label>";
             str += "</div>";
         }
-        str += "</div>";
+        str += "</div></div>";
         return str;
     };
 

@@ -7,12 +7,25 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
     /**
      * 预览页面
-     * 1、拼装组件并生成HTML数据
-     * 2、保存该HTML到后台文件
-     * 3、展示前端手机预览页面，iframe的url指向该地址
-     * 4、生成携带参数的的小程序二维码
      */
     let viewPage = function () {
+        //1、拼装组件并生成HTML数据
+        let packWidgetHtmlData = PackSer.packSelectData();
+        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
+
+        //装载页面HTML到手机框中，并展开手机框面板
+        OverallDataSer.overallData.phoneView.sheetHtmlData = fullPhoneHtmlData;
+        OverallDataSer.overallData.phoneView.showPhoneView = true;
+    };
+
+    /**
+     * 保存页面信息
+     * 1、拼装组件并生成HTML数据
+     * 2、保存该HTML到后台文件
+     * 3、展示前端手机预览页面，iframe的url指向该地址 TODO
+     * 4、生成携带参数的的小程序二维码 TODO
+     */
+    let savePage = function () {
         //1、拼装组件并生成HTML数据
         let packWidgetHtmlData = PackSer.packSelectData();
         let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
@@ -31,15 +44,9 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
         });
     };
 
-    /**
-     * 保存页面信息
-     */
-    let savePage = function () {
-
-    };
-
 
     return {
+        savePage:savePage,
         viewPage: viewPage,
     }
 });

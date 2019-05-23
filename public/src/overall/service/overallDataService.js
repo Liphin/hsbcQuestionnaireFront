@@ -15,6 +15,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         phoneView:{
             showPhoneView: false, //是否展开手机页面
             htmlFrameData:'', //HTML框架页面
+            sheetHtmlData:'', //装载预览时查看的HTML数据
             viewSheetUrl:'',//查看生成的表单页面url
         },
     };

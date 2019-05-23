@@ -45,3 +45,16 @@ overallModule.directive('resize', ['$window', 'OverallDataSer', function ($windo
         });
     }
 }]);
+
+
+/**
+ * 手机页面上预览表单数据
+ */
+overallModule.directive('phoneView', ['OverallDataSer', function (OverallDataSer) {
+    return {
+        restrict: 'A',
+        link: function (scope, ele, attrs) {
+            ele.html(OverallDataSer.overallData.phoneView.sheetHtmlData);
+        }
+    };
+}]);
