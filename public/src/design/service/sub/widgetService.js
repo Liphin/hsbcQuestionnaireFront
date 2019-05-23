@@ -5,6 +5,22 @@
 designModule.factory('WidgetSer', function (DesignDataSer) {
 
     /**
+     * 添加新组件操作
+     * @param type
+     */
+    let addNewWidget = function (type) {
+        DesignDataSer.sheet.push(angular.copy(DesignDataSer.newWidgetData[type]));
+    };
+
+    /**
+     * 编辑该组件的数据
+     */
+    let editWidgetData = function (index) {
+        DesignDataSer.overallData.editRenderIndex = index;
+    };
+
+
+    /**
      * 添加选项操作
      */
     let addOptions = function () {
@@ -91,6 +107,8 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
 
 
     return {
+        editWidgetData: editWidgetData,
+        addNewWidget: addNewWidget,
         addOptions: addOptions,
         deleteOption: deleteOption,
         positionUp: positionUp,

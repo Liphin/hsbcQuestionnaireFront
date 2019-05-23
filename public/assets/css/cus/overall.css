@@ -294,4 +294,7 @@ body {
     color: #3376ab;
 }
 
-
+/** 组件编辑页面在鼠标放上去时，背景颜色发生变化 */
+.widgetMouseOn:hover{
+    background: #fafafa;
+}

@@ -66,9 +66,28 @@ designModule.factory('DesignDataSer', function () {
         }
     ];
 
+    /**
+     * 新添加组件后填充的数据
+     */
+    let newWidgetData = {
+        single_select:{
+            type: 'single_select',
+            data: {
+                title: '这里输入题干信息',
+                selected: 'none',
+                option: [
+                    {text: '选项1'},
+                    {text: '选项2'},
+                    {text: '选项3'},
+                ]
+            },
+        }
+    };
+
     return {
         overallData: overallData,
         widget: widget, //所有可选择的组件
         sheet: sheet, //问卷、表单页面
+        newWidgetData:newWidgetData, //新添加的组件填充数据
     }
 });

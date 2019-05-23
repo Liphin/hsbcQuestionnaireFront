@@ -11,6 +11,20 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
     design.sheet = DesignDataSer.sheet;
 
     /**
+     * 添加新组件的操作
+     */
+    design.addNewWidget=function (type) {
+        WidgetSer.addNewWidget(type);
+    };
+
+    /**
+     * 编辑该组件的数据
+     */
+    design.editWidgetData = function (index) {
+        WidgetSer.editWidgetData(index)
+    };
+
+    /**
      * 添加选项操作
      */
     design.addOption= function () {

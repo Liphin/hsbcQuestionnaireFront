@@ -1,17 +1,21 @@
 <!--渲染页面-->
 <div style="display: flex;flex-direction: row;align-items: stretch;height: 100%; background: #f4f4f4; border: 1px solid gainsboro; border-width: 0 1px 0 1px">
     <div style="flex: 1"></div>
-    <div class="scrollBar-7" style="overflow-y: auto;background: white; width: 400px;display: flex; padding: 20px 0; box-shadow: 0 0 7px #a8a8a8; margin-top: 15px; position: relative">
-        <div style="flex: 1"></div>
-        <div style="flex: 8">
-            <div ng-repeat="value in design.sheet">
+    <div class="scrollBar-7"
+         style="overflow-y: auto;background: white; width: 400px; padding: 20px 0; box-shadow: 0 0 7px #a8a8a8; margin-top: 15px; ">
+        <div class="widgetMouseOn" ng-click="design.editWidgetData($index)"
+             ng-repeat="value in design.sheet track by $index" style="position: relative; display: flex;">
+            <div style="flex: 1"></div>
+            <div style="flex: 8">
+                <!--占位空间-->
+                <div style="width: 100%;height: 20px"></div>
                 <!--单选题数据渲染页面-->
                 <design-render-single-select></design-render-single-select>
                 <!--占位空间-->
-                <div style="width: 100%;height: 50px"></div>
+                <div style="width: 100%;height: 20px"></div>
             </div>
+            <div style="flex: 1"></div>
         </div>
-        <div style="flex: 1"></div>
     </div>
     <div style="flex: 1"></div>
 </div>
