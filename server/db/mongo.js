@@ -5,7 +5,7 @@
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
-const dbArbitration = 'arbitration';
+const dbArbitration = 'hsbc';
 
 /**
  * 连接数据库操作

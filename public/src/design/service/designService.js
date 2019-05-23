@@ -19,7 +19,7 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
         //2、保存该HTML到后台文件
         let jsonData = {
-            uniqueId: 323232332,
+            uniqueId: '5f2f48a0-7d2f-11e9-aac2-51d42dd428f6',
             htmlData: fullPhoneHtmlData,
             dbData: DesignDataSer.sheet,
         };
