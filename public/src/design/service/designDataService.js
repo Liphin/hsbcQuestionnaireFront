@@ -13,17 +13,16 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'single_select',
+            type: 'multi_select',
             data: {
-                title: '选择一种颜色',
-                selected: 'none',
+                title: '这里输入题干信息',
                 option: [
-                    {text: '红色'},
-                    {text: '黄色'},
-                    {text: '橙色'},
+                    {text: '选项1', status: true},
+                    {text: '选项2', status: false},
+                    {text: '选项3', status: false},
                 ]
             },
-        },
+        }
     ];
 
 
@@ -79,6 +78,17 @@ designModule.factory('DesignDataSer', function () {
                     {text: '选项1'},
                     {text: '选项2'},
                     {text: '选项3'},
+                ]
+            },
+        },
+        multi_select:{
+            type: 'multi_select',
+            data: {
+                title: '这里输入题干信息',
+                option: [
+                    {text: '选项1', status: true},
+                    {text: '选项2', status: false},
+                    {text: '选项3', status: false},
                 ]
             },
         }

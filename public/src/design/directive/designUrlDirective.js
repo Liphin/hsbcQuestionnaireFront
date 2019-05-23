@@ -45,6 +45,7 @@ designModule.directive('designHeader', ['$document', function ($document) {
 
 
 //***************************** 分别对组件edit和render的HTML页面数据进行渲染操作 ********************************
+//single_select
 designModule.directive('designRenderSingleSelect', ['$document', function ($document) {
     return {
         restrict: 'E',
@@ -58,6 +59,19 @@ designModule.directive('designEditSingleSelect', ['$document', function ($docume
     };
 }]);
 
+//multi_select
+designModule.directive('designRenderMultiSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/multi_select.html'
+    };
+}]);
+designModule.directive('designEditMultiSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/multi_select.html'
+    };
+}]);
 
 
 
