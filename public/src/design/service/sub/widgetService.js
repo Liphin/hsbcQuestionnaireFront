@@ -79,6 +79,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 }
                 break;
             }
+            case 'matrix_fill':{
+                widget.data.option.push({text:'新项', value:''});
+                break;
+            }
         }
     };
 

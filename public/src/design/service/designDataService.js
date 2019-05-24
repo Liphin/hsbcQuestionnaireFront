@@ -13,25 +13,15 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'matrix_multi_select',
+            type: 'matrix_fill',
             data: {
-                required: true,
+                required: true, //必答、非必答选项
                 title: '这里输入题干信息',
                 option: [
-                    {text: '速度快'},
-                    {text: '高精准'},
-                    {text: '信息全'},
+                    {text: '姓名', value:''},
+                    {text: '国籍', value:''},
+                    {text: '工作', value:''}
                 ],
-                choice: [
-                    {
-                        text: '百度',
-                        selected: [],
-                    },
-                    {
-                        text: '谷歌',
-                        selected: [],
-                    },
-                ]
             }
         }
     ];
@@ -224,7 +214,31 @@ designModule.factory('DesignDataSer', function () {
                     },
                 ]
             }
-        }
+        },
+
+        //*******************************************************************
+        //单项填空
+        single_fill: {
+            type: 'single_fill',
+            data: {
+                required: true, //必答、非必答选项
+                title: '这里输入题干信息',
+                value: '',
+            }
+        },
+        //矩阵填空
+        matrix_fill: {
+            type: 'matrix_fill',
+            data: {
+                required: true, //必答、非必答选项
+                title: '这里输入题干信息',
+                option: [
+                    {text: '姓名', value:''},
+                    {text: '国籍', value:''},
+                    {text: '工作', value:''}
+                ],
+            }
+        },
     };
 
     return {

@@ -1,7 +1,7 @@
 <!--单项选择题-->
 <div ng-if="value.type=='pull_single_select'">
     <div style="font-weight: bold">{{value.data.title}}</div>
-    <div style="border: 1px solid gainsboro; border-radius: 7px;margin-top: 10px">
+    <div style="margin-top: 10px">
         <select class="form-control" ng-model="value.data.selected">
             <option ng-repeat="subValue in value.data.option track by $index" value="{{$index}}">{{subValue.text}}</option>
         </select>

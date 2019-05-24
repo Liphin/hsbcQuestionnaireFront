@@ -157,4 +157,30 @@ designModule.directive('designEditMatrixMultiSelect', ['$document', function ($d
     };
 }]);
 
+//single_fill
+designModule.directive('designRenderSingleFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/single_fill.html'
+    };
+}]);
+designModule.directive('designEditSingleFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/single_fill.html'
+    };
+}]);
 
+//matrix_fill
+designModule.directive('designRenderMatrixFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/matrix_fill.html'
+    };
+}]);
+designModule.directive('designEditMatrixFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/matrix_fill.html'
+    };
+}]);

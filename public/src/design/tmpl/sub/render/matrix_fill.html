@@ -1,0 +1,19 @@
+<!--单项选择题-->
+<div ng-if="value.type=='matrix_fill'">
+    <div style="font-weight: bold">{{value.data.title}}</div>
+    <div style="margin-top: 10px">
+        <table class="table">
+            <tbody>
+            <tr ng-repeat="subValue in value.data.option track by $index">
+                <td style="padding: 12px; text-align: center; border: none">
+                    {{subValue.text}}
+                </td>
+
+                <td style="padding: 8px; border: none;">
+                    <input type="text" class="form-control" ng-model="subValue.value">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
