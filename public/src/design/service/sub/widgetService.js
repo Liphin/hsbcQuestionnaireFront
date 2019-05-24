@@ -70,6 +70,15 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 widget.data.option.push({text: '新选项', value: widget.data.option.length});
                 break;
             }
+            case 'matrix_multi_select': {
+                if (param == 'choice') {
+                    widget.data.choice.push({text: '新项', selected: []})
+
+                } else if (param == 'option') {
+                    widget.data.option.push({text: '子项'})
+                }
+                break;
+            }
         }
     };
 
