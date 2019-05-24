@@ -15,6 +15,7 @@ designModule.factory('DesignDataSer', function () {
         {
             type: 'matrix_single_select',
             data: {
+                required: true,
                 title: '这里输入题干信息',
                 option: [
                     {text: '极好'},
@@ -90,6 +91,7 @@ designModule.factory('DesignDataSer', function () {
         single_select: {
             type: 'single_select',
             data: {
+                required: true, //必答、非必答选项
                 title: '这里输入题干信息',
                 selected: 'none',
                 option: [
@@ -102,6 +104,7 @@ designModule.factory('DesignDataSer', function () {
         multi_select: {
             type: 'multi_select',
             data: {
+                required: true,
                 title: '这里输入题干信息',
                 option: [
                     {text: '选项1', status: true},
@@ -113,6 +116,7 @@ designModule.factory('DesignDataSer', function () {
         matrix_single_select: {
             type: 'matrix_single_select',
             data: {
+                required: true,
                 title: '这里输入题干信息',
                 option: [
                     {text: '极好'},

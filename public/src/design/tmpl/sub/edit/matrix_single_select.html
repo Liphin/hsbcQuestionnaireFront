@@ -7,12 +7,12 @@
         <div style="border: 1px solid gainsboro;border-radius: 5px; padding: 15px; width: 400px">
             <span style="font-weight: bold; color: #3376ab; font-size: 16px">必答题：</span>
             <label>
-                <input type="radio" value="1"
+                <input type="radio" ng-value="true"
                        ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
                 <span style="font-weight: normal">必答</span>
             </label>
             <label style="margin-left: 10px">
-                <input type="radio" value="0"
+                <input type="radio" ng-value="false"
                        ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
                 <span style="font-weight: normal">非必答</span>
             </label>
