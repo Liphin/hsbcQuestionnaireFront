@@ -44,6 +44,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 widget.data.option.push({'text': '新选项', status: false});
                 break;
             }
+            case 'single_scale': {
+                widget.data.option.push({'text': '新项', value: widget.data.option.length});
+                break;
+            }
             case 'matrix_single_select': {
                 if (param == 'choice') {
                     widget.data.choice.push({text: '新项', selected: 'none'})

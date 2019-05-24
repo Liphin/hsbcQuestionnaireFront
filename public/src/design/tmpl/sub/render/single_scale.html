@@ -1,0 +1,23 @@
+<!--量标题-->
+<div ng-if="value.type=='single_scale'">
+    <div style="font-weight: bold">{{value.data.title}}</div>
+    <div style="margin-top: 10px">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td style="text-align: center;border: none">{{value.data.option[0].text}}</td>
+                <td colspan="{{value.data.option.length-2}}" style="border: none"></td>
+                <td style="text-align: center;border: none">{{value.data.option[value.data.option.length-1].text}}</td>
+            </tr>
+            <tr>
+                <td ng-repeat="subValue in value.data.option track by $index" style="padding: 0">
+                    <label style="width: 100%; text-align: center; padding: 8px">
+                        <input type="radio" ng-model="value.data.selected" value="{{subValue.value}}">
+                        <span style="font-weight: normal">{{subValue.value}}</span>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

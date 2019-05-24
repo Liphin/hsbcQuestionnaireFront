@@ -101,7 +101,19 @@ designModule.directive('designEditMatrixSingleSelect', ['$document', function ($
     };
 }]);
 
-
+//single_scale
+designModule.directive('designRenderSingleScale', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/single_scale.html'
+    };
+}]);
+designModule.directive('designEditSingleScale', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/single_scale.html'
+    };
+}]);
 
 
 
