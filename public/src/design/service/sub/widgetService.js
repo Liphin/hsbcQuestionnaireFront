@@ -66,6 +66,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 }
                 break;
             }
+            case 'pull_single_select':{
+                widget.data.option.push({text: '新选项', value: widget.data.option.length});
+                break;
+            }
         }
     };
 
@@ -131,6 +135,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
         switch (widget.type) {
             case 'multi_select': {
                 widget.data[param][index].status = !widget.data[param][index].status;
+                break;
+            }
+            case 'pull_single_select':{
+                widget.data.selected = index.toString();
                 break;
             }
             default:{

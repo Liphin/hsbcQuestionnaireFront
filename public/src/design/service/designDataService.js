@@ -13,28 +13,17 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'matrix_single_scale',
+            type: 'pull_single_select',
             data: {
-                required: true,
+                required: true, //必答、非必答选项
                 title: '这里输入题干信息',
+                selected: '0',
                 option: [
-                    {text: '极差', value: 0},
-                    {text: '不满', value: 1},
-                    {text: '一般', value: 2},
-                    {text: '满意', value: 3},
-                    {text: '极好', value: 4},
-                ],
-                choice: [
-                    {
-                        text: '外观',
-                        selected: [], //里面对应option中的index对应true（选中）or false（不选中）状态
-                    },
-                    {
-                        text: '功能',
-                        selected: [],
-                    },
+                    {text: '选项1'},
+                    {text: '选项2'},
+                    {text: '选项3'},
                 ]
-            }
+            },
         }
     ];
 
@@ -82,6 +71,7 @@ designModule.factory('DesignDataSer', function () {
      * 新添加组件后填充的数据
      */
     let newWidgetData = {
+        //*******************************************************************
         //文本描述
         paragraph: {
             type: 'paragraph',
@@ -89,6 +79,8 @@ designModule.factory('DesignDataSer', function () {
                 html: '<p><span>请输入相关文本信息描述</span></p>'
             },
         },
+
+        //*******************************************************************
         //单选题
         single_select: {
             type: 'single_select',
@@ -119,19 +111,7 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
-        //多选题
-        multi_select: {
-            type: 'multi_select',
-            data: {
-                required: true,
-                title: '这里输入题干信息',
-                option: [
-                    {text: '选项1', status: true},
-                    {text: '选项2', status: false},
-                    {text: '选项3', status: false},
-                ]
-            },
-        },
+
         //矩阵单选
         matrix_single_select: {
             type: 'matrix_single_select',
@@ -181,6 +161,35 @@ designModule.factory('DesignDataSer', function () {
                     },
                 ]
             }
+        },
+        //下拉单选题
+        pull_single_select: {
+            type: 'pull_single_select',
+            data: {
+                required: true, //必答、非必答选项
+                title: '这里输入题干信息',
+                selected: '0',
+                option: [
+                    {text: '选项1'},
+                    {text: '选项2'},
+                    {text: '选项3'},
+                ]
+            },
+        },
+
+        //*******************************************************************
+        //多选题
+        multi_select: {
+            type: 'multi_select',
+            data: {
+                required: true,
+                title: '这里输入题干信息',
+                option: [
+                    {text: '选项1', status: true},
+                    {text: '选项2', status: false},
+                    {text: '选项3', status: false},
+                ]
+            },
         },
         //矩阵多选
         matrix_multi_select: {

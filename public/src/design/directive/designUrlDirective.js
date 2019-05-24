@@ -129,7 +129,19 @@ designModule.directive('designEditMatrixSingleScale', ['$document', function ($d
     };
 }]);
 
-
+//pull_single_scale
+designModule.directive('designRenderPullSingleSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/pull_single_select.html'
+    };
+}]);
+designModule.directive('designEditPullSingleSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/pull_single_select.html'
+    };
+}]);
 
 
 
