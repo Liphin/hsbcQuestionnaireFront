@@ -87,6 +87,19 @@ designModule.directive('designEditMultiSelect', ['$document', function ($documen
     };
 }]);
 
+//matrix_single_select
+designModule.directive('designRenderMatrixSingleSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/matrix_single_select.html'
+    };
+}]);
+designModule.directive('designEditMatrixSingleSelect', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/matrix_single_select.html'
+    };
+}]);
 
 
 

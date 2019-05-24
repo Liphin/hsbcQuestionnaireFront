@@ -36,7 +36,7 @@
                 <span style="font-weight: bold; color: #3376ab;font-size: 16px">选项：</span>
             </div>
             <!--添加新的选项操作-->
-            <div ng-click="design.addOption()"
+            <div ng-click="design.addOption('option')"
                  style="border: 1px solid #d0d0d0; border-radius: 5px; padding: 3px 12px;margin-left: 23px; font-size: 13px; cursor: pointer; position: relative; top: -3px">
                 <span style="">添加</span>
                 <i class="fa fa-plus" style="position: relative; top: 1px; left: 3px"></i>
@@ -57,13 +57,13 @@
                 <input type="text" ng-model="value['text']"
                        style="border: 1px solid gainsboro;width: 220px; outline: none;padding: 3px 12px; font-size: 14px"/>
                 <div style="margin-left: 14px; color: #9a9a9a; font-size: 18px; display: inline-block">
-                    <i ng-click="design.setAsDefault($index)" style="cursor: pointer;" title="默认选中状态"
+                    <i ng-click="design.setAsDefault($index,'option')" style="cursor: pointer;" title="默认选中状态"
                        ng-class="{'fa fa-check-circle-o':design.sheet[design.overallData.editRenderIndex].data.selected==$index,'fa fa-circle-o':design.sheet[design.overallData.editRenderIndex].data.selected!=$index}"></i>
-                    <i ng-click="design.positionUp($index)" class="fa fa-arrow-circle-o-up"
+                    <i ng-click="design.positionUp($index,'option')" class="fa fa-arrow-circle-o-up"
                        style="margin-left: 14px;cursor: pointer" title="选项上移"></i>
-                    <i ng-click="design.positionDown($index)" class="fa fa-arrow-circle-o-down"
+                    <i ng-click="design.positionDown($index,'option')" class="fa fa-arrow-circle-o-down"
                        style="margin-left: 14px;cursor: pointer" title="选项下移"></i>
-                    <i ng-click="design.deleteOption($index)" class="fa fa-trash"
+                    <i ng-click="design.deleteOption($index,'option')" class="fa fa-trash"
                        style="margin-left: 14px;cursor: pointer" title="删除"></i>
                 </div>
             </div>

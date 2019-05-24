@@ -163,7 +163,7 @@ designModule.directive('richTextEditor', ['DesignDataSer', function (DesignDataS
              */
             let refreshData = function () {
                 scope.$apply(function () {
-                    DesignDataSer.sheet[DesignDataSer.overallData.editRenderIndex].html = ele.summernote("code");
+                    DesignDataSer.sheet[DesignDataSer.overallData.editRenderIndex].data.html = ele.summernote("code");
                 });
             };
 
@@ -193,7 +193,6 @@ designModule.directive('richTextEditor', ['DesignDataSer', function (DesignDataS
             //监听富文本框内容变化事件
             ele.on('summernote.change', function (we, contents, $editable) {
                 //第一次进入summernote后无需change监听，否则会重复执行angularjs的digest
-                console.log('enter', summernoteInitMark)
                 if (!summernoteInitMark) {
                     //更新数据操作
                     refreshData();
@@ -210,7 +209,7 @@ designModule.directive('richTextEditor', ['DesignDataSer', function (DesignDataS
                 if (newValue && newValue != '') {
                     summernoteInitMark = true;
                     //初始化富文本框HTML内容
-                    ele.summernote('code', DesignDataSer.sheet[DesignDataSer.overallData.editRenderIndex].html); //加载初始化的code
+                    ele.summernote('code', DesignDataSer.sheet[DesignDataSer.overallData.editRenderIndex].data.html); //加载初始化的code
                 }
             });
         },

@@ -13,8 +13,27 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'paragraph',
-            html:'<p><span>请输入相关文本信息描述</span></p>',
+            type: 'matrix_single_select',
+            data: {
+                title: '这里输入题干信息',
+                option: [
+                    {text: '极好'},
+                    {text: '满意'},
+                    {text: '一般'},
+                    {text: '不满'},
+                    {text: '极差'}
+                ],
+                choice: [
+                    {
+                        text: '外观',
+                        selected: 'none',
+                    },
+                    {
+                        text: '功能',
+                        selected: 'none',
+                    },
+                ]
+            }
         }
     ];
 
@@ -64,7 +83,9 @@ designModule.factory('DesignDataSer', function () {
     let newWidgetData = {
         paragraph: {
             type: 'paragraph',
-            html:'<p><span>请输入相关文本信息描述</span></p>',
+            data: {
+                html: '<p><span>请输入相关文本信息描述</span></p>'
+            },
         },
         single_select: {
             type: 'single_select',
@@ -89,6 +110,29 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
+        matrix_single_select: {
+            type: 'matrix_single_select',
+            data: {
+                title: '这里输入题干信息',
+                option: [
+                    {text: '极好'},
+                    {text: '满意'},
+                    {text: '一般'},
+                    {text: '不满'},
+                    {text: '极差'}
+                ],
+                choice: [
+                    {
+                        text: '外观',
+                        selected: 'none',
+                    },
+                    {
+                        text: '功能',
+                        selected: 'none',
+                    },
+                ]
+            }
+        }
 
     };
 

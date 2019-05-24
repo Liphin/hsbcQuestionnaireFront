@@ -17,6 +17,7 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
         WidgetSer.addNewWidget(type);
     };
 
+
     /**
      * 编辑该组件的数据
      */
@@ -27,29 +28,29 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
     /**
      * 添加选项操作
      */
-    design.addOption= function () {
-        WidgetSer.addOptions();
+    design.addOption= function (param) {
+        WidgetSer.addOptions(param);
     };
 
     /**
      * 删除选项操作
      */
-    design.deleteOption = function (index) {
-        WidgetSer.deleteOption(index);
+    design.deleteOption = function (index,param) {
+        WidgetSer.deleteOption(index,param);
     };
 
     /**
      * 调整位置，上移一个位置
      */
-    design.positionUp = function (index) {
-        WidgetSer.positionUp(index);
+    design.positionUp = function (index, param) {
+        WidgetSer.positionUp(index, param);
     };
 
     /**
      * 调整位置，下移一个位置
      */
-    design.positionDown = function (index) {
-        WidgetSer.positionDown(index);
+    design.positionDown = function (index,param) {
+        WidgetSer.positionDown(index,param);
     };
 
     /**
