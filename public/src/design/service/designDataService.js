@@ -13,15 +13,8 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'multi_select',
-            data: {
-                title: '这里输入题干信息',
-                option: [
-                    {text: '选项1', status: true},
-                    {text: '选项2', status: false},
-                    {text: '选项3', status: false},
-                ]
-            },
+            type: 'paragraph',
+            html:'<p><span>请输入相关文本信息描述</span></p>',
         }
     ];
 
@@ -32,7 +25,7 @@ designModule.factory('DesignDataSer', function () {
             status: true, //展开状态：true、 收回状态：false
             name: '内容',
             sub: [
-                {name: '文本描述', type: 'text_describe', font: 'fa fa-paragraph'},
+                {name: '文本描述', type: 'paragraph', font: 'fa fa-paragraph'},
             ]
         },
         {
@@ -69,7 +62,11 @@ designModule.factory('DesignDataSer', function () {
      * 新添加组件后填充的数据
      */
     let newWidgetData = {
-        single_select:{
+        paragraph: {
+            type: 'paragraph',
+            html:'<p><span>请输入相关文本信息描述</span></p>',
+        },
+        single_select: {
             type: 'single_select',
             data: {
                 title: '这里输入题干信息',
@@ -81,7 +78,7 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
-        multi_select:{
+        multi_select: {
             type: 'multi_select',
             data: {
                 title: '这里输入题干信息',
@@ -91,13 +88,14 @@ designModule.factory('DesignDataSer', function () {
                     {text: '选项3', status: false},
                 ]
             },
-        }
+        },
+
     };
 
     return {
         overallData: overallData,
         widget: widget, //所有可选择的组件
         sheet: sheet, //问卷、表单页面
-        newWidgetData:newWidgetData, //新添加的组件填充数据
+        newWidgetData: newWidgetData, //新添加的组件填充数据
     }
 });

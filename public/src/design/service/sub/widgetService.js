@@ -14,13 +14,14 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
         //1、添加此新的组件到表单中
         DesignDataSer.sheet.push(angular.copy(DesignDataSer.newWidgetData[type]));
         //2、对该新添加的组件进行编辑操作
-        DesignDataSer.overallData.editRenderIndex = DesignDataSer.sheet.length - 1;
+        editWidgetData(DesignDataSer.sheet.length - 1);
     };
 
     /**
      * 编辑该组件的数据
      */
     let editWidgetData = function (index) {
+        //1、设置自动绑定的编辑题目的位置信息
         DesignDataSer.overallData.editRenderIndex = index;
     };
 
@@ -36,6 +37,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
             //单选类型
             case 'single_select': {
                 widget.data.option.push({text: '新选项'});
+                break;
+            }
+            case 'multi_select':{
+                widget.data.option.push({'text':'新选项', status: false});
                 break;
             }
         }

@@ -45,6 +45,20 @@ designModule.directive('designHeader', ['$document', function ($document) {
 
 
 //***************************** 分别对组件edit和render的HTML页面数据进行渲染操作 ********************************
+//paragraph
+designModule.directive('designRenderParagraph', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/paragraph.html'
+    };
+}]);
+designModule.directive('designEditParagraph', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/paragraph.html'
+    };
+}]);
+
 //single_select
 designModule.directive('designRenderSingleSelect', ['$document', function ($document) {
     return {

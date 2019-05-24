@@ -296,5 +296,10 @@ body {
 
 /** 组件编辑页面在鼠标放上去时，背景颜色发生变化 */
 .widgetMouseOn:hover{
-    background: #fafafa;
+    /*background: #fafafa;*/
+    background: #e8fafa;
+}
+.widgetMouseSelected{
+    /*background: #faf7fa;*/
+    background: #faf7fa;
 }
