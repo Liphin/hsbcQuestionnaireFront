@@ -1,0 +1,26 @@
+<!--矩阵量表题-->
+<div ng-if="value.type=='matrix_single_scale'">
+    <div style="font-weight: bold">{{value.data.title}}</div>
+    <table class="table" style="margin-top: 10px">
+        <thead>
+        <tr>
+            <th style="border: none;"></th>
+            <th ng-repeat="radioValue in value.data.option" style="font-weight: normal; border: none;text-align: center">{{radioValue.text}}</th>
+        </tr>
+        <tr>
+            <th style="border: none;"></th>
+            <th ng-repeat="radioValue in value.data.option" style="padding: 0;font-weight: normal; border: none;text-align: center; color: #ff8a14">{{radioValue.value}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="subValue in value.data.choice">
+            <td style="font-weight: bold">{{subValue.text}}</td>
+            <td ng-repeat="radioValue in value.data.option track by $index" style="padding: 0">
+                <label style="width: 100%; text-align: center; padding: 8px">
+                    <input type="radio" ng-model="subValue.selected" value="{{$index}}"/>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

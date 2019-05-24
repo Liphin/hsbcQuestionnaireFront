@@ -56,8 +56,8 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
     /**
      * 设置或取消设置为默认选中选项
      */
-    design.setAsDefault = function (index) {
-        WidgetSer.setAsDefault(index);
+    design.setAsDefault = function (index, param) {
+        WidgetSer.setAsDefault(index, param);
     };
 
 

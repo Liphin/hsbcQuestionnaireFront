@@ -13,19 +13,28 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'single_scale',
+            type: 'matrix_single_scale',
             data: {
-                required: true, //必答、非必答选项
+                required: true,
                 title: '这里输入题干信息',
-                selected: 'none',
                 option: [
                     {text: '极差', value: 0},
                     {text: '不满', value: 1},
                     {text: '一般', value: 2},
                     {text: '满意', value: 3},
-                    {text: '极好', value: 4}
+                    {text: '极好', value: 4},
+                ],
+                choice: [
+                    {
+                        text: '外观',
+                        selected: [], //里面对应option中的index对应true（选中）or false（不选中）状态
+                    },
+                    {
+                        text: '功能',
+                        selected: [],
+                    },
                 ]
-            },
+            }
         }
     ];
 
@@ -44,8 +53,8 @@ designModule.factory('DesignDataSer', function () {
             name: '单选题',
             sub: [
                 {name: '单选题', type: 'single_select', font: 'fa fa-circle'},
-                {name: '矩阵单选', type: 'matrix_single_select', font: 'fa fa-list'},
                 {name: '量表题', type: 'single_scale', font: 'fa fa-power-off'},
+                {name: '矩阵单选', type: 'matrix_single_select', font: 'fa fa-list'},
                 {name: '矩阵量表', type: 'matrix_single_scale', font: 'fa fa-star-half-o'},
                 {name: '下拉单选', type: 'pull_single_select', font: 'fa fa-caret-square-o-down'},
             ]
@@ -73,12 +82,14 @@ designModule.factory('DesignDataSer', function () {
      * 新添加组件后填充的数据
      */
     let newWidgetData = {
+        //文本描述
         paragraph: {
             type: 'paragraph',
             data: {
                 html: '<p><span>请输入相关文本信息描述</span></p>'
             },
         },
+        //单选题
         single_select: {
             type: 'single_select',
             data: {
@@ -92,6 +103,7 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
+        //量标题
         single_scale: {
             type: 'single_scale',
             data: {
@@ -107,6 +119,7 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
+        //多选题
         multi_select: {
             type: 'multi_select',
             data: {
@@ -119,17 +132,68 @@ designModule.factory('DesignDataSer', function () {
                 ]
             },
         },
+        //矩阵单选
         matrix_single_select: {
             type: 'matrix_single_select',
             data: {
                 required: true,
                 title: '这里输入题干信息',
                 option: [
-                    {text: '极好'},
-                    {text: '满意'},
-                    {text: '一般'},
+                    {text: '极差'},
                     {text: '不满'},
-                    {text: '极差'}
+                    {text: '一般'},
+                    {text: '满意'},
+                    {text: '极好'},
+                ],
+                choice: [
+                    {
+                        text: '外观',
+                        selected: 'none',
+                    },
+                    {
+                        text: '功能',
+                        selected: 'none',
+                    },
+                ]
+            }
+        },
+        //矩阵量表
+        matrix_single_scale: {
+            type: 'matrix_single_scale',
+            data: {
+                required: true,
+                title: '这里输入题干信息',
+                option: [
+                    {text: '极差', value: 0},
+                    {text: '不满', value: 1},
+                    {text: '一般', value: 2},
+                    {text: '满意', value: 3},
+                    {text: '极好', value: 4},
+                ],
+                choice: [
+                    {
+                        text: '外观',
+                        selected: 'none',
+                    },
+                    {
+                        text: '功能',
+                        selected: 'none',
+                    },
+                ]
+            }
+        },
+        //矩阵多选
+        matrix_multi_select: {
+            type: 'matrix_multi_select',
+            data: {
+                required: true,
+                title: '这里输入题干信息',
+                option: [
+                    {text: '极差'},
+                    {text: '不满'},
+                    {text: '一般'},
+                    {text: '满意'},
+                    {text: '极好'},
                 ],
                 choice: [
                     {
@@ -143,7 +207,6 @@ designModule.factory('DesignDataSer', function () {
                 ]
             }
         }
-
     };
 
     return {

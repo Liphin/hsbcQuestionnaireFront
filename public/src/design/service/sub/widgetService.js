@@ -57,6 +57,15 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 }
                 break;
             }
+            case 'matrix_single_scale': {
+                if (param == 'choice') {
+                    widget.data.choice.push({text: '新项', selected: []})
+
+                } else if (param == 'option') {
+                    widget.data.option.push({text: '子项', value: widget.data.option.length})
+                }
+                break;
+            }
         }
     };
 
@@ -113,23 +122,24 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
     /**
      * 设置或取消设置为默认选中状态
      * @param index
+     * @param param
      */
-    let setAsDefault = function (index) {
+    let setAsDefault = function (index, param) {
         //对应表单组件信息
         let widget = DesignDataSer.sheet[DesignDataSer.overallData.editRenderIndex];
         //对应不同组件不同的初始化设置操作
         switch (widget.type) {
-            case 'single_select': {
+            case 'multi_select': {
+                widget.data[param][index].status = !widget.data[param][index].status;
+                break;
+            }
+            default:{
                 //如果之前已选中默认值，再点一次取消选择，否则选择
                 if (widget.data.selected == index) {
                     widget.data.selected = 'none'
                 } else {
                     widget.data.selected = index;
                 }
-                break;
-            }
-            case 'multi_select': {
-                widget.data.option[index].status = !widget.data.option[index].status;
                 break;
             }
         }
