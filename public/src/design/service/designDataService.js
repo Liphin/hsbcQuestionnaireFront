@@ -13,15 +13,11 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'matrix_fill',
+            type: 'detail_fill',
             data: {
                 required: true, //必答、非必答选项
                 title: '这里输入题干信息',
-                option: [
-                    {text: '姓名', value:''},
-                    {text: '国籍', value:''},
-                    {text: '工作', value:''}
-                ],
+                value: '',
             }
         }
     ];
@@ -237,6 +233,15 @@ designModule.factory('DesignDataSer', function () {
                     {text: '国籍', value:''},
                     {text: '工作', value:''}
                 ],
+            }
+        },
+        //详情填空
+        detail_fill: {
+            type: 'detail_fill',
+            data: {
+                required: true, //必答、非必答选项
+                title: '这里输入题干信息',
+                value: '',
             }
         },
     };

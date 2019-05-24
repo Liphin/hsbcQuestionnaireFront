@@ -184,3 +184,17 @@ designModule.directive('designEditMatrixFill', ['$document', function ($document
         templateUrl: 'src/design/tmpl/sub/edit/matrix_fill.html'
     };
 }]);
+
+//matrix_fill
+designModule.directive('designRenderDetailFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/render/detail_fill.html'
+    };
+}]);
+designModule.directive('designEditDetailFill', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/edit/detail_fill.html'
+    };
+}]);
