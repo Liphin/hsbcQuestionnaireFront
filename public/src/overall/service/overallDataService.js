@@ -13,15 +13,20 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         'fileSuffix': ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'png', 'jpeg', 'jpg', 'gif', 'pfx', 'zip'], //文件后缀辅助数据
 
         //手机预览操作
-        phoneView:{
+        phoneView: {
             showPhoneView: false, //是否展开手机页面
-            sheetFrameData:'', //预览HTML框架页面
-            sheetHtmlData:'', //装载预览时查看的HTML数据
+            sheetFrameData: '', //预览HTML框架页面
+            sheetHtmlData: '', //装载预览时查看的HTML数据
         },
         //小程序预览操作
-        miniView:{
+        miniView: {
             showMiniView: false, //是否展开小程序预览页面
-            sheetMiniQrCode:'', //小程序二维码
+            sheetMiniQrCode: '', //小程序二维码
+        },
+
+        //用户信息
+        user: {
+            id: 123,
         }
     };
 

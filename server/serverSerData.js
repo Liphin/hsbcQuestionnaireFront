@@ -16,7 +16,9 @@ let appConfig = targetSetting['appConfig'];
 
 //全局数据变量
 let overallData = {
-    'access_token': '',
+    'mini': {
+        'access_token': '', 'timestamp': 0, 'expire': 0,
+    },
 };
 
 

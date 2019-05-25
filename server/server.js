@@ -46,9 +46,9 @@ app.use("/", express.static(serverData.projectPath));
 /**
  * 开启http和https服务
  */
-var privateKey = fs.readFileSync(serverData.targetSetting.certConfig.key);
-var certificate = fs.readFileSync(serverData.targetSetting.certConfig.cert);
-var credentials = {key: privateKey, cert: certificate};
+let privateKey = fs.readFileSync(serverData.targetSetting.certConfig.key);
+let certificate = fs.readFileSync(serverData.targetSetting.certConfig.cert);
+let credentials = {key: privateKey, cert: certificate};
 
 /**
  * 如果部署到生产环境则用https协议打开端口，否则直接使用http协议端口
@@ -59,6 +59,9 @@ if (global.env == 'prod') {
     app.listen(serverData.port);
 }
 console.log('Server proxy on port: ', serverData.port, ' , on environment: ', global.env);
+
+let miniSer = require('./wechat/mini/miniSer');
+miniSer.getQrCode();
 
 
 
