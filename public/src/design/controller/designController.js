@@ -66,6 +66,12 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
         WidgetSer.setAsDefault(index, param);
     };
 
+    /**
+     * 预览页面数据结果
+     */
+    design.viewPage=function (viewType) {
+        DesignSer.viewPage(viewType);
+    };
 
     /**
      * 保存页面数据结果

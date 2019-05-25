@@ -7,6 +7,7 @@ designModule.factory('DesignDataSer', function () {
 
     let overallData = {
         editRenderIndex: 0,
+        viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
     };
 
 
@@ -234,9 +235,9 @@ designModule.factory('DesignDataSer', function () {
                 required: true, //必答、非必答选项
                 title: '这里输入题干信息',
                 option: [
-                    {text: '姓名', value:''},
-                    {text: '国籍', value:''},
-                    {text: '工作', value:''}
+                    {text: '姓名', value: ''},
+                    {text: '国籍', value: ''},
+                    {text: '工作', value: ''}
                 ],
             }
         },

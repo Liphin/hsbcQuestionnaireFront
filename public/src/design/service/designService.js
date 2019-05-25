@@ -5,6 +5,27 @@
 
 designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, PackSer) {
 
+    /**
+     * 点击预览，快速预览或小程序预览
+     * @param viewType
+     */
+    let viewPage = function (viewType) {
+        //如果新的viewType不为空则重新赋值
+        if (OverallGeneralSer.checkDataNotEmpty(viewType)) {
+            DesignDataSer.overallData.viewType = viewType
+        }
+        //手机页面预览
+        if(DesignDataSer.overallData.viewType=='phoneView'){
+            OverallDataSer.overallData.phoneView.showPhoneView=true;
+        }
+        //小程序页面预览
+        else if (DesignDataSer.overallData.viewType=='miniView'){
+
+
+            OverallDataSer.overallData.miniView.showMiniView=true;
+        }
+    };
+
 
     /**
      * 保存页面信息
@@ -32,6 +53,7 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
 
     return {
-        savePage:savePage,
+        viewPage: viewPage,
+        savePage: savePage,
     }
 });

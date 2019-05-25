@@ -303,3 +303,14 @@ body {
     /*background: #faf7fa;*/
     background: #faf7fa;
 }
+
+/*导出按钮的头部*/
+.header {
+    background: white;
+}
+.header:hover {
+    background: #f7f7f9;
+}
+
+
+

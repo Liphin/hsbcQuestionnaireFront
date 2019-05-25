@@ -12,12 +12,17 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         'requestDataErrorMsg': '尊敬的客户，服务出错，请稍后重试',
         'fileSuffix': ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'png', 'jpeg', 'jpg', 'gif', 'pfx', 'zip'], //文件后缀辅助数据
 
+        //手机预览操作
         phoneView:{
             showPhoneView: false, //是否展开手机页面
             sheetFrameData:'', //预览HTML框架页面
             sheetHtmlData:'', //装载预览时查看的HTML数据
-            //viewSheetUrl:'',//查看生成的表单页面url
         },
+        //小程序预览操作
+        miniView:{
+            showMiniView: false, //是否展开小程序预览页面
+            sheetMiniQrCode:'', //小程序二维码
+        }
     };
 
     // Url系统各种文件获取的URL设置
