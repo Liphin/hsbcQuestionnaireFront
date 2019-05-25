@@ -66,7 +66,7 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 }
                 break;
             }
-            case 'pull_single_select':{
+            case 'pull_single_select': {
                 widget.data.option.push({text: '新选项', value: widget.data.option.length});
                 break;
             }
@@ -79,8 +79,8 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 }
                 break;
             }
-            case 'matrix_fill':{
-                widget.data.option.push({text:'新项', value:''});
+            case 'matrix_fill': {
+                widget.data.option.push({text: '新项', value: ''});
                 break;
             }
         }
@@ -150,11 +150,11 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 widget.data[param][index].status = !widget.data[param][index].status;
                 break;
             }
-            case 'pull_single_select':{
+            case 'pull_single_select': {
                 widget.data.selected = index.toString();
                 break;
             }
-            default:{
+            default: {
                 //如果之前已选中默认值，再点一次取消选择，否则选择
                 if (widget.data.selected == index) {
                     widget.data.selected = 'none'

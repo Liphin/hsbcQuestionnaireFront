@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer) {
+designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer) {
 
     let design = this;
     design.overallData = DesignDataSer.overallData;
@@ -17,6 +17,12 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
         WidgetSer.addNewWidget(type);
     };
 
+    /**
+     * 获取问题序号
+     */
+    design.getQuestionnaireNum = function (index) {
+        return DesignGeneralSer.getQuestionnaireNum(index);
+    };
 
     /**
      * 编辑该组件的数据

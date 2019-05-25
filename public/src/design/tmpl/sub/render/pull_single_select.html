@@ -1,6 +1,6 @@
 <!--单项选择题-->
 <div ng-if="value.type=='pull_single_select'">
-    <div style="font-weight: bold">{{value.data.title}}</div>
+    <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
     <div style="margin-top: 10px">
         <select class="form-control" ng-model="value.data.selected">
             <option ng-repeat="subValue in value.data.option track by $index" value="{{$index}}">{{subValue.text}}</option>

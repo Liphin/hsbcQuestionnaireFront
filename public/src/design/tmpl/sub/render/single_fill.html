@@ -1,6 +1,6 @@
 <!--单项选择题-->
 <div ng-if="value.type=='single_fill'">
-    <div style="font-weight: bold">{{value.data.title}}</div>
+    <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
     <div style="margin-top: 10px">
         <input type="text" class="form-control" ng-model="value.data.value">
     </div>
