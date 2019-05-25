@@ -13,6 +13,8 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
         let packWidgetHtmlData = PackSer.packSelectData();
         let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
 
+        console.log(fullPhoneHtmlData);
+
         //装载页面HTML到手机框中，并展开手机框面板
         OverallDataSer.overallData.phoneView.sheetHtmlData = fullPhoneHtmlData;
         OverallDataSer.overallData.phoneView.showPhoneView = true;

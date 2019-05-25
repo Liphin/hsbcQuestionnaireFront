@@ -16,7 +16,7 @@ designModule.factory('DesignGeneralSer', function (DesignDataSer) {
                 paraNum++;
             }
         }
-        return index - paraNum;
+        return index - paraNum + 1 ; //从1开始
     };
 
     return {

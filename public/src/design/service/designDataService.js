@@ -13,12 +13,19 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'detail_fill',
+            type: 'single_scale',
             data: {
                 required: true, //必答、非必答选项
                 title: '这里输入题干信息',
-                value: '',
-            }
+                selected: 'none',
+                option: [
+                    {text: '极差', value: 0},
+                    {text: '不满', value: 1},
+                    {text: '一般', value: 2},
+                    {text: '满意', value: 3},
+                    {text: '极好', value: 4}
+                ]
+            },
         }
     ];
 
