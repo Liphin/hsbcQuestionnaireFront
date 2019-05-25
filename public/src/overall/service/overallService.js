@@ -10,10 +10,10 @@ overallModule.factory('OverallSer', function ($rootScope, OverallDataSer, $locat
      * 全局初始化应用
      */
     let initData = function () {
-        //加载手机拼装页面数据
-        OverallGeneralSer.httpGetFiles(OverallDataSer.urlData.getPhoneHtmlFrame, function (result) {
-            OverallDataSer.overallData.phoneView.htmlFrameData = result;
-        })
+        //加载手机预览拼装页面数据
+        OverallGeneralSer.httpGetFiles(OverallDataSer.urlData.getPhoneHtmlFrameUrl, function (result) {
+            OverallDataSer.overallData.phoneView.sheetFrameData = result;
+        });
     };
 
 

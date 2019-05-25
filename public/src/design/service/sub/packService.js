@@ -40,7 +40,7 @@ designModule.factory('PackSer', function (DesignDataSer, DesignGeneralSer) {
         for (let j in widget.data.option) {
             str += "<div style=\"border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px\">";
             str += "<label style=\"width: 100%;display: block\">";
-            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + i + "\">";
+            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + "_" + i + "\">";
             str += "<span style=\"font-weight: normal;margin-left: 5px\">" + widget.data.option[j].text + "</span>";
             str += "</label></div>";
         }
@@ -66,7 +66,7 @@ designModule.factory('PackSer', function (DesignDataSer, DesignGeneralSer) {
 
         for (let j in widget.data.option) {
             str += "<td style=\"padding: 0\"><label style=\"width: 100%; text-align: center; padding: 8px\">";
-            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + i + "\">";
+            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + "_" + i + "\">";
             str += "<span style=\"font-weight: normal\">" + widget.data.option[j].value + "</span>";
             str += "</label></td>";
         }
@@ -74,6 +74,47 @@ designModule.factory('PackSer', function (DesignDataSer, DesignGeneralSer) {
         return str;
     };
 
+
+    /**
+     * 打包矩阵单选的操作，返回打包后的HTML数据
+     * @param widget
+     * @param i
+     */
+    let matrixSingleSelectPackage = function (widget, i) {
+        let str = "<div style=\"padding: 20px 0;\">";
+        str += "<div style=\"font-weight: bold\">" + DesignGeneralSer.getQuestionnaireNum(i) + "、" + widget.data.title + "</div>";
+        str += "<table class=\"table\" style=\"margin-top: 10px\"><thead><tr><th style=\"border: none;\"></th>";
+        //子选项
+        for (let k in widget.data.option) {
+            str += "<th style=\"font-weight: normal; border: none;text-align: center\">" + widget.data.option[k].text + "</th>";
+        }
+        str += "</tr></thead><tbody>";
+        //选项
+        for (let j in widget.data.option) {
+            str += "<tr><td style=\"font-weight: bold\">"+widget.data.option+"</td>";
+            for(let h in widget.data.option[h]){
+                str += "<td style=\"padding: 0\"><label style=\"width: 100%; text-align: center; padding: 8px\">";
+                str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + "_" + i + "\">";
+                str += "</label></td>";
+            }
+            str += "</tr>";
+        }
+
+
+        str += "<td style=\"text-align: center;border: none\">" + widget.data.option[0].text + "</td>";
+        str += "<td style=\"text-align: center;border: none\" colspan=\"" + (widget.data.option.length - 2) + "\" ></td>";
+        str += "<td style=\"text-align: center;border: none\">" + widget.data.option[widget.data.option.length - 1].text + "</td>";
+        str += "</tr><tr>";
+
+        for (let j in widget.data.option) {
+            str += "<td style=\"padding: 0\"><label style=\"width: 100%; text-align: center; padding: 8px\">";
+            str += "<input type=\"radio\" value=\"" + j + "\" name=\"" + widget.type + "_" + i + "\">";
+            str += "<span style=\"font-weight: normal\">" + widget.data.option[j].value + "</span>";
+            str += "</label></td>";
+        }
+        str += "</tr></tbody></table></div></div>";
+        return str;
+    };
 
     /**
      * 打包多项选择题目的操作，返回打包后的HTML数据
@@ -87,7 +128,7 @@ designModule.factory('PackSer', function (DesignDataSer, DesignGeneralSer) {
         for (let j in widget.data.option) {
             str += "<div style=\"border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px\">";
             str += "<label style=\"width: 100%;display: block\">";
-            str += "<input type=\"checkbox\" value=\"" + j + "\" name=\"" + widget.type + i + "\">";
+            str += "<input type=\"checkbox\" value=\"" + j + "\" name=\"" + widget.type + "_" + i + "\">";
             str += "<span style=\"font-weight: normal;margin-left: 5px\">" + widget.data.option[j].text + "</span>";
             str += "</label></div>";
         }
@@ -99,6 +140,7 @@ designModule.factory('PackSer', function (DesignDataSer, DesignGeneralSer) {
     return {
         packSelectData: packSelectData,
         singleScalePackage: singleScalePackage,
-        multiSelectPackage: multiSelectPackage
+        multiSelectPackage: multiSelectPackage,
+        matrixSingleSelectPackage: matrixSingleSelectPackage,
     }
 });

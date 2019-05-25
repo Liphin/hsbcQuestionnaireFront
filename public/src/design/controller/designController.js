@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer) {
+designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer, $http) {
 
     let design = this;
     design.overallData = DesignDataSer.overallData;
@@ -68,12 +68,24 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
 
 
     /**
-     * 预览页面数据结果
+     * 保存页面数据结果
      */
-    design.viewPage=function () {
-        DesignSer.viewPage();
-    }
+    design.savePage=function () {
+        DesignSer.savePage();
+    };
 
+    /**
+     * 提交问卷
+     */
+    design.submitSheet= function () {
+        $http.post("/submitResult", design.sheet).success(function (response) {
+            if(response=='OK'){
+                alert("提交成功");
+            }
+        }).error(function (err) {
+            alert("很抱歉，提交有误，请稍后重试");
+        });
+    };
 });
 
 

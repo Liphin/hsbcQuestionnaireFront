@@ -5,32 +5,16 @@
 
 designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, PackSer) {
 
-    /**
-     * 预览页面
-     */
-    let viewPage = function () {
-        //1、拼装组件并生成HTML数据
-        let packWidgetHtmlData = PackSer.packSelectData();
-        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
-
-        console.log(fullPhoneHtmlData);
-
-        //装载页面HTML到手机框中，并展开手机框面板
-        OverallDataSer.overallData.phoneView.sheetHtmlData = fullPhoneHtmlData;
-        OverallDataSer.overallData.phoneView.showPhoneView = true;
-    };
 
     /**
      * 保存页面信息
-     * 1、拼装组件并生成HTML数据
+     * 1、手机表单HTML的框架页面添加数据
      * 2、保存该HTML到后台文件
-     * 3、展示前端手机预览页面，iframe的url指向该地址 TODO
      * 4、生成携带参数的的小程序二维码 TODO
      */
     let savePage = function () {
-        //1、拼装组件并生成HTML数据
-        let packWidgetHtmlData = PackSer.packSelectData();
-        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.htmlFrameData.replace(/__CONTENT__/g, packWidgetHtmlData);
+        //1、手机表单HTML的框架页面添加数据
+        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.sheetFrameData.replace(/__SHEET_DATA_/g, JSON.stringify(DesignDataSer.sheet));
 
         //2、保存该HTML到后台文件
         let jsonData = {
@@ -38,10 +22,10 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
             htmlData: fullPhoneHtmlData,
             dbData: DesignDataSer.sheet,
         };
-        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetData, jsonData, function (result) {
+
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetDataUrl, jsonData, function (result) {
             if (result == 'OK') {
-                OverallDataSer.overallData.phoneView.viewSheetUrl = OverallDataSer.urlData.resourceBaseUrl + "html/323232332.html";
-                OverallDataSer.overallData.phoneView.showPhoneView = true;
+
             }
         });
     };
@@ -49,6 +33,5 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
     return {
         savePage:savePage,
-        viewPage: viewPage,
     }
 });

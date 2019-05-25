@@ -53,6 +53,13 @@ router.post('/saveSheetData', (req, res, next) => {
 });
 
 
+router.post('/submitResult', function (req, res) {
+
+
+    res.sendStatus(200)
+});
+
+
 // mongo.insertOneDocuments("sheet", {
 //     uniqueId: '5f2f48a0-7d2f-11e9-aac2-51d42dd428f6',
 //     sheet:[],
