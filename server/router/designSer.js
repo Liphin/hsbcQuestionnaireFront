@@ -4,29 +4,45 @@
 
 const fs = require('fs');
 const express = require('express');
-const uuidv = require('uuid/v1');
 const mongo = require('../db/mongo');
+const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
 const router = express.Router();
+const domSheet = "sheet";//mongodb中的sheet文档库
 
-//mongodb中的sheet文档库
-const domSheet = "sheet";
 
+//******************************* 小程序端操作 ***************************************
+/**
+ * 获取用户openid
+ */
+router.post('/getUserOpenId', function (req, res, next) {
+    miniSer.getUserOpenId(req, res);
+});
+
+/**
+ * 获取带参数的二维码图片
+ */
+router.post('/getQrCode', function (req, res, next) {
+    miniSer.getQrCode(req, res);
+});
+
+
+//******************************** 程序数据集操作 ************************************
 /**
  * 保存表单数据
  * 1、保存数据到MongoDB数据库中
  * 2、表单数据到文件HTML中
  */
 router.post('/saveSheetData', (req, res, next) => {
-
+    //1、解析携带的参数
     let param = req.body;
 
-    //1、保存文件到MongoDb数据库中
+    //2、保存文件到MongoDb数据库中
     mongo.updateOneDocuments(domSheet, {uniqueId: param.uniqueId}, {sheet: param.dbData},
         response => {
             console.log('更新文档结果', response.result);
 
-            //2、保存文件到HTML操作
+            //3、保存文件到HTML操作
             let filePath = serverData.resourcePath + "/html/" + param.uniqueId + ".html";
 
             //查询是否已经存在文件，若已经存在则先删除
@@ -53,12 +69,18 @@ router.post('/saveSheetData', (req, res, next) => {
 });
 
 
-
-
+/**
+ * 获取所有开放的统计数据
+ */
+router.post('/getAllStatistics', function (req, res) {
+    mongo.findDocuments(domSheet, {open: true}, response => {
+        res.send(response);
+    })
+});
 
 
 router.post('/submitResult', function (req, res) {
-    res.sendStatus(200)
+
 });
 
 

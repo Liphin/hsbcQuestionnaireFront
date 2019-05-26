@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sheet">
+<head>
+    <link rel="stylesheet" href="/public/assets/css/bootstrap/bootstrap.min.css">
+    <script src="/public/assets/js/jquery/jquery-1.11.0.js"></script>
+    <script src="/public/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/public/assets/js/angularjs/angular.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <meta charset="UTF-8">
+    <title>数据统计</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        .loader {
+            position: relative;
+            margin: 0 auto;
+            width: 70px;
+        }
+        .loader:before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+        .circular {
+            animation: rotate 2s linear infinite;
+            height: 100%;
+            transform-origin: center center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .path {
+            stroke-dasharray: 50 10;
+            animation: dash 3s infinite linear, color 6s ease-in-out infinite;
+            stroke-linecap: round;
+        }
+        @keyframes rotate {
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 500px;
+            }
+        }
+        @keyframes color {
+            100%,
+            0% {
+                stroke: #d62d20;
+            }
+            40% {
+                stroke: #0057e7;
+            }
+            66% {
+                stroke: #008744;
+            }
+            80% {
+                stroke: #5e4492;
+            }
+            90% {
+                stroke: #ffa700;
+            }
+        }
+    </style>
+</head>
+<body ng-controller="designCtrl as design" style="font-family: 微软雅黑">
+<div>
+    <!--头部数据统计与分析轮播-->
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div style="background: #508cc7 url(/public/assets/img/mini/statistics_head1.png) no-repeat center center;background-size: contain; width: 100%;height: 200px"></div>
+            </div>
+            <div class="item">
+                <div style="background: #5fbb7b url(/public/assets/img/mini/statistics_head2.png) no-repeat center center;background-size: contain; width: 100%;height: 200px"></div>
+            </div>
+            <div class="item">
+                <div style="background: #f49954 url(/public/assets/img/mini/statistics_head3.png) no-repeat center center;background-size: contain; width: 100%;height: 200px"></div>
+            </div>
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!--数据集列表-->
+    <div style="position: relative">
+        <!--loading页面-->
+        <div ng-if="design.loading" style="background: rgba(255,255,255,1);position: absolute;left: 0;right: 0; top: 150px;bottom: 0;z-index:10;text-align: center;">
+            <div>
+                <div class="loader">
+                    <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                stroke-miterlimit="10"></circle>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!--数据集合展示-->
+        <div ng-if="!design.loading">
+            <div ng-click="design.viewStatisticsResult(value.uniqueid)" ng-repeat="value in design.sheet"
+                 style="border-radius: 10px;padding: 10px;margin: 10px;border: 1px solid gainsboro;display: flex; align-items: center">
+                <img src="/public/assets/img/overall/type/{{value.type}}.png" style="width: 30px; height: 30px;"/>
+                <span style="flex: 1;font-size: 15px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; word-break: break-all; margin: 0 10px;">{{value.title}}</span>
+                <img src="/public/assets/img/mini/calculate.png" style="width: 20px; height: 20px"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    "use strict";
+    let sheetModule = angular.module('sheet', []);
+    sheetModule.controller('designCtrl', function ($http) {
+        let design = this;
+        design.loading = true;
+
+        /**
+         * 查看数据统计结果
+         */
+        design.viewStatisticsResult = function (scene) {
+            //跳转到小程序页面指定页面
+            wx.miniProgram.navigateTo({url: '/pages/statistics/statistics?scene=' + scene})
+        };
+
+        /**
+         * 页面初始化执行的操作
+         */
+        let initData = function () {
+            /**
+             * 设置轮播开始
+             */
+            $('#myCarousel').carousel({
+                interval: 3000
+            });
+
+            /**
+             * 获取所有统计数据
+             */
+            $http.post("/getAllStatistics", {}).success(function (response) {
+                design.sheet = response;
+                console.log(response)
+                design.loading = false;
+
+            }).error(function (err) {
+                alert("很抱歉，系统有误，请稍后重试");
+            });
+        };
+
+        initData();
+
+    })
+</script>
+</body>
+</html>

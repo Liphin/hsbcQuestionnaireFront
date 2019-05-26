@@ -10,21 +10,44 @@ const miniGeneralSer = require('./miniGeneralSer');
 const serverSerData = require('../../serverSerData');
 const serverGeneralSer = require('../../serverGeneralSer');
 
+
+/**
+ * 小程序获取用户openid
+ * @param req
+ * @param response
+ */
+let getUserOpenId = function (req, response) {
+    let arg = url.parse(req.url, true).query;
+    let js_code = arg['js_code'];
+
+    //发送动态信息数据的url
+    let getUserOpenIdUrl = 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code';
+    let uri = util.format(getUserOpenIdUrl, serverSerData.appConfig.appid, serverSerData.appConfig.secret, js_code);
+    request.get(uri, function (err, resData, body) {
+        if (!err && resData['statusCode'] == 200) {
+            response.send(JSON.parse(body)['openid'])
+
+        } else {
+            response.send('fail')
+        }
+    });
+};
+
+
 /**
  * 获取携带参数的二维码图片
  */
-let getQrCode = function (response) {
-    // //获取access_token操作
+let getQrCode = function (req, response) {
+    //解析参数
+    let param = req.body;
+
+    //获取access_token操作
     miniGeneralSer.getAccessToken(response, () => {
         let getParamQrCodeUrl = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s";
         let url = util.format(getParamQrCodeUrl, serverSerData.overallData.mini.access_token);
-
-        //1、TODO 设置明确的param参数值
-        let param = '20131003499_1558776614842';
-
-        let filePath = serverSerData.resourcePath + "/qrcode/" + param + ".jpg";
+        let filePath = serverSerData.resourcePath + "/qrcode/" + param.scene + ".jpg";
         //通过axios方式调用接口
-        axios.post(url, {scene: param}, {responseType: 'stream'})
+        axios.post(url, {scene: param.scene}, {responseType: 'stream'})
             .then((res) => {
                 fs.access(filePath, error => {
                     if (!error) {
@@ -38,6 +61,12 @@ let getQrCode = function (response) {
                         response.sendStatus(200);
                     }
                 })
+            })
+            .catch(function (error) {
+                console.debug('调用接口获取带参数二维码图片失败', param.scene, error);
+                if (serverGeneralSer.checkDataNotEmpty(response)) {
+                    response.sendStatus(400);
+                }
             });
     });
 };
@@ -45,4 +74,5 @@ let getQrCode = function (response) {
 
 module.exports = {
     getQrCode: getQrCode,
+    getUserOpenId:getUserOpenId,
 };

@@ -60,9 +60,6 @@ if (global.env == 'prod') {
 }
 console.log('Server proxy on port: ', serverData.port, ' , on environment: ', global.env);
 
-let miniSer = require('./wechat/mini/miniSer');
-miniSer.getQrCode();
-
 
 
 
