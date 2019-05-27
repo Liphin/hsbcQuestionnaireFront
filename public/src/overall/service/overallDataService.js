@@ -26,6 +26,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         //用户信息
         user: {
             _id: '',
+            account: 'admin',
         }
     };
 

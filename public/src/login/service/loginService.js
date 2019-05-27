@@ -38,6 +38,7 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,
                 //该账号注册成功
                 if (res.status = 200) {
                     OverallDataSer.overallData.user._id = res.data;
+                    OverallDataSer.overallData.user.account = LoginDataSer.loginInfo.account;
                     $location.path('/manage');
                 }
                 //插入数据失败
