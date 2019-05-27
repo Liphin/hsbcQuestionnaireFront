@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2018/2/28.
  */
-var overallModule = angular.module('Angular');
 
 overallModule.factory('OverallDataSer', function ($rootScope) {
 
@@ -26,7 +25,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
         //用户信息
         user: {
-            id: 123,
+            _id: '',
         }
     };
 
@@ -40,6 +39,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         getPhoneHtmlFrameUrl: baseUrlData.frontEndHttp + "src/phone/sheet_frame.html", //手机框架HTML数据
         saveSheetDataUrl: baseUrlData.frontEndHttp + "saveSheetData", //保存表单设计数据
         resourceBaseUrl: baseUrlData.frontEndHttp + "resource/", //保存表单设计数据
+
+        loginUrl: baseUrlData.frontEndHttp + "login", //登录操作
+        registerUrl: baseUrlData.frontEndHttp + "register", //注册操作
     };
 
     //用于sql注入filter

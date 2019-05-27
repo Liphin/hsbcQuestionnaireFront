@@ -25,6 +25,7 @@ const bodyParser = require('body-parser');
  * 自定义模块数据
  */
 const serverData = require('./serverSerData');
+const loginRouter = require('./router/loginSer');
 const designRouter = require('./router/designSer');
 require('./db/mongo');
 
@@ -36,6 +37,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 //路由数据访问
+app.use(loginRouter);
 app.use(designRouter);
 //资源数据访问
 app.use("/resource", express.static(serverData.resourcePath));

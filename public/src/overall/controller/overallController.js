@@ -1,8 +1,6 @@
 /**
  * Created by Administrator on 2018/2/28.
  */
-var overallModule = angular.module('Angular');
-
 overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, $timeout, OverallDataSer,
                                                   OverallSer, OverallGeneralSer, $window) {
     /******************************个人信息标签显示和隐藏设置**************************************/

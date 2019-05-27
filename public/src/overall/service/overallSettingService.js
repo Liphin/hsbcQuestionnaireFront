@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2018/2/28.
  */
-var overallModule = angular.module('Angular');
 
 /**
  * 当有外来请求时候进行拦截，可以进行安全防范等操作或者进行页面跳转等。

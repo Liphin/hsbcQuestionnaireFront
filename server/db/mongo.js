@@ -4,9 +4,9 @@
  */
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-// const url = 'mongodb://localhost:27017';
-const url = 'mongodb://119.23.40.181:27017';
-const dbArbitration = 'hsbc';
+const url = 'mongodb://localhost:27017';
+//const url = 'mongodb://119.23.40.181:27017';
+const mgDataBase = 'hsbc';
 
 /**
  * 连接数据库操作
@@ -29,10 +29,29 @@ var findDocuments = function (collection, findObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         //根据条件查找collection中相应数据
-        db.db(dbArbitration).collection(collection).find(findObj).toArray(function (err, docs) {
+        db.db(mgDataBase).collection(collection).find(findObj).toArray(function (err, docs) {
             assert.equal(null, err);
             callback(docs);
             db.close();
+        });
+    })
+};
+
+
+/**
+ * 返回当前文档数据总数
+ * @param collection
+ * @param callback
+ */
+let getCount = function (collection, callback) {
+    //连接mongoDB数据库
+    connectToMongo(function (db) {
+        db.db(mgDataBase).collection(collection, function (error, collection) {
+            collection.count({}, function (err, numOfDocs) {
+                assert.equal(null, err);
+                callback(numOfDocs);
+                db.close();
+            });
         });
     })
 };
@@ -48,7 +67,7 @@ var findDocuments = function (collection, findObj, callback) {
 var insertOneDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        db.db(dbArbitration).collection(collection).insertOne(insertObj, function (err, res) {
+        db.db(mgDataBase).collection(collection).insertOne(insertObj, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -66,7 +85,7 @@ var insertOneDocuments = function (collection, insertObj, callback) {
 var insertManyDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        db.db(dbArbitration).collection(collection).insertMany(insertObj, function (err, res) {
+        db.db(mgDataBase).collection(collection).insertMany(insertObj, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -86,7 +105,7 @@ var updateOneDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         var updateStr = {$set: updateObj};
-        db.db(dbArbitration).collection(collection).updateOne(whereStr, updateStr, function (err, res) {
+        db.db(mgDataBase).collection(collection).updateOne(whereStr, updateStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -106,7 +125,7 @@ var updateManyDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         var updateStr = {$set: updateObj};
-        db.db(dbArbitration).collection(collection).updateMany(whereStr, updateStr, function (err, res) {
+        db.db(mgDataBase).collection(collection).updateMany(whereStr, updateStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -125,7 +144,7 @@ var updateManyDocuments = function (collection, whereStr, updateObj, callback) {
 var deleteOneDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        db.db(dbArbitration).collection(collection).deleteOne(whereStr, function (err, res) {
+        db.db(mgDataBase).collection(collection).deleteOne(whereStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -143,7 +162,7 @@ var deleteOneDocuments = function (collection, whereStr, callback) {
 var deleteManyDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        db.db(dbArbitration).collection(collection).deleteMany(whereStr, function (err, res) {
+        db.db(mgDataBase).collection(collection).deleteMany(whereStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
             db.close();
@@ -152,9 +171,10 @@ var deleteManyDocuments = function (collection, whereStr, callback) {
 };
 
 
-module.exports ={
-    dbArbitration:dbArbitration,
-    connectToMongo:connectToMongo,
+module.exports = {
+    getCount: getCount,
+    dbArbitration: mgDataBase,
+    connectToMongo: connectToMongo,
     findDocuments: findDocuments,
     insertOneDocuments: insertOneDocuments,
     insertManyDocuments: insertManyDocuments,

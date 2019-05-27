@@ -1,9 +1,6 @@
 /**
  * Created by Administrator on 2018/2/28.
  */
-var overallModule = angular.module('Angular');
-
-
 overallModule.directive('convertToNumber', ['$parse', function ($parse) {
     return {
         restrict: 'A',

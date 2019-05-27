@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2018/8/20.
  */
-var overallModule = angular.module('Angular');
 
 overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $timeout, $rootScope, $location) {
 

@@ -2,16 +2,19 @@
  * Created by Administrator on 2018/2/28.
  */
 
-var overallModule = angular.module('Angular');
-
 overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvider) {
 
     $routeProvider
-        // .when('/login/home', {
-        //     templateUrl: 'src/login/tmpl/login.html',
-        //     controller: 'LoginCtrl',
-        //     controllerAs: 'login'
-        // })
+        .when('/login', {
+            templateUrl: 'src/login/tmpl/login.html',
+            controller: 'LoginCtrl',
+            controllerAs: 'login'
+        })
+        .when('/manage', {
+            templateUrl: 'src/manage/tmpl/manage.html',
+            controller: 'ManageCtrl',
+            controllerAs: 'manage'
+        })
         .when('/design/:option', {
             templateUrl: 'src/design/tmpl/design.html',
             controller: 'DesignCtrl',
