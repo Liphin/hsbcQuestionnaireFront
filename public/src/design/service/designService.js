@@ -35,13 +35,15 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
      */
     let savePage = function () {
         //1、手机表单HTML的框架页面添加数据
-        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.sheetFrameData.replace(/__SHEET_DATA_/g, JSON.stringify(DesignDataSer.sheet));
+        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.sheetFrameData
+            .replace(/__SHEET_DATA__/g, JSON.stringify(DesignDataSer.sheet))
+            .replace(/__SHEET_CONFIG__/g, JSON.stringify(DesignDataSer.overallData.sheetConfig));
 
         //2、保存该HTML到后台文件
         let jsonData = {
-            uniqueId: '5f2f48a0-7d2f-11e9-aac2-51d42dd428f6',
-            htmlData: fullPhoneHtmlData,
-            dbData: DesignDataSer.sheet,
+            uniqueId: DesignDataSer.overallData.sheetConfig.uniqueid,
+            htmlData: fullPhoneHtmlData, //用于保存HTML数据到后台形成文件
+            sheetData: DesignDataSer.sheet, //用于保存表单数据到数据库
         };
 
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetDataUrl, jsonData, function (result) {

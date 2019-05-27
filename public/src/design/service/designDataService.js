@@ -6,8 +6,17 @@
 designModule.factory('DesignDataSer', function () {
 
     let overallData = {
-        editRenderIndex: 0,
+        editRenderIndex: 0, //当前正在编辑的渲染的组件的index
         viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
+
+        //表单基础数据
+        sheetConfig: {
+            uniqueid: '',//唯一的id号，
+            creatorid: '',//创建者id号
+            title: '',//标题
+            open: true, //是否对外开放查询结果
+            type: ''//表单类型：问卷、投票等
+        }
     };
 
 

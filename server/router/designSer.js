@@ -38,7 +38,7 @@ router.post('/saveSheetData', (req, res, next) => {
     let param = req.body;
 
     //2、保存文件到MongoDb数据库中
-    mongo.updateOneDocuments(domSheet, {uniqueId: param.uniqueId}, {sheet: param.dbData},
+    mongo.updateOneDocuments(domSheet, {uniqueId: param.uniqueId}, {sheet: param.sheetData},
         response => {
             console.log('更新文档结果', response.result);
 
@@ -84,11 +84,7 @@ router.post('/submitResult', function (req, res) {
 });
 
 
-// mongo.insertOneDocuments("sheet", {
-//     uniqueId: '5f2f48a0-7d2f-11e9-aac2-51d42dd428f6',
-//     sheet:[],
-//     creatorId:1,
-// }, function (res) {
+// mongo.insertOneDocuments("sheet", {"uniqueid":"1_1558854148255","sheet":[{"type":"single_select","data":{"required":true,"title":"这里输入题干信息","selected":"none","option":[{"text":"选项1"},{"text":"选项2"},{"text":"选项3"}]}}],"creatorid":1,"title":"测试表单测试表单测试表单测试表单测试表单测试表单","open":true,"type":"questionnaire"}, function (res) {
 //     console.log('get response',res);
 // });
 
