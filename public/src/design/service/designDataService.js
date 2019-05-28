@@ -11,8 +11,8 @@ designModule.factory('DesignDataSer', function () {
 
         //表单基础数据
         sheetConfig: {
-            uniqueid: '',//唯一的id号，
-            creatorid: '',//创建者id号
+            _id: '',//唯一的id号，
+            userid: '',//创建者id号
             title: '',//标题
             open: true, //是否对外开放查询结果
             type: ''//表单类型：问卷、投票等
@@ -23,23 +23,18 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [
         {
-            type: 'single_select',
+            type: 'paragraph',
             data: {
-                required: true, //必答、非必答选项
-                title: '这里输入题干信息',
-                selected: 'none',
-                option: [
-                    {text: '选项1'},
-                    {text: '选项2'},
-                    {text: '选项3'},
-                ]
+                html: '<p><span>请输入相关文本信息描述</span></p>'
             },
         }
     ];
 
 
+    //展示在选择列表上的组件
+    let widget = [];
     //所有组件信息
-    let widget = [
+    let allWidget = [
         {
             status: true, //展开状态：true、 收回状态：false
             name: '内容',
@@ -263,7 +258,8 @@ designModule.factory('DesignDataSer', function () {
 
     return {
         overallData: overallData,
-        widget: widget, //所有可选择的组件
+        allWidget:allWidget, //所有可选择的组件
+        widget: widget, //展示在列表中的可选择的组件
         sheet: sheet, //问卷、表单页面
         newWidgetData: newWidgetData, //新添加的组件填充数据
     }

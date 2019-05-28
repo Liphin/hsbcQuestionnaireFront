@@ -20,7 +20,7 @@ overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvid
             controller: 'DesignCtrl',
             controllerAs: 'design',
         })
-        .otherwise({redirectTo: '/design/20193432422'});
+        .otherwise({redirectTo: '/login'});
 
     //部署拦截器，每次http请求，会经过拦截器方法后再往下传
     $httpProvider.interceptors.push('interceptHttp');

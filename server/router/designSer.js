@@ -8,7 +8,7 @@ const mongo = require('../db/mongo');
 const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
 const router = express.Router();
-const domSheet = "sheet";//mongodb中的sheet文档库
+const sheetDom = "sheet";//mongodb中的sheet文档库
 
 
 //******************************* 小程序端操作 ***************************************
@@ -38,7 +38,7 @@ router.post('/saveSheetData', (req, res, next) => {
     let param = req.body;
 
     //2、保存文件到MongoDb数据库中
-    mongo.updateOneDocuments(domSheet, {uniqueId: param.uniqueId}, {sheet: param.sheetData},
+    mongo.updateOneDocuments(sheetDom, {uniqueId: param.uniqueId}, {sheet: param.sheetData},
         response => {
             console.log('更新文档结果', response.result);
 
@@ -73,7 +73,7 @@ router.post('/saveSheetData', (req, res, next) => {
  * 获取所有开放的统计数据
  */
 router.post('/getAllStatistics', function (req, res) {
-    mongo.findDocuments(domSheet, {open: true}, response => {
+    mongo.findDocuments(sheetDom, {open: true}, response => {
         res.send(response);
     })
 });

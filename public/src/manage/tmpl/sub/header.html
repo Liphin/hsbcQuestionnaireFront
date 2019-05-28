@@ -9,18 +9,26 @@
         border-color: #4eb4ed;
     }
 </style>
-<div style="position: fixed; z-index: 5;top: 0; left: 0; right: 0;height: 50px;background: white; box-shadow: 2px 0 5px #adadad; text-align: right">
+<div style="position: fixed; z-index: 5;top: 0; left: 0; right: 0;height: 50px;background: white; box-shadow: 2px 0 5px #adadad; ">
 
-    <!--保存按钮-->
-    <div class="headerBtn" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 12px; border-width: 1px;border-style: solid; margin: 9px 10px  20px 9px ">
-        <i class="fa fa-user"></i>
-        <span  style="margin-left: 5px">{{overallData.user.account}}</span>
+    <div style="position: absolute; left: 190px;top: 10px; font-size: 17px; font-weight: bold; letter-spacing: 2px; color: #7a96b5">
+        <div ng-if="manage.overallData.navigation=='createSheet'">新建问卷</div>
+        <div ng-if="manage.overallData.navigation=='allSheet'">所有问卷</div>
     </div>
 
-    <!--返回按钮-->
-    <div class="headerBtn" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 12px; border-width: 1px;border-style: solid;margin: 9px 30px  20px 9px; ">
-        <i class="fa fa-power-off"></i>
-        <span style="margin-left: 5px">退出</span>
+    <div style="text-align: right">
+        <!--保存按钮-->
+        <div class="headerBtn" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 12px; border-width: 1px;border-style: solid; margin: 9px 10px  20px 9px ">
+            <i class="fa fa-user"></i>
+            <span  style="margin-left: 5px">{{overallData.user.account}}</span>
+        </div>
+
+        <!--返回按钮-->
+        <div ng-click="signOut()" class="headerBtn" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 12px; border-width: 1px;border-style: solid;margin: 9px 30px  20px 9px; ">
+            <i class="fa fa-power-off"></i>
+            <span style="margin-left: 5px">退出</span>
+        </div>
     </div>
+
 
 </div>

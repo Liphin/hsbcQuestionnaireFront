@@ -37,8 +37,13 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,
             LoginDataSer.loginInfo, res => {
                 //该账号注册成功
                 if (res.status = 200) {
+                    //保存到全局数据
                     OverallDataSer.overallData.user._id = res.data;
                     OverallDataSer.overallData.user.account = LoginDataSer.loginInfo.account;
+                    //重置账号密码信息
+                    LoginDataSer.loginInfo.account = '';
+                    LoginDataSer.loginInfo.password = '';
+                    //路由到管理页面
                     $location.path('/manage');
                 }
                 //插入数据失败

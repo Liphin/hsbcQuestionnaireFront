@@ -43,6 +43,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
         loginUrl: baseUrlData.frontEndHttp + "login", //登录操作
         registerUrl: baseUrlData.frontEndHttp + "register", //注册操作
+        createNewSheetUrl: baseUrlData.frontEndHttp + "createNewSheet", //创建新的sheet
     };
 
     //用于sql注入filter
@@ -51,8 +52,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
     //location.path的重定向
     var redirect = {
-        'loginHome': '/login/home',
-        'arbiList': '/arbitration/list',
+        'login': '/login',
+        'manage': '/manage',
+        'design': '/arbitration/list',
         'arbiListTest': '/arbitration/listTest',
     };
 

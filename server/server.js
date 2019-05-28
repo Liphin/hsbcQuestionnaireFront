@@ -26,6 +26,7 @@ const bodyParser = require('body-parser');
  */
 const serverData = require('./serverSerData');
 const loginRouter = require('./router/loginSer');
+const manageRouter = require('./router/manageSer');
 const designRouter = require('./router/designSer');
 require('./db/mongo');
 
@@ -36,9 +37,12 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 //路由数据访问
 app.use(loginRouter);
+app.use(manageRouter);
 app.use(designRouter);
+
 //资源数据访问
 app.use("/resource", express.static(serverData.resourcePath));
 app.use("/public/assets", express.static(serverData.projectPath + '/assets'));

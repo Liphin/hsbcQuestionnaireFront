@@ -51,15 +51,9 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
      * 退出登录操作
      */
     $rootScope.signOut = function () {
-        //清空用户数据
-        OverallDataSer.overallData['loginStatus']=false;
-        $cookies.remove('loginStatus');
-
-        //跳转到登录页面
-        $location.search({});
-        $location.path(OverallDataSer.redirect['loginHome']);
-
-        //刷新当前页面，所有数据重置
-        $window.location.reload();
+        //重置数据并条转至登录页面
+        OverallDataSer.overallData.user._id='';
+        OverallDataSer.overallData.user.account='';
+        $location.path('/login')
     };
 });

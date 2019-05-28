@@ -7,7 +7,7 @@ const express = require('express');
 const mongo = require('../db/mongo');
 const serverData = require('../serverSerData');
 const router = express.Router();
-const domSheet = "user";//mongodb中的sheet文档库
+const userDom = "user";//mongodb中的sheet文档库
 
 
 /**
@@ -15,7 +15,7 @@ const domSheet = "user";//mongodb中的sheet文档库
  */
 router.post('/login', function (req, res, next) {
     let param = req.body;
-    mongo.findDocuments(domSheet, param, response => {
+    mongo.findDocuments(userDom, param, response => {
         //该账号登录成功
         if (response.length > 0) {
             res.send({
@@ -25,7 +25,7 @@ router.post('/login', function (req, res, next) {
         }
         //该账号或密码填写有误
         else {
-            mongo.findDocuments(domSheet, {account: param.account}, response => {
+            mongo.findDocuments(userDom, {account: param.account}, response => {
                 //该账号存在，密码填写错误
                 if (response.length > 0) {
                     res.send({
@@ -49,7 +49,7 @@ router.post('/login', function (req, res, next) {
 router.post('/register', function (req, res, next) {
     let param = req.body;
     //查看该账号是否已经被注册过了
-    mongo.findDocuments(domSheet, {account: param.account}, response => {
+    mongo.findDocuments(userDom, {account: param.account}, response => {
         if (response.length > 0) {
             //该账号已被注册，返回401
             res.send({
@@ -58,7 +58,7 @@ router.post('/register', function (req, res, next) {
         }
         else {
             //该账号尚未被注册过，进行注册该账号
-            mongo.insertOneDocuments(domSheet, param, response => {
+            mongo.insertOneDocuments(userDom, param, response => {
                 //插入数据成功
                 if (response.result.ok == 1) {
                     res.send({
