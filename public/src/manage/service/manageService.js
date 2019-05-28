@@ -1,7 +1,20 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.factory('ManageSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer) {
+manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
+                                            AllSheetSer) {
+
+    /**
+     * 管理页面初始化操作
+     */
+    let init = function () {
+        ManageDataSer.overallData.navigation = $routeParams.option;
+        //如果是所有问卷路由则进入该方法
+        if ($routeParams.option == 'allSheet') {
+            //AllSheetSer.loadAllSheet();
+        }
+    };
+
 
     /**
      * 创建新的表单类型数据
@@ -35,6 +48,7 @@ manageModule.factory('ManageSer', function ($cookies, $location, ManageDataSer, 
 
 
     return {
+        init: init,
         createNewSheet: createNewSheet,
     }
 });

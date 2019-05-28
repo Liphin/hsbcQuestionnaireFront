@@ -39,7 +39,7 @@ manageModule.directive('manageContent', function () {
 manageModule.directive('manageCreateSheet', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/opt/create_sheet.html'
+        templateUrl:'src/manage/tmpl/sub/content/create_sheet.html'
     }
 });
 /**
@@ -48,6 +48,6 @@ manageModule.directive('manageCreateSheet', function () {
 manageModule.directive('manageAllSheet', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/opt/all_sheet.html'
+        templateUrl:'src/manage/tmpl/sub/content/all_sheet.html'
     }
 });

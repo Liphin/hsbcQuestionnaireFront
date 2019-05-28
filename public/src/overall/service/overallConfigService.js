@@ -10,7 +10,7 @@ overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvid
             controller: 'LoginCtrl',
             controllerAs: 'login'
         })
-        .when('/manage:option', {
+        .when('/manage/:option', {
             templateUrl: 'src/manage/tmpl/manage.html',
             controller: 'ManageCtrl',
             controllerAs: 'manage',

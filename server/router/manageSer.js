@@ -20,7 +20,7 @@ router.post('/createNewSheet', function (req, res, next) {
         if (response.result.ok == 1) {
             res.send({
                 status: 200,
-                data: response.ops[0]
+                data: response.ops[0]._id
             })
         }
         //创建新问卷表单数据，插入数据库失败
@@ -29,6 +29,20 @@ router.post('/createNewSheet', function (req, res, next) {
                 status: 401,
             })
         }
+    })
+});
+
+
+/**
+ * 加载所有表单数据
+ */
+router.post('/loadAllSheet', function (req, res, next) {
+    let param = req.body;
+    mongo.findDocuments(sheetDom, param, response => {
+        res.send({
+            status: 200,
+            data: response
+        })
     })
 });
 

@@ -5,6 +5,7 @@
 const fs = require('fs');
 const express = require('express');
 const mongo = require('../db/mongo');
+const mongodb = require('mongodb');
 const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
 const router = express.Router();
@@ -28,6 +29,21 @@ router.post('/getQrCode', function (req, res, next) {
 
 
 //******************************** 程序数据集操作 ************************************
+
+/**
+ * 获取指定_id的sheet数据
+ */
+router.post('/getTargetSheet', function (req, res) {
+    mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(req.body._id)}, response => {
+        console.log(response);
+        res.send({
+            status: 200,
+            data: response,
+        });
+    })
+});
+
+
 /**
  * 保存表单数据
  * 1、保存数据到MongoDB数据库中
