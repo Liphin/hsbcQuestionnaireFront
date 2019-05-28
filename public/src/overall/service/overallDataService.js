@@ -26,7 +26,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         //用户信息
         user: {
             _id: '',
-            account: 'admin',
+            account: '',
         }
     };
 
@@ -44,6 +44,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         loginUrl: baseUrlData.frontEndHttp + "login", //登录操作
         registerUrl: baseUrlData.frontEndHttp + "register", //注册操作
         createNewSheetUrl: baseUrlData.frontEndHttp + "createNewSheet", //创建新的sheet
+        getTargetSheetUrl: baseUrlData.frontEndHttp + "getTargetSheet", //获取指定_id的sheet文档数据
     };
 
     //用于sql注入filter

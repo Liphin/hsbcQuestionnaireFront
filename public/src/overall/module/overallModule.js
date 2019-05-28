@@ -4,6 +4,7 @@
 let overallModule = angular.module('Angular',
     [
         'ngRoute',
+        'ngCookies',
         'Angular.login',
         'Angular.manage',
         'Angular.design'

@@ -4,7 +4,7 @@
 manageModule.factory('ManageDataSer', function () {
     let overallData = {
 
-        navigation: 'createSheet', //导航类型
+        navigation: 'allSheet', //导航类型
 
         //创建新的表单
         newSheet:{

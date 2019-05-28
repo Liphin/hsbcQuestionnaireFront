@@ -9,7 +9,7 @@ designModule.factory('DesignDataSer', function () {
         editRenderIndex: 0, //当前正在编辑的渲染的组件的index
         viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
 
-        //表单基础数据
+        //表单基础数据，每次进入表单时获取
         sheetConfig: {
             _id: '',//唯一的id号，
             userid: '',//创建者id号
@@ -32,9 +32,9 @@ designModule.factory('DesignDataSer', function () {
 
 
     //展示在选择列表上的组件
-    let widget = [];
+    let allWidget = [];
     //所有组件信息
-    let allWidget = [
+    let widget = [
         {
             status: true, //展开状态：true、 收回状态：false
             name: '内容',

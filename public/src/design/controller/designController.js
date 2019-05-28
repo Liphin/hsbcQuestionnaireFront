@@ -3,12 +3,16 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer, $http) {
+designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer, $http) {
+
+    //检查是否登录状态
+    if (!check) return;
 
     let design = this;
     design.overallData = DesignDataSer.overallData;
     design.widget = DesignDataSer.widget;
     design.sheet = DesignDataSer.sheet;
+    DesignSer.init();
 
     /**
      * 添加新组件的操作
@@ -92,6 +96,13 @@ designModule.controller('DesignCtrl', function (DesignDataSer, WidgetSer, Design
             alert("很抱歉，提交有误，请稍后重试");
         });
     };
+
+    /**
+     * 返回管理页面
+     */
+    design.backToManage=function () {
+        $location.path('/manage/allSheet');
+    }
 });
 
 

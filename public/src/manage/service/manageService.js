@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.factory('ManageSer', function ($location, ManageDataSer, OverallGeneralSer, OverallDataSer, DesignDataSer) {
+manageModule.factory('ManageSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer) {
 
     /**
      * 创建新的表单类型数据
@@ -19,13 +19,8 @@ manageModule.factory('ManageSer', function ($location, ManageDataSer, OverallGen
             //post发送http请求数据创建新表单数据
             OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.createNewSheetUrl, data, function (result) {
                 if (result.status == 200) {
-                    //TODO 配置overall.redirectUrl，并对刷新机制做优化
-                    //记录数据到design数据集中
-                    DesignDataSer.overallData.sheetConfig = result.data;
-                    //TODO 设置相关渲染页面可选择的编辑组件
-                    DesignDataSer.widget = DesignDataSer.allWidget;
                     //跳转链接，进入design界面
-                    $location.path('/design');
+                    $location.path('/design/' + result.data);
                 }
                 else if (result.status == 401) {
                     alert("创建失败，请稍后重试")
@@ -37,6 +32,7 @@ manageModule.factory('ManageSer', function ($location, ManageDataSer, OverallGen
             alert("请填写标题信息");
         }
     };
+
 
     return {
         createNewSheet: createNewSheet,

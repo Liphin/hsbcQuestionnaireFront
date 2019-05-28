@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/2/28.
  */
 overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, $timeout, OverallDataSer,
-                                                  OverallSer, OverallGeneralSer, $window) {
+                                                  OverallSer, OverallGeneralSer, $cookies) {
     /******************************个人信息标签显示和隐藏设置**************************************/
 
     /*初始化必要变量*/
@@ -51,9 +51,12 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
      * 退出登录操作
      */
     $rootScope.signOut = function () {
-        //重置数据并条转至登录页面
+        //重置数据
         OverallDataSer.overallData.user._id='';
         OverallDataSer.overallData.user.account='';
+        $cookies.remove('_id');
+        $cookies.remove('account');
+        //跳转至登录页面
         $location.path('/login')
     };
 });

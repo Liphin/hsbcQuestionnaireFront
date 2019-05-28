@@ -10,15 +10,25 @@ overallModule.config(function ($routeProvider, $httpProvider, $sceDelegateProvid
             controller: 'LoginCtrl',
             controllerAs: 'login'
         })
-        .when('/manage', {
+        .when('/manage:option', {
             templateUrl: 'src/manage/tmpl/manage.html',
             controller: 'ManageCtrl',
-            controllerAs: 'manage'
+            controllerAs: 'manage',
+            resolve: {
+                check: function (OverallSer) {
+                    return OverallSer.processLogonStatus(20, '/login');
+                }
+            }
         })
-        .when('/design/:option', {
+        .when('/design/:_id', {
             templateUrl: 'src/design/tmpl/design.html',
             controller: 'DesignCtrl',
             controllerAs: 'design',
+            resolve: {
+                check: function (OverallSer) {
+                    return OverallSer.processLogonStatus(20, '/login');
+                }
+            }
         })
         .otherwise({redirectTo: '/login'});
 

@@ -1,8 +1,23 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,
+loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,$cookies,
                                           OverallDataSer, $location) {
+
+    /**
+     * 保存登录信息
+     */
+    let saveLoginInfo = function (_id) {
+        //查询有该记录，登录成功，跳转到用户管理界面
+        OverallDataSer.overallData.user._id = _id;
+        OverallDataSer.overallData.user.account = LoginDataSer.loginInfo.account;
+
+        //保存至cookie中
+        let newExpireTime = OverallGeneralSer.getNewCookiesExpireDate();
+        $cookies.put('_id', OverallDataSer.overallData.user._id, {'expires': newExpireTime});
+        $cookies.put('account', OverallDataSer.overallData.user.account, {'expires': newExpireTime});
+    };
+
 
     /**
      * 登录操作
@@ -13,9 +28,10 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,
             LoginDataSer.loginInfo, res => {
                 //账户登录成功
                 if (res.status == 200) {
-                    //查询有该记录，登录成功，跳转到用户管理界面
-                    OverallDataSer.overallData.user._id = res.data;
-                    $location.path('/manage');
+                    //保存登录信息
+                    saveLoginInfo(res.data);
+                    //跳转页面
+                    $location.path('/manage/allSheet');
                 }
                 //账户尚未注册
                 else if (res.status == 401) {
@@ -37,12 +53,13 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,
             LoginDataSer.loginInfo, res => {
                 //该账号注册成功
                 if (res.status = 200) {
-                    //保存到全局数据
-                    OverallDataSer.overallData.user._id = res.data;
-                    OverallDataSer.overallData.user.account = LoginDataSer.loginInfo.account;
+                    //保存登录信息
+                    saveLoginInfo(res.data);
+
                     //重置账号密码信息
                     LoginDataSer.loginInfo.account = '';
                     LoginDataSer.loginInfo.password = '';
+
                     //路由到管理页面
                     $location.path('/manage');
                 }

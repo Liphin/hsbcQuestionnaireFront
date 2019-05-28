@@ -3,7 +3,36 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, PackSer) {
+designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
+
+    /**
+     * 初始化渲染数据集
+     */
+    let init = function () {
+        //1、http请求获取对应的表单数据
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getTargetSheetUrl, {_id: $routeParams._id}, result => {
+            if (result.status == 200) {
+                //赋值表单页面编辑数据
+                DesignDataSer.sheet = result.data.sheet;
+                //赋值表单全局设置数据
+                DesignDataSer.overallData.sheetConfig = {
+                    _id: result.data._id,//唯一的id号，
+                    userid: result.data.userid,//创建者id号
+                    title: result.data.title,//标题
+                    open: result.data.open, //是否对外开放查询结果
+                    type: result.data.type//表单类型：问卷、投票等
+                };
+
+                //2. TODO 设置相关渲染页面可选择的编辑组件
+
+            }
+            //获取失败
+            else{
+                alert("系统出错，请稍后重试")
+            }
+        });
+    };
+
 
     /**
      * 点击预览，快速预览或小程序预览
@@ -15,14 +44,14 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
             DesignDataSer.overallData.viewType = viewType
         }
         //手机页面预览
-        if(DesignDataSer.overallData.viewType=='phoneView'){
-            OverallDataSer.overallData.phoneView.showPhoneView=true;
+        if (DesignDataSer.overallData.viewType == 'phoneView') {
+            OverallDataSer.overallData.phoneView.showPhoneView = true;
         }
         //小程序页面预览
-        else if (DesignDataSer.overallData.viewType=='miniView'){
+        else if (DesignDataSer.overallData.viewType == 'miniView') {
 
 
-            OverallDataSer.overallData.miniView.showMiniView=true;
+            OverallDataSer.overallData.miniView.showMiniView = true;
         }
     };
 
@@ -55,6 +84,7 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
 
     return {
+        init: init,
         viewPage: viewPage,
         savePage: savePage,
     }
