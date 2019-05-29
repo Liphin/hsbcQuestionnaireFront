@@ -24,8 +24,9 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
                     _id: targetSheet._id,//唯一的id号，
                     userid: targetSheet.userid,//创建者id号
                     title: targetSheet.title,//标题
+                    type: targetSheet.type,//表单类型：问卷、投票等
+                    status: targetSheet.status,//表单状态：草稿，发布中等
                     open: targetSheet.open, //是否对外开放查询结果
-                    type: targetSheet.type//表单类型：问卷、投票等
                 };
 
                 //2. TODO 设置相关渲染页面可选择的编辑组件
@@ -75,7 +76,7 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
         //2、保存该HTML到后台文件
         let jsonData = {
-            uniqueId: DesignDataSer.overallData.sheetConfig.uniqueid,
+            _id: DesignDataSer.overallData.sheetConfig._id,
             htmlData: fullPhoneHtmlData, //用于保存HTML数据到后台形成文件
             sheetData: DesignDataSer.sheet, //用于保存表单数据到数据库
         };

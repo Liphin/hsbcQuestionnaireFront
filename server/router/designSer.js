@@ -54,12 +54,12 @@ router.post('/saveSheetData', (req, res, next) => {
     let param = req.body;
 
     //2、保存文件到MongoDb数据库中
-    mongo.updateOneDocuments(sheetDom, {uniqueId: param.uniqueId}, {sheet: param.sheetData},
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {sheet: param.sheetData},
         response => {
             console.log('更新文档结果', response.result);
 
             //3、保存文件到HTML操作
-            let filePath = serverData.resourcePath + "/html/" + param.uniqueId + ".html";
+            let filePath = serverData.resourcePath + "/html/" + param._id + ".html";
 
             //查询是否已经存在文件，若已经存在则先删除
             fs.access(filePath, error => {

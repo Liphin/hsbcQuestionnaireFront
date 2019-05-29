@@ -10,25 +10,12 @@ designModule.factory('DesignDataSer', function () {
         viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
 
         //表单基础数据，每次进入表单时获取
-        sheetConfig: {
-            _id: '',//唯一的id号，
-            userid: '',//创建者id号
-            title: '',//标题
-            open: true, //是否对外开放查询结果
-            type: ''//表单类型：问卷、投票等
-        }
+        sheetConfig: {}
     };
 
 
     //问卷、表单页面
-    let sheet = [
-        {
-            type: 'paragraph',
-            data: {
-                html: '<p><span>请输入相关文本信息描述</span></p>'
-            },
-        }
-    ];
+    let sheet = [];
 
 
     //展示在选择列表上的组件
