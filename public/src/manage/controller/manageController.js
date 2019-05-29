@@ -29,8 +29,15 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     /**
      * 对创建的表单进行操作
      */
-    manage.sheetOpt = function (type, _id) {
-        AllSheetSer.sheetOpt(type, _id);
+    manage.sheetOpt = function (type, index, param) {
+        AllSheetSer.sheetOpt(type, index, param);
+    };
+
+    /**
+     * 获取对应表单类型的logo
+     */
+    manage.getSheetTypeLogo= function (type) {
+        return AllSheetSer.getSheetTypeLogo(type)
     }
 });
 

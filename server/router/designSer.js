@@ -54,7 +54,10 @@ router.post('/saveSheetData', (req, res, next) => {
     let param = req.body;
 
     //2、保存文件到MongoDb数据库中
-    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {sheet: param.sheetData},
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {
+            sheet: param.sheetData,
+            timestamp: param.timestamp
+        },
         response => {
             console.log('更新文档结果', response.result);
 
@@ -95,6 +98,31 @@ router.post('/getAllStatistics', function (req, res) {
 });
 
 
+/**
+ * 设置sheet发布状态
+ */
+router.post('/releaseConfig', function (req, res) {
+    let param = req.body;
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {status: param.status}, response => {
+        console.log('设置开放状态结果: ', response.result);
+        //更新文档成功
+        if(response.result.n==1){
+            res.send({
+                status: 200,
+            })
+        }
+        //更新失败
+        else {
+            res.send({
+                status: 401,
+            })
+        }
+    })
+});
+
+/**
+ * 提交表单信息
+ */
 router.post('/submitResult', function (req, res) {
 
 });

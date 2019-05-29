@@ -1,5 +1,12 @@
 <!--编辑页面头部-->
 <div style="position: fixed; top: 0; left: 0; right: 0;height: 50px;background: white; box-shadow: 2px 0 5px #adadad; text-align: right">
+
+    <!--发布按钮-->
+    <div ng-click="design.publishPage(2)"
+         style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro; margin: 9px 10px  20px 9px ">
+        发布
+    </div>
+
     <!--预览按钮-->
     <div class="btn-group" style="cursor: pointer; display: inline-block; padding: 5px 20px; vertical-align: top;
         border: 1px solid #4eb4ed; color: white; background: #4eb4ed; margin: 9px 10px  20px 9px" >
@@ -22,7 +29,6 @@
         </div>
     </div>
 
-
     <!--保存按钮-->
     <div ng-click="design.savePage()"
          style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro; margin: 9px 10px  20px 9px ">
@@ -30,7 +36,7 @@
     </div>
 
     <!--返回按钮-->
-    <div ng-click="design.backToManage()" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro;margin: 9px 10px  20px 9px; ">
+    <div ng-click="design.backToManage()" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro;margin: 9px 20px  20px 9px; ">
         返回
     </div>
 

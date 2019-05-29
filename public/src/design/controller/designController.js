@@ -85,6 +85,15 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
         DesignSer.viewPage(viewType);
     };
 
+
+    /**
+     * 发布小程序页面
+     */
+    design.publishPage = function (status) {
+        DesignSer.publishPage(status);
+    };
+
+
     /**
      * 保存页面数据结果
      */

@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
+designModule.factory('DesignSer', function ($location, OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
 
     /**
      * 初始化渲染数据集
@@ -27,6 +27,7 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
                     type: targetSheet.type,//表单类型：问卷、投票等
                     status: targetSheet.status,//表单状态：草稿，发布中等
                     open: targetSheet.open, //是否对外开放查询结果
+                    timestamp: targetSheet.timestamp, //最新保存时间
                 };
 
                 //2. TODO 设置相关渲染页面可选择的编辑组件
@@ -63,12 +64,10 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
 
     /**
-     * 保存页面信息
-     * 1、手机表单HTML的框架页面添加数据
-     * 2、保存该HTML到后台文件
-     * 4、生成携带参数的的小程序二维码 TODO
+     * 开放保存操作的对外方法体
+     * @param callback
      */
-    let savePage = function () {
+    let saveOpt = function (callback) {
         //1、手机表单HTML的框架页面添加数据
         let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.sheetFrameData
             .replace(/__SHEET_DATA__/g, JSON.stringify(DesignDataSer.sheet))
@@ -79,20 +78,59 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
             _id: DesignDataSer.overallData.sheetConfig._id,
             htmlData: fullPhoneHtmlData, //用于保存HTML数据到后台形成文件
             sheetData: DesignDataSer.sheet, //用于保存表单数据到数据库
+            timestamp: new Date().getTime(), //获取最新保存的时间
         };
 
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetDataUrl, jsonData, function (result) {
             if (result == 'OK') {
-                OverallGeneralSer.setFinishAnimation(1500, '保存完成');
+                //保存完成后如有其它操作调用此方法
+                callback();
             }
         });
     };
 
+
+    /**
+     * 保存页面信息
+     * 1、手机表单HTML的框架页面添加数据
+     * 2、保存该HTML到后台文件
+     * 4、生成携带参数的的小程序二维码 TODO
+     */
+    let savePage = function () {
+        //调用开放的公共保存操作方法
+        saveOpt(() => {
+            OverallGeneralSer.setFinishAnimation(1500, '保存完成');
+        })
+    };
+
+
+    /**
+     * 发布表单数据
+     */
+    let publishPage = function (status) {
+        //1、保存当前表单数据
+        saveOpt(() => {
+            //2、设置数据库中开放表单字段的操作
+            OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.releaseConfigUrl,
+                {_id: DesignDataSer.overallData.sheetConfig._id, status: status}, result => {
+                    if (result.status == 200) {
+                        OverallGeneralSer.setFinishAnimation(2000, '发布成功');
+                        $location.path('/manage/allSheet');
+                    }
+                    //更新失败
+                    else {
+                        alert("发布失败，请稍后重试");
+                    }
+                })
+        })
+    };
 
 
     return {
         init: init,
         viewPage: viewPage,
         savePage: savePage,
+        publishPage: publishPage,
     }
 });
+
