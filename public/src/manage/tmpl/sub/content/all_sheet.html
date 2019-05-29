@@ -1,10 +1,74 @@
 <!--所有问卷表单-->
-<div ng-if="manage.overallData.navigation=='allSheet'" style="position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0">
-    <div ng-repeat="value in manage.allSheetData">
-        {{value}}
+<style>
+    .sheetList {
+        border-color: gainsboro;
+    }
+    .sheetList:hover {
+        border-color: rgba(65, 191, 242, 0.56);
+        box-shadow: 0 0 15px #62bff2;
+    }
+    .sheetListOpt:hover{
+        color: rgba(29, 146, 238, 0.82);
+    }
+</style>
+
+<div ng-if="manage.overallData.navigation=='allSheet'" class="scrollBar-7"
+     style="padding: 10px 0 0 50px;position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0; overflow-y:auto">
+
+    <div ng-repeat="value in manage.allSheetData" style="width: 80%; font-size: 15px;border-width: 2px; border-style: solid;
+        padding: 17px 0 0 0;margin: 27px; border-radius: 10px" class="sheetList">
+
+        <div style="padding:0 30px">
+            <div style="display: flex; flex-direction: row;">
+                <!--左侧信息展示-->
+                <div style="text-align: left; flex: 1">
+                    <span>{{value.title}}</span>
+                </div>
+
+                <!--中间按钮-->
+                <div style="display: flex; flex-direction: row;margin-right: 40px; color: grey">
+                    <div class="sheetListOpt" style="cursor: pointer">
+                        <i class="fa fa-edit"></i>
+                        <span style="margin-left: 3px">编辑设计</span>
+                    </div>
+                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span style="margin-left: 3px">统计分析</span>
+                    </div>
+                </div>
+
+
+                <!--右侧操作按钮-->
+                <div class="sheetListOpt" style="text-align: right; display: flex; flex-direction: row;color: grey">
+                    <div class="sheetListOpt" style="cursor: pointer">
+                        <i class="fa fa-play-circle-o"></i>
+                        <span style="margin-left: 3px">发布</span>
+                    </div>
+                    <div class="sheetListOpt" style="cursor: pointer; margin-left: 18px;">
+                        <i class="fa fa-qrcode"></i>
+                        <span style="margin-left: 3px">二维码</span>
+                    </div>
+                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-copy"></i>
+                        <span style="margin-left: 3px">复制</span>
+                    </div>
+
+                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-trash-o"></i>
+                        <span style="margin-left: 3px">删除</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--问卷状态等信息-->
+        <div style="background: #e6f0fa;text-align: right;font-size: 12px; color: grey;margin-top: 10px; padding: 10px 30px 15px 30px;">
+            <span style="margin-right: 18px">运行中</span>
+            <span>2019/5/12 15:30</span>
+        </div>
     </div>
 
-    <div>
-        <span></span>
-    </div>
+    <!--占位符-->
+    <div style="width: 100%; height: 70px"></div>
 </div>

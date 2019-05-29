@@ -11,7 +11,7 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
         ManageDataSer.overallData.navigation = $routeParams.option;
         //如果是所有问卷路由则进入该方法
         if ($routeParams.option == 'allSheet') {
-            //AllSheetSer.loadAllSheet();
+            AllSheetSer.loadAllSheet();
         }
     };
 
