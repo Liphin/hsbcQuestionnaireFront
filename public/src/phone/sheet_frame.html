@@ -76,9 +76,11 @@
         design.submitSheet = function () {
             let submitData = {
                 openid: params.openid,
+                sheetid: design.config._id,
                 title: design.config.title,
-                uniqueid: design.config.uniqueid,
+                type: design.config.type,
                 sheet: design.sheet,
+                timestamp:new Date().getTime()
             };
             $http.post("/submitResult", submitData).success(function (response) {
                 if (response == 'OK') {

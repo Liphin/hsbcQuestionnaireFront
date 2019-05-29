@@ -126,8 +126,33 @@ designModule.factory('DesignSer', function ($location, OverallDataSer, OverallGe
     };
 
 
+    /**
+     * 提交问卷表单数据
+     */
+    let submitSheet = function () {
+        //表单提交的数据
+        let submitData = {
+            openid: OverallDataSer.overallData.user._id, //电脑端用户提交用该用户的_id作为openid，手机端用户用真实openid
+            sheetid: DesignDataSer.overallData.sheetConfig._id, //该表单文档的id
+            title: DesignDataSer.overallData.sheetConfig.title,
+            type: DesignDataSer.overallData.sheetConfig.type,
+            sheet: DesignDataSer.sheet,
+            timestamp:new Date().getTime()
+        };
+
+        $http.post("/submitResult", submitData).success(function (response) {
+            if (response == 'OK') {
+                OverallGeneralSer.setFinishAnimation(1500, '提交成功');
+            }
+        }).error(function (err) {
+            alert("很抱歉，提交有误，请稍后重试");
+        });
+    };
+
+
     return {
         init: init,
+        submitSheet: submitSheet,
         viewPage: viewPage,
         savePage: savePage,
         publishPage: publishPage,

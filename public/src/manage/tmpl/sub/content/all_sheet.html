@@ -87,7 +87,7 @@
             <div style="flex: 1; text-align: right">
                 <span style="margin-right: 18px" ng-if="value.status==1">草稿</span>
                 <span style="margin-right: 18px; color: #ff7b15" ng-if="value.status==2">运行中</span>
-                <span>2019/5/12 15:30</span>
+                <span>{{manage.parseSheetTime(value.timestamp)}}</span>
             </div>
         </div>
     </div>

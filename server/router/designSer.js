@@ -10,6 +10,7 @@ const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
 const router = express.Router();
 const sheetDom = "sheet";//mongodb中的sheet文档库
+const participantDom = "participant";//mongodb中的sheet文档库
 
 
 //******************************* 小程序端操作 ***************************************
@@ -106,7 +107,7 @@ router.post('/releaseConfig', function (req, res) {
     mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {status: param.status}, response => {
         console.log('设置开放状态结果: ', response.result);
         //更新文档成功
-        if(response.result.n==1){
+        if (response.result.n == 1) {
             res.send({
                 status: 200,
             })
@@ -124,13 +125,32 @@ router.post('/releaseConfig', function (req, res) {
  * 提交表单信息
  */
 router.post('/submitResult', function (req, res) {
+    let param = req.body;
+    //1、插入participant文档
+    mongo.insertOneDocuments(participantDom, param, response => {
+
+    });
+
+    //2、更新sheet文档
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param.sheetid)}, {}, response => {
+
+    })
 
 });
 
+// //更新数组或对象数据
+// mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID("5cee0521b0b5983a14b1a39a")},
+//     {'sheet.3.data.option.0.status': true}, response => {console.log(response.result)})
 
-// mongo.insertOneDocuments("sheet", {"uniqueid":"1_1558854148255","sheet":[{"type":"single_select","data":{"required":true,"title":"这里输入题干信息","selected":"none","option":[{"text":"选项1"},{"text":"选项2"},{"text":"选项3"}]}}],"creatorid":1,"title":"测试表单测试表单测试表单测试表单测试表单测试表单","open":true,"type":"questionnaire"}, function (res) {
-//     console.log('get response',res);
+// //自增叠加更新：可多级创建新子元素，不能自动创建数组，result.2 这种将以对象方式对待
+// mongo.connectToMongo(function (db) {
+//     var updateStr = {$inc: {'sheet.3.data.option.0.result.2': 1}};
+//     db.db("hsbc").collection(sheetDom).updateOne({_id: new mongodb.ObjectID("5cee0521b0b5983a14b1a39a")}, updateStr, function (err, res) {
+//         console.log(res.result)
+//         db.close();
+//     });
 // });
+
 
 
 module.exports = router;

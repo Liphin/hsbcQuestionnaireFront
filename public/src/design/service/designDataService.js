@@ -87,7 +87,7 @@ designModule.factory('DesignDataSer', function () {
                 ],
             },
         },
-        //量标题
+        //量表题
         single_scale: {
             type: 'single_scale',
             data: {
@@ -245,7 +245,7 @@ designModule.factory('DesignDataSer', function () {
 
     return {
         overallData: overallData,
-        allWidget:allWidget, //所有可选择的组件
+        allWidget: allWidget, //所有可选择的组件
         widget: widget, //展示在列表中的可选择的组件
         sheet: sheet, //问卷、表单页面
         newWidgetData: newWidgetData, //新添加的组件填充数据

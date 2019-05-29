@@ -105,13 +105,7 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
      * 提交问卷
      */
     design.submitSheet= function () {
-        $http.post("/submitResult", design.sheet).success(function (response) {
-            if(response=='OK'){
-                alert("提交成功");
-            }
-        }).error(function (err) {
-            alert("很抱歉，提交有误，请稍后重试");
-        });
+        DesignSer.submitSheet();
     };
 
     /**

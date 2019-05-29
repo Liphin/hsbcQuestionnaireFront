@@ -49,6 +49,8 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
     };
 
 
+
+
     return {
         init: init,
         createNewSheet: createNewSheet,

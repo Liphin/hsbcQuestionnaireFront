@@ -38,6 +38,15 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.getSheetTypeLogo= function (type) {
         return AllSheetSer.getSheetTypeLogo(type)
+    };
+
+    /**
+     * 解析表单的时间
+     */
+    manage.parseSheetTime = function (timestamp) {
+        let dataTime = new Date(timestamp);
+        return dataTime.getFullYear() + "/" + (dataTime.getMonth() + 1) + "/" + dataTime.getDate() + "  " +
+            dataTime.getHours() + ":" + dataTime.getMinutes() + ":" + dataTime.getSeconds();
     }
 });
 
