@@ -12,28 +12,28 @@ overallModule.factory('interceptHttp', function ($location, $rootScope) {
         /*成功请求数据*/
         request: function (receive) {
             if (receive.load != false) {
-                $rootScope.loading++;
+                $rootScope.overallData.loadingNum++;
             }
-            //console.log('request', $rootScope.loading, receive)
+            //console.log('request', $rootScope.overallData.loading, receive)
             return receive;
         },
 
         /*成功返回数据*/
         response: function (response) {
-            $rootScope.loading--;
-            //console.log('response', $rootScope.loading, response)
+            $rootScope.overallData.loadingNum--;
+            //console.log('response', $rootScope.overallData.loading, response)
             return response
         },
 
         /*请求或返回数据出现错误*/
         requestError: function (err) {
-            $rootScope.loading--;
-            //console.log('requestError', $rootScope.loading)
+            $rootScope.overallData.loadingNum--;
+            //console.log('requestError', $rootScope.overallData.loading)
             return err;
         },
         responseError: function (err) {
-            $rootScope.loading--;
-            //console.log('responseError', $rootScope.loading)
+            $rootScope.overallData.loadingNum--;
+            //console.log('responseError', $rootScope.overallData.loading)
             return err;
         }
     };
@@ -46,23 +46,23 @@ overallModule.run(function ($rootScope, $timeout) {
 
     /*定义在config中每个path对应controller和view*/
     $rootScope.$on('$routeChangeStart', function (e, curr, prev) {
-        $rootScope.loading++;
-        //console.log('$routeChangeStart', $rootScope.loading)
+        $rootScope.overallData.loadingNum++;
+        //console.log('$routeChangeStart', $rootScope.overallData.loading)
     });
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
-        $rootScope.loading--;
-        //console.log('$routeChangeSuccess', $rootScope.loading)
+        $rootScope.overallData.loadingNum--;
+        //console.log('$routeChangeSuccess', $rootScope.overallData.loading)
     });
 
     /*所有URL跳转，不管是否在config中定义path*/
     $rootScope.$on('$locationChangeStart', function () {
-        $rootScope.loading++;
-        //console.log('$locationChangeStart', $rootScope.loading)
+        $rootScope.overallData.loadingNum++;
+        //console.log('$locationChangeStart', $rootScope.overallData.loading)
     });
     $rootScope.$on('$locationChangeSuccess', function () {
-        $rootScope.loading--;
-        //console.log('$locationChangeSuccess', $rootScope.loading)
+        $rootScope.overallData.loadingNum--;
+        //console.log('$locationChangeSuccess', $rootScope.overallData.loading)
     });
 
 });

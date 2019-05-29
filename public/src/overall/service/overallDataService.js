@@ -28,10 +28,15 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             _id: '',
             account: '',
         },
+
         //http请求时等待加载压栈
         loadingNum: 0,
+
         //执行操作完成后等动画
-        finishAnimation: false,
+        finishAnimation: {
+            status: false,
+            text:'',
+        },
     };
 
     // Url系统各种文件获取的URL设置
@@ -67,6 +72,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
     var zIndexHelper = {
         loading: 5000,
+        finishAnimation: 5000,
         phoneView: 1000
     };
 

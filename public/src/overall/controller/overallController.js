@@ -6,8 +6,7 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
     /******************************个人信息标签显示和隐藏设置**************************************/
 
     /*初始化必要变量*/
-    $rootScope.loading = OverallDataSer.overallData.loadingNum;
-    $rootScope.saveAnimate = OverallDataSer.overallData.finishAnimation;
+    //$rootScope.loading = OverallDataSer.overallData.loadingNum;
     $rootScope.overallData = OverallDataSer.overallData;
     $rootScope.zIndexHelper = OverallDataSer.zIndexHelper;
 

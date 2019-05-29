@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/2/28.
  */
 
-overallModule.factory('OverallSer', function ($rootScope, OverallDataSer, $location, $http, OverallGeneralSer, $cookies) {
+overallModule.factory('OverallSer', function ($rootScope, OverallDataSer, $location, $http,  OverallGeneralSer, $cookies) {
 
 
     /**

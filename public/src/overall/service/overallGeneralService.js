@@ -8,8 +8,8 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 设置cookie三小时的生存时间
      * @returns {Date}
      */
-    var getNewCookiesExpireDate = function () {
-        var expireDate = new Date();
+    let getNewCookiesExpireDate = function () {
+        let expireDate = new Date();
         expireDate.setHours(expireDate.getHours() + 3, expireDate.getMinutes(), expireDate.getSeconds(), expireDate.getMilliseconds());
         return expireDate;
     };
@@ -19,8 +19,8 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 对数据进行判空处理
      * @param data
      */
-    var checkDataNotEmpty = function (data) {
-        var status = false;
+    let checkDataNotEmpty = function (data) {
+        let status = false;
         if (data != null && data != undefined) {
             //根据变量的不同类型进行判空处理
             switch (Object.prototype.toString.call(data)) {
@@ -318,6 +318,22 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     };
 
 
+    /**
+     * 操作完成动画
+     */
+    let setFinishAnimation = function (time, word) {
+        //设置文字和动画状态
+        //OverallDataSer.overallData.finishAnimation.status = false;
+        OverallDataSer.overallData.finishAnimation.text = word;
+        OverallDataSer.overallData.finishAnimation.status = true;
+
+        //设置动画过期完成时间
+        $timeout(function () {
+            OverallDataSer.overallData.finishAnimation.status = false;
+        }, time);
+    };
+
+
     return {
         httpGetFiles: httpGetFiles,
         httpPostFormData: httpPostFormData,
@@ -328,6 +344,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         httpPostData3: httpPostData3,
         uploadFileToYJW: uploadFileToYJW,
         uploadResource: uploadResource,
+        setFinishAnimation:setFinishAnimation,
         checkDataNotEmpty: checkDataNotEmpty,
         getNewCookiesExpireDate: getNewCookiesExpireDate,
         alertHttpRequestError: alertHttpRequestError,

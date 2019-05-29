@@ -82,10 +82,11 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
 
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetDataUrl, jsonData, function (result) {
             if (result == 'OK') {
-
+                OverallGeneralSer.setFinishAnimation(1500, '保存完成');
             }
         });
     };
+
 
 
     return {
