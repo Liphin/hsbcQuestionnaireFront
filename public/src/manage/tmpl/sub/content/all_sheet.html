@@ -1,7 +1,7 @@
 <!--所有问卷表单-->
 <style>
     .sheetList {
-        border-color: gainsboro;
+        border-color: #becfdc;
     }
     .sheetList:hover {
         border-color: rgba(65, 191, 242, 0.56);
@@ -27,40 +27,38 @@
 
                 <!--中间按钮-->
                 <div style="display: flex; flex-direction: row;margin-right: 40px; color: grey">
-                    <div class="sheetListOpt" style="cursor: pointer">
+                    <div ng-click="manage.sheetOpt('edit', value._id)" class="sheetListOpt" style="cursor: pointer">
                         <i class="fa fa-edit"></i>
                         <span style="margin-left: 3px">编辑设计</span>
                     </div>
-                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                    <div ng-click="manage.sheetOpt('analyse', value._id)" class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
                         <i class="fa fa-bar-chart-o"></i>
                         <span style="margin-left: 3px">统计分析</span>
                     </div>
                 </div>
 
-
                 <!--右侧操作按钮-->
                 <div class="sheetListOpt" style="text-align: right; display: flex; flex-direction: row;color: grey">
-                    <div class="sheetListOpt" style="cursor: pointer">
+                    <div ng-click="manage.sheetOpt('release', value._id)" class="sheetListOpt" style="cursor: pointer">
                         <i class="fa fa-play-circle-o"></i>
                         <span style="margin-left: 3px">发布</span>
                     </div>
-                    <div class="sheetListOpt" style="cursor: pointer; margin-left: 18px;">
+                    <div ng-click="manage.sheetOpt('qrcode', value._id)" class="sheetListOpt" style="cursor: pointer; margin-left: 18px;">
                         <i class="fa fa-qrcode"></i>
                         <span style="margin-left: 3px">二维码</span>
                     </div>
-                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                    <div ng-click="manage.sheetOpt('copy', value._id)" class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
                         <i class="fa fa-copy"></i>
                         <span style="margin-left: 3px">复制</span>
                     </div>
 
-                    <div class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
+                    <div ng-click="manage.sheetOpt('delete', value._id)" class="sheetListOpt" style="margin-left: 18px;cursor: pointer">
                         <i class="fa fa-trash-o"></i>
                         <span style="margin-left: 3px">删除</span>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!--问卷状态等信息-->
         <div style="background: #e6f0fa;text-align: right;font-size: 12px; color: grey;margin-top: 10px; padding: 10px 30px 15px 30px;">

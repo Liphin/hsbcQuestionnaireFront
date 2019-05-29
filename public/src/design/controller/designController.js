@@ -22,6 +22,13 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     };
 
     /**
+     * 组件操作
+     */
+    design.widgetOpt=function (opt, index) {
+        WidgetSer.widgetOpt(opt, index);
+    };
+
+    /**
      * 获取问题序号
      */
     design.getQuestionnaireNum = function (index) {

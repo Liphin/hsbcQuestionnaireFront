@@ -12,22 +12,27 @@ designModule.factory('DesignSer', function (OverallDataSer, OverallGeneralSer, D
         //1、http请求获取对应的表单数据
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getTargetSheetUrl, {_id: $routeParams._id}, result => {
             if (result.status == 200) {
+                //返回是一个数据集，去第一条数据为目标sheet
+                let targetSheet = result.data[0];
                 //赋值表单页面编辑数据
-                DesignDataSer.sheet = result.data.sheet;
+                DesignDataSer.sheet.length = 0;
+                for (let i in targetSheet.sheet) {
+                    DesignDataSer.sheet.push(targetSheet.sheet[i]);
+                }
                 //赋值表单全局设置数据
                 DesignDataSer.overallData.sheetConfig = {
-                    _id: result.data._id,//唯一的id号，
-                    userid: result.data.userid,//创建者id号
-                    title: result.data.title,//标题
-                    open: result.data.open, //是否对外开放查询结果
-                    type: result.data.type//表单类型：问卷、投票等
+                    _id: targetSheet._id,//唯一的id号，
+                    userid: targetSheet.userid,//创建者id号
+                    title: targetSheet.title,//标题
+                    open: targetSheet.open, //是否对外开放查询结果
+                    type: targetSheet.type//表单类型：问卷、投票等
                 };
 
                 //2. TODO 设置相关渲染页面可选择的编辑组件
 
             }
             //获取失败
-            else{
+            else {
                 alert("系统出错，请稍后重试")
             }
         });

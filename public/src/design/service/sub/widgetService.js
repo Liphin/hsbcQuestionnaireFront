@@ -28,6 +28,27 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
 
 
     /**
+     * 对组件的操作
+     * @opt 操作类型
+     * @index 组件所在表单数组的下标
+     */
+    let widgetOpt = function (opt, index) {
+        //对应的表单组件信息
+        let widget = DesignDataSer.sheet[index];
+        switch (opt){
+            case 'copy':{
+                DesignDataSer.sheet.splice(index, 0, angular.copy(widget));
+                break;
+            }
+            case 'delete':{
+                DesignDataSer.sheet.splice(index, 1);
+                break;
+            }
+        }
+    };
+
+
+    /**
      * 添加选项操作
      */
     let addOptions = function (param) {
@@ -168,6 +189,7 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
 
 
     return {
+        widgetOpt: widgetOpt,
         editWidgetData: editWidgetData,
         addNewWidget: addNewWidget,
         addOptions: addOptions,

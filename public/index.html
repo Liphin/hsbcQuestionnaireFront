@@ -67,7 +67,7 @@
 <body resize>
 
 <!--页面加载动画-->
-<div ng-if="loading"  style="background: rgba(255,255,255,0.5);position: fixed;left: 0;right: 0; top: 0;bottom: 0;z-index:{{zIndexHelper['loading']}};text-align: center;">
+<div ng-if="loading>0"  style="background: rgba(255,255,255,0.5);position: fixed;left: 0;right: 0; top: 0;bottom: 0;z-index:{{zIndexHelper['loading']}};text-align: center;">
     <div style="vertical-align: middle;display: inline-block">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">

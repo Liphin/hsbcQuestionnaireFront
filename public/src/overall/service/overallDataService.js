@@ -27,7 +27,11 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         user: {
             _id: '',
             account: '',
-        }
+        },
+        //http请求时等待加载压栈
+        loadingNum: 0,
+        //执行操作完成后等动画
+        finishAnimation: false,
     };
 
     // Url系统各种文件获取的URL设置

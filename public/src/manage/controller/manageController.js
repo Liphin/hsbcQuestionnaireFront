@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer) {
+manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer) {
     //检查是否登录状态
     if (!check) return;
 
@@ -24,6 +24,16 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.changeNavigation = function (path) {
         $location.path(path)
-    }
+    };
 
+    /**
+     * 对创建的表单进行操作
+     */
+    manage.sheetOpt = function (type, _id) {
+        AllSheetSer.sheetOpt(type, _id);
+    }
 });
+
+
+
+
