@@ -5,6 +5,7 @@
 const uuidv1 = require('uuid/v1');
 const express = require('express');
 const mongo = require('../db/mongo');
+const mongodb = require('mongodb');
 const serverData = require('../serverSerData');
 const router = express.Router();
 const sheetDom = "sheet";//mongodb中的sheet文档库
@@ -67,5 +68,23 @@ router.post('/loadAllSheet', function (req, res, next) {
     })
 });
 
+/**
+ * 获取该表单数据填写数据结果
+ */
+router.post('/getTargetResult', function (req, res, next) {
+    let param = req.body;
+    mongo.findDocuments(resultDom, {sheetid: new mongodb.ObjectID(param.sheetid)}, response => {
+        res.send({
+            status: 200,
+            data: response
+        })
+    })
+});
+
 
 module.exports = router;
+
+
+
+
+

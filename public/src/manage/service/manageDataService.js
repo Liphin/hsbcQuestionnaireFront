@@ -15,6 +15,20 @@ manageModule.factory('ManageDataSer', function () {
     let allSheetData = [];
 
 
+    //目标问卷统计
+    let analyseData = {
+        sheetIndex: '',
+        result: {},
+        participant: {},
+        sheetClassify: {
+            paragraph: ['paragraph'],
+            select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
+            matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],
+            fill: ['single_fill', 'matrix_fill', 'detail_fill']
+        }
+    };
+
+
     //创建不同类型问卷有不同组件选择类型
     let allSheetType = [
         {
@@ -57,6 +71,7 @@ manageModule.factory('ManageDataSer', function () {
 
 
     return {
+        analyseData: analyseData,
         overallData: overallData,
         allSheetType: allSheetType,
         allSheetData: allSheetData,

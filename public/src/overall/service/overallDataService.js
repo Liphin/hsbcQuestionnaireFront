@@ -56,6 +56,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         getTargetSheetUrl: baseUrlData.frontEndHttp + "getTargetSheet", //获取指定_id的sheet文档数据
         loadAllSheetUrl: baseUrlData.frontEndHttp + "loadAllSheet", //加载该用户所有表单数据
         releaseConfigUrl: baseUrlData.frontEndHttp + "releaseConfig", //设置发布状态
+        getTargetResultUrl: baseUrlData.frontEndHttp + "getTargetResult", //获取表单填写结果
     };
 
     //用于sql注入filter

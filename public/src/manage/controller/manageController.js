@@ -1,12 +1,13 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer) {
+manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer, DesignGeneralSer) {
     //检查是否登录状态
     if (!check) return;
 
     let manage = this;
     manage.overallData = ManageDataSer.overallData;
+    manage.analyseData = ManageDataSer.analyseData;
     manage.allSheetData = ManageDataSer.allSheetData;
     manage.allSheetType = ManageDataSer.allSheetType;
     ManageSer.init();
@@ -36,7 +37,7 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     /**
      * 获取对应表单类型的logo
      */
-    manage.getSheetTypeLogo= function (type) {
+    manage.getSheetTypeLogo = function (type) {
         return AllSheetSer.getSheetTypeLogo(type)
     };
 
@@ -47,7 +48,24 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         let dataTime = new Date(timestamp);
         return dataTime.getFullYear() + "/" + (dataTime.getMonth() + 1) + "/" + dataTime.getDate() + "  " +
             dataTime.getHours() + ":" + dataTime.getMinutes() + ":" + dataTime.getSeconds();
+    };
+
+
+    //************************************ 数据统计分析 ******************************************
+    /**
+     * 获取问题序号，用于分析统计时使用
+     */
+    manage.getQuestionnaireNum = function (index) {
+        return DesignGeneralSer.getQuestionnaireNum(index);
+    };
+
+    /**
+     * 数据统计分析时一些数据计算
+     */
+    manage.getStatisticNum = function (type, data, data2) {
+        return AnalyseSer.getStatisticNum(type, data, data2)
     }
+
 });
 
 

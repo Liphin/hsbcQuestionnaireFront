@@ -123,6 +123,7 @@ router.post('/releaseConfig', function (req, res) {
     })
 });
 
+
 /**
  * 组件及其类型数据
  */

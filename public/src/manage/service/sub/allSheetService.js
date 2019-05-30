@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer) {
+manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
+                                        AnalyseSer) {
 
     /**
      * 加载所有表单数据
@@ -84,6 +85,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                 break;
             }
             case 'analyse': {
+                AnalyseSer.sheetStatistic(index, sheet._id);
                 break;
             }
             case 'release': {

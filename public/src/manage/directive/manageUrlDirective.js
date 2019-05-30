@@ -51,3 +51,44 @@ manageModule.directive('manageAllSheet', function () {
         templateUrl:'src/manage/tmpl/sub/content/all_sheet.html'
     }
 });
+
+/**
+ * 数据统计与分析
+ */
+manageModule.directive('sheetAnalyse', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/content/sheet_analyse.html'
+    }
+});
+
+
+/**
+ * 数据统计与分析——段落描述
+ */
+manageModule.directive('sheetAnalyseParagraph', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/analyse/paragraph.html'
+    }
+});
+
+/**
+ * 数据统计与分析——选择题
+ */
+manageModule.directive('sheetAnalyseSelect', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/analyse/select.html'
+    }
+});
+
+/**
+ * 数据统计与分析——矩阵题
+ */
+manageModule.directive('sheetAnalyseMatrix', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/analyse/matrix.html'
+    }
+});
