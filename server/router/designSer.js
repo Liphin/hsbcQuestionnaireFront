@@ -9,6 +9,8 @@ const mongodb = require('mongodb');
 const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
 const router = express.Router();
+const dbName = "hsbc";//mongodb中的数据库
+const resultDom = "result";//mongodb中的sheet文档库
 const sheetDom = "sheet";//mongodb中的sheet文档库
 const participantDom = "participant";//mongodb中的sheet文档库
 
@@ -122,19 +124,99 @@ router.post('/releaseConfig', function (req, res) {
 });
 
 /**
+ * 组件及其类型数据
+ */
+let widgetResultClassify = {
+    single: ['single_select', 'single_scale', 'pull_single_select'],
+    multi: ['multi_select'],
+    matrix_single: ['matrix_single_select', 'matrix_single_scale'],
+    matrix_multi: ['matrix_multi_select'],
+    fill: ['single_fill', 'matrix_fill', 'detail_fill'],
+};
+
+/**
  * 提交表单信息
  */
 router.post('/submitResult', function (req, res) {
     let param = req.body;
-    //1、插入participant文档
-    mongo.insertOneDocuments(participantDom, param, response => {
 
+    mongo.connectToMongo(function (db) {
+
+        //1、插入participant文档
+        db.db(dbName).collection(participantDom).insertOne(param, function (err, response) {
+            if (response.result.n == 1) {
+                //2、更新result文档
+                let resultData = {};
+
+                //对每个表单组件进行数据提交操作
+                for (let i in param.sheet) {
+                    let widget = param.sheet[i];
+
+                    //根据不同表单类型进行相应数据提交方式
+                    //单选方式
+                    if (widgetResultClassify.single.indexOf(widget.type) > -1) {
+                        let selected = widget.data.selected;
+                        let resultKey = 'result.' + widget.timestamp + '.' + selected;
+                        resultData[resultKey] = 1;
+                    }
+                    //多选方式
+                    else if (widgetResultClassify.multi.indexOf(widget.type) > -1) {
+                        for (let j in widget.data.option){
+                            if(widget.data.option[j].status){
+                                let resultKey = 'result.' + widget.timestamp + '.' + j;
+                                resultData[resultKey] = 1;
+                            }
+                        }
+                    }
+                    //矩阵单选
+                    else if (widgetResultClassify.matrix_single.indexOf(widget.type) > -1) {
+                        for(let j in widget.data.choice){
+                            let selected = widget.data.choice[j].selected;
+                            let resultKey = 'result.' + widget.timestamp + '.' + selected;
+                            resultData[resultKey] = 1;
+                        }
+
+                    }
+                    //矩阵多选
+                    else if (widgetResultClassify.matrix_multi.indexOf(widget.type) > -1) {
+                        for(let j in widget.data.choice){
+                            for(let h in widget.data.choice[j].selected){
+                                if(widget.data.choice[j].selected[h]){
+                                    let resultKey = 'result.' + widget.timestamp + '.' + j + '.' + h;
+                                    resultData[resultKey] = 1;
+                                }
+                            }
+                        }
+
+                    }
+                    //填空，暂时只存储在participant不存储在result中
+                    else if (widgetResultClassify.fill.indexOf(widget.type) > -1) {}
+                }
+                //对文档进行数据库操作
+                db.db(dbName).collection(resultDom).updateOne({sheetid: new mongodb.ObjectID(param.sheetid)},
+                    {$inc: resultData}, function (err, response) {
+                        if (response.result.n == 1) {
+                            console.log("插入participant及result文档成功");
+                            db.close();
+                            res.send({status: 200});
+                        }
+                        //提交失败，返回
+                        else {
+                            console.log("插入result文档失败");
+                            db.close();
+                            res.send({status: 401});
+                        }
+                    });
+            }
+            //提交失败，返回
+            else {
+                console.log("插入participant文档失败");
+                db.close();
+                res.send({status: 401});
+            }
+        });
     });
 
-    //2、更新sheet文档
-    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param.sheetid)}, {}, response => {
-
-    })
 
 });
 
@@ -151,6 +233,9 @@ router.post('/submitResult', function (req, res) {
 //     });
 // });
 
+//如果同时需要使用$inc和$set进行更新则不能使用$set直接更新对象，
+//因为$set和$inc同时修改同一个对象时会被重写覆盖，因此只能$set针对某个具体元素进行赋值，不能与$inc有交集
+//{$inc:{}, $set:{}}
 
 
 module.exports = router;

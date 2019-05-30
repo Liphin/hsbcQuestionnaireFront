@@ -199,7 +199,7 @@ designModule.factory('DesignDataSer', function () {
                 choice: [
                     {
                         text: '外观',
-                        selected: [],
+                        selected: [],//里面装着每个option对应index的true或false
                     },
                     {
                         text: '功能',

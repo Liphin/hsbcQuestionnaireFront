@@ -37,7 +37,7 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
                     //跳转链接，进入design界面
                     $location.path('/design/' + result.data);
                 }
-                else if (result.status == 401) {
+                else {
                     alert("创建失败，请稍后重试")
                 }
             })

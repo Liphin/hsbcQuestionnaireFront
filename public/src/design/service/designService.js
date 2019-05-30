@@ -3,7 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.factory('DesignSer', function ($location, OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
+designModule.factory('DesignSer', function ($http, $location, OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
 
     /**
      * 初始化渲染数据集
@@ -137,12 +137,14 @@ designModule.factory('DesignSer', function ($location, OverallDataSer, OverallGe
             title: DesignDataSer.overallData.sheetConfig.title,
             type: DesignDataSer.overallData.sheetConfig.type,
             sheet: DesignDataSer.sheet,
-            timestamp:new Date().getTime()
+            timestamp: new Date().getTime()
         };
 
-        $http.post("/submitResult", submitData).success(function (response) {
-            if (response == 'OK') {
+        $http.post("/submitResult", submitData).success(function (result) {
+            if (result.status == 200) {
                 OverallGeneralSer.setFinishAnimation(1500, '提交成功');
+            } else {
+                alert("提交出错，请稍后重试")
             }
         }).error(function (err) {
             alert("很抱歉，提交有误，请稍后重试");

@@ -11,9 +11,13 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
      * @param type
      */
     let addNewWidget = function (type) {
-        //1、添加此新的组件到表单中
-        DesignDataSer.sheet.push(angular.copy(DesignDataSer.newWidgetData[type]));
-        //2、对该新添加的组件进行编辑操作
+        //1、新的拷贝
+        let newWidget = angular.copy(DesignDataSer.newWidgetData[type]);
+        //设置组件的timestamp
+        newWidget.timestamp = new Date().getTime();
+        //2、添加此新的组件到表单中
+        DesignDataSer.sheet.push(newWidget);
+        //3、对该新添加的组件进行编辑操作
         editWidgetData(DesignDataSer.sheet.length - 1);
     };
 
