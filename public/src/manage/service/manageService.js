@@ -2,16 +2,27 @@
  * Created by Administrator on 2019/5/27.
  */
 manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
-                                            AllSheetSer, DesignDataSer) {
+                                            AllSheetSer, DesignDataSer, AnalyseSer) {
 
     /**
      * 管理页面初始化操作
      */
     let init = function () {
         ManageDataSer.overallData.navigation = $routeParams.option;
-        //如果是所有问卷路由则进入该方法
+        //初始化时根据不同路由配置信息执行相应方法
         if ($routeParams.option == 'allSheet') {
-            AllSheetSer.loadAllSheet();
+            AllSheetSer.loadAllSheet(() => {
+            });
+        }
+        //若页面尚未加载所有表单数据，则应先加载所有表单数据后再加载分析数据，否则直接加载分析数据
+        else if ($routeParams.option == 'analyseSheet') {
+            if (ManageDataSer.allSheetData.length == 0) {
+                AllSheetSer.loadAllSheet(() => {
+                    AnalyseSer.initAnalyseData();
+                })
+            } else {
+                AnalyseSer.initAnalyseData();
+            }
         }
     };
 
@@ -28,7 +39,7 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
                 type: sheetType,
                 status: 1, //状态信息： 1：待发布状态，2：发布中状态
                 open: true, //对于发布状态的消息，设置open字段记录是否开放结果查询
-                sheet:[DesignDataSer.newWidgetData.paragraph], //初始化操作
+                sheet: [DesignDataSer.newWidgetData.paragraph], //初始化操作
                 timestamp: new Date().getTime(), //记录创建时间戳
             };
             //post发送http请求数据创建新表单数据
@@ -47,8 +58,6 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
             alert("请填写标题信息");
         }
     };
-
-
 
 
     return {

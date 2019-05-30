@@ -64,6 +64,14 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.getStatisticNum = function (type, data, data2) {
         return AnalyseSer.getStatisticNum(type, data, data2)
+    };
+
+    /**
+     * 更换目标分析的表单数据
+     */
+    manage.changeAnalyseSheet = function (sheetid) {
+        console.log(sheetid);
+        $location.search('_id', sheetid);
     }
 
 });

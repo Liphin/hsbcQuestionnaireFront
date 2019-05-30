@@ -1,4 +1,4 @@
-<!--选择题：包括单选、多选等-->
-<div ng-if="value.type=='single_select'">
-
+<!--段落文本描述-->
+<div ng-if="manage.analyseData.sheetClassify.paragraph.indexOf(value.type)>-1">
+    <div style="margin: 20px 0;">{{value.data.html}}</div>
 </div>

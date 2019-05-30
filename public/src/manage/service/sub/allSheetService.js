@@ -1,13 +1,12 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
-                                        AnalyseSer) {
+manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer, OverallGeneralSer, OverallDataSer) {
 
     /**
      * 加载所有表单数据
      */
-    let loadAllSheet = function () {
+    let loadAllSheet = function (callback) {
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.loadAllSheetUrl,
             {userid: OverallDataSer.overallData.user._id}, function (result) {
                 if (result.status == 200) {
@@ -15,6 +14,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                     ManageDataSer.allSheetData.length = 0;
                     for (let i in result.data) {
                         ManageDataSer.allSheetData.push(result.data[i]);
+                        callback();
                     }
                 }
                 else if (result.status == 401) {
@@ -85,7 +85,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                 break;
             }
             case 'analyse': {
-                AnalyseSer.sheetStatistic(index, sheet._id);
+                $location.url('/manage/analyseSheet?_id=' + sheet._id)
                 break;
             }
             case 'release': {

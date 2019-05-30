@@ -5,27 +5,42 @@
 manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGeneralSer, OverallDataSer) {
 
     /**
-     * 表单数据分析
-     * @param index
-     * @param sheetid
+     * 初始化分析数据
      */
-    let sheetStatistic = function (index, sheetid) {
-        //1、数据初始化
-        ManageDataSer.analyseData.sheetIndex = index;
-        //清空之前数据
+    let initAnalyseData = function () {
+
+        //1、获取目标问卷的index
+        let param = $location.search();
+
+        //如果目标问卷id参数为空处理规则且
+        if (!OverallGeneralSer.checkDataNotEmpty(param._id)) {
+            //若参数为空则取第一个页面元素_id，若问卷页面总数大于0则跳转，否则停止向下运行
+            if(ManageDataSer.allSheetData.length > 0){
+                $location.url('/manage/analyseSheet?_id=' + ManageDataSer.allSheetData[0]._id)
+            }else {
+                return
+            }
+        }
+
+        for (let i in ManageDataSer.allSheetData) {
+            if (param._id == ManageDataSer.allSheetData[i]._id) {
+                ManageDataSer.analyseData.sheetIndex = i; //记录目标数据的index
+            }
+        }
+
+        //2、清空之前数据
         for (let i in ManageDataSer.analyseData.result) {
             delete ManageDataSer.analyseData.result[i];
         }
 
-        //2、获取提交表单数据结果
-        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getTargetResultUrl, {sheetid: sheetid}, result => {
+        //3、获取提交表单数据结果
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getTargetResultUrl, {sheetid: param._id}, result => {
             if (result.status == 200) {
                 //重新赋值result对象数组
                 for (let i in result.data[0].result) {
                     ManageDataSer.analyseData.result[i] = result.data[0].result[i];
                 }
-                //3、内容页面跳转
-                $location.path('/manage/analyseSheet');
+
             }
             //获取数据失败
             else {
@@ -61,12 +76,31 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 }
                 return total
             }
+            //matrix类型百分比计算
+            case 'matrixPercent': {
+                let num = data > 0 ? data : 0;
+                let total = 0;
+                for (let i in data2) {
+                    total += data2[i];
+                }
+                return (parseFloat(num) / total * 100).toFixed(2);
+            }
+            //matrix类型汇总计算
+            case 'matrixSum': {
+                let total = 0;
+                for (let i in data) {
+                    for (let j in data[i]) {
+                        total += data[i][j];
+                    }
+                }
+                return total;
+            }
         }
     };
 
 
     return {
-        sheetStatistic: sheetStatistic,
+        initAnalyseData: initAnalyseData,
         getStatisticNum: getStatisticNum,
     }
 });

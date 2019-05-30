@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<!--矩阵题：包括矩阵单选、矩阵多选等-->
+<div ng-if="manage.analyseData.sheetClassify.matrix.indexOf(value.type)>-1">
+    <div style="margin: 20px 0;">
+        <div style="padding: 10px 0; font-size: 15px">
+            <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
+            <span>{{value.data.title}}</span>
+        </div>
+        <table class="table table-striped table-hover"
+               style="text-align: center; width: 70%;border: 1px solid gainsboro;">
+            <thead>
+            <tr>
+                <th style="width: 250px; text-align: center">题目/选项</th>
+                <th ng-repeat="thValue in value.data.option" style="text-align: center">{{thValue.text}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tdValue in value.data.choice track by $index">
+                <td>{{tdValue.text}}</td>
+                <td ng-repeat="subValue in value.data.option track by $index">
+                    {{manage.getStatisticNum('selectMinCount', manage.analyseData.result[value.timestamp][$parent.$index][$index])}}
+                    ({{manage.getStatisticNum('matrixPercent',manage.analyseData.result[value.timestamp][$parent.$index][$index], manage.analyseData.result[value.timestamp][$parent.$index])}}%)
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
