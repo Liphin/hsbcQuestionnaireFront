@@ -3,8 +3,7 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (check, $location, DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer,
-                                                $http, OverallGeneralSer) {
+designModule.controller('DesignCtrl', function (check, $location, DesignDataSer, WidgetSer, DesignSer) {
 
     //检查是否登录状态
     if (!check) return;
@@ -34,7 +33,7 @@ designModule.controller('DesignCtrl', function (check, $location, DesignDataSer,
      * 获取问题序号
      */
     design.getQuestionnaireNum = function (index) {
-        return DesignGeneralSer.getQuestionnaireNum(index);
+        return WidgetSer.getQuestionnaireNum(index);
     };
 
     /**

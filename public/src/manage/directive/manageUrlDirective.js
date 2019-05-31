@@ -69,7 +69,7 @@ manageModule.directive('sheetAnalyse', function () {
 manageModule.directive('sheetAnalyseParagraph', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/paragraph.html'
+        templateUrl:'src/manage/tmpl/sub/analyse/analyse_paragraph.html'
     }
 });
 
@@ -79,16 +79,16 @@ manageModule.directive('sheetAnalyseParagraph', function () {
 manageModule.directive('sheetAnalyseSelect', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/select.html'
+        templateUrl:'src/manage/tmpl/sub/analyse/analyse_select.html'
     }
 });
 
 /**
- * 数据统计与分析——矩阵题
+ * 数据统计与分析——矩阵单选题
  */
 manageModule.directive('sheetAnalyseMatrix', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/matrix.html'
+        templateUrl:'src/manage/tmpl/sub/analyse/analyse_matrix.html'
     }
 });

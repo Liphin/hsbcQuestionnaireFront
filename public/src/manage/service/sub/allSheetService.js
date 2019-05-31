@@ -14,7 +14,9 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                     ManageDataSer.allSheetData.length = 0;
                     for (let i in result.data) {
                         ManageDataSer.allSheetData.push(result.data[i]);
-                        callback();
+                        if (callback != undefined) {
+                            callback();
+                        }
                     }
                 }
                 else if (result.status == 401) {
@@ -72,6 +74,42 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
 
 
     /**
+     * 删除对应表单数据
+     */
+    let deleteOpt = function (sheet) {
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.deleteSheetUrl,
+            {_id: sheet._id, status: status}, result => {
+                if (result.status == 200) {
+                    //更新状态成功后，重新加载页面数据
+                    loadAllSheet();
+                }
+                //更新失败
+                else {
+                    alert("删除出错，请稍后重试");
+                }
+            })
+    };
+
+
+    /**
+     * 拷贝对应表单数据
+     */
+    let copyOpt = function (sheet) {
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.copySheetUrl,
+            {_id: sheet._id, status: status}, result => {
+                if (result.status == 200) {
+                    //更新状态成功后，重新加载页面数据
+                    loadAllSheet();
+                }
+                //更新失败
+                else {
+                    alert("拷贝出错，请稍后重试");
+                }
+            })
+    };
+
+
+    /**
      * 对创建过的表单进行操作
      * @param type
      * @param index
@@ -96,9 +134,11 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                 break;
             }
             case 'copy': {
+                copyOpt(sheet);
                 break;
             }
             case 'delete': {
+                deleteOpt(sheet);
                 break;
             }
         }

@@ -69,6 +69,65 @@ router.post('/loadAllSheet', function (req, res, next) {
     })
 });
 
+/**
+ * 删除对应表单
+ */
+router.post('/deleteSheet', function (req, res, next) {
+    let param = req.body;
+    //TODO 届时用Promise做并行处理，并每次复用db对象，无需连接3次, 并且需删除文件，若换成不生成文件形式可省却该步骤
+    mongo.deleteOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, response => {
+        if (response.result.n > 0) {
+            mongo.deleteManyDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, response2 => {
+                mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response3 => {
+                    res.send({
+                        status: 200
+                    })
+                })
+            })
+        }
+        //sheet表单需要判断是否有删除数量大于0，result和participant表单无需判断删除数目问题，可能未有参与者提交信息
+        else {
+            console.log("删除sheet表单失败");
+            res.send({
+                status: 401
+            })
+        }
+    })
+});
+
+
+/**
+ * 拷贝对应表单
+ */
+router.post('/copySheet', function (req, res, next) {
+    let param = req.body;
+    mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, response => {
+        if (response.length > 0) {
+            let targetSheet = response[0]; //获取拷贝目标对象数据
+            delete targetSheet._id; //自动创建的_id先对原先进行覆盖
+            mongo.insertOneDocuments(sheetDom, targetSheet, response2 => {
+                if (response2.result.n == 1) {
+                    res.send({
+                        status: 200
+                    })
+                }
+                //创建失败
+                else {
+                    console.log('插入拷贝表单失败', response2);
+                    res.send({
+                        status: 402
+                    })
+                }
+            })
+        }
+        else {
+            console.log("获取对应表单失败");
+            res.send({
+                status: 401
+            })
+        }
+    })
+});
 
 /**
  * 获取该表单数据填写数据结果
@@ -138,6 +197,7 @@ router.post('/getTargetSheetAndResult', function (req, res, next) {
         }
     })
 });
+
 
 
 module.exports = router;

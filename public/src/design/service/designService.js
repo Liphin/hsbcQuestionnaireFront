@@ -68,23 +68,19 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
      * @param callback
      */
     let saveOpt = function (callback) {
-        //1、手机表单HTML的框架页面添加数据
-        let fullPhoneHtmlData = OverallDataSer.overallData.phoneView.sheetFrameData
-            .replace(/__SHEET_DATA__/g, JSON.stringify(DesignDataSer.sheet))
-            .replace(/__SHEET_CONFIG__/g, JSON.stringify(DesignDataSer.overallData.sheetConfig));
-
-        //2、保存该HTML到后台文件
+        //保存到数据库
         let jsonData = {
             _id: DesignDataSer.overallData.sheetConfig._id,
-            htmlData: fullPhoneHtmlData, //用于保存HTML数据到后台形成文件
-            sheetData: DesignDataSer.sheet, //用于保存表单数据到数据库
+            sheet: DesignDataSer.sheet, //用于保存表单数据到数据库
             timestamp: new Date().getTime(), //获取最新保存的时间
         };
-
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.saveSheetDataUrl, jsonData, function (result) {
-            if (result == 'OK') {
+            if (result.status == 200) {
                 //保存完成后如有其它操作调用此方法
-                callback();
+                if (callback != undefined) callback();
+
+            } else {
+                alert("保存出错，请稍后重试")
             }
         });
     };

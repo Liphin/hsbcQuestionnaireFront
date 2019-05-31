@@ -1,6 +1,6 @@
 <!--选择题：包括单选、多选等-->
 <div ng-if="manage.analyseData.sheetClassify.select.indexOf(value.type)>-1">
-    <div style="margin: 20px 0;">
+    <div style="margin: 25px 0;">
         <div style="padding: 10px 0; font-size: 15px">
             <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
             <span>{{value.data.title}}</span>
@@ -24,7 +24,7 @@
                                  style="width: {{manage.getStatisticNum('selectPercent',manage.analyseData.result[value.timestamp][$index],
                               manage.analyseData.result[value.timestamp])}}%;"></div>
                         </div>
-                        <div style="display: inline-block; vertical-align: middle">{{manage.getStatisticNum('selectPercent',
+                        <div style="width: 60px;display: inline-block; vertical-align: middle">{{manage.getStatisticNum('selectPercent',
                             manage.analyseData.result[value.timestamp][$index], manage.analyseData.result[value.timestamp])}}%</div>
                     </div>
                 </td>

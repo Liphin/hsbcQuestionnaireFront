@@ -5,11 +5,5 @@
         <select class="form-control" ng-model="value.data.selected" ng-disabled="design.isDisabled">
             <option ng-repeat="subValue in value.data.option track by $index" value="{{$index}}">{{subValue.text}}</option>
         </select>
-        <!--<div ng-repeat="subValue in value.data.option track by $index" style="border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px">-->
-            <!--<label style="width: 100%">-->
-                <!--<input type="radio" ng-model="value.data.selected" value="{{$index}}">-->
-                <!--<span style="font-weight: normal">{{subValue.text}}</span>-->
-            <!--</label>-->
-        <!--</div>-->
     </div>
 </div>

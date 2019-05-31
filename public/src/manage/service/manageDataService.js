@@ -23,7 +23,7 @@ manageModule.factory('ManageDataSer', function () {
         sheetClassify: {
             paragraph: ['paragraph'],
             select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
-            matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],
+            matrix: ['matrix_single_select', 'matrix_single_scale','matrix_multi_select'],
             fill: ['single_fill', 'matrix_fill', 'detail_fill']
         }
     };

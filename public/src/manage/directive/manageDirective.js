@@ -41,3 +41,24 @@ manageModule.directive('sheetTypeBtn', function () {
         }
     }
 });
+
+
+/**
+ * 渲染表单中段落信息展现
+ */
+manageModule.directive('sheetParagraph', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            sheetParagraph: '@'
+        },
+        link: function (scope, ele, attrs) {
+            ele.html(scope.sheetParagraph);
+        }
+    }
+});
+
+
+
+
+

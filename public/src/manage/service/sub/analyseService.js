@@ -15,9 +15,9 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
         //如果目标问卷id参数为空处理规则且
         if (!OverallGeneralSer.checkDataNotEmpty(param._id)) {
             //若参数为空则取第一个页面元素_id，若问卷页面总数大于0则跳转，否则停止向下运行
-            if(ManageDataSer.allSheetData.length > 0){
+            if (ManageDataSer.allSheetData.length > 0) {
                 $location.url('/manage/analyseSheet?_id=' + ManageDataSer.allSheetData[0]._id)
-            }else {
+            } else {
                 return
             }
         }
@@ -47,6 +47,23 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 alert("系统出错，请稍后重试");
             }
         })
+    };
+
+
+    /**
+     * 获取某问题的序号
+     * @param index
+     */
+    let getQuestionnaireNum = function (index) {
+        //遍历问题表单到index前的每个选项，去除所有为paragraph类型的数据
+        let paraNum = 0;
+        let targetSheet = ManageDataSer.allSheetData[ManageDataSer.analyseData.sheetIndex];
+        for (let i = 0; i < index; i++) {
+            if (targetSheet.sheet[i].type == 'paragraph') {
+                paraNum++;
+            }
+        }
+        return index - paraNum + 1; //从1开始
     };
 
 
@@ -100,6 +117,7 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
 
 
     return {
+        getQuestionnaireNum: getQuestionnaireNum,
         initAnalyseData: initAnalyseData,
         getStatisticNum: getStatisticNum,
     }

@@ -38,7 +38,6 @@ router.post('/getQrCode', function (req, res, next) {
  */
 router.post('/getTargetSheet', function (req, res) {
     mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(req.body._id)}, response => {
-        console.log(response);
         res.send({
             status: 200,
             data: response,
@@ -57,35 +56,18 @@ router.post('/saveSheetData', (req, res, next) => {
     let param = req.body;
 
     //2、保存文件到MongoDb数据库中
-    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {
-            sheet: param.sheetData,
-            timestamp: param.timestamp
-        },
-        response => {
-            console.log('更新文档结果', response.result);
-
-            //3、保存文件到HTML操作
-            let filePath = serverData.resourcePath + "/html/" + param._id + ".html";
-
-            //查询是否已经存在文件，若已经存在则先删除
-            fs.access(filePath, error => {
-                if (!error) {
-                    console.log('文件已存在，删除旧文件', filePath);
-                    //删除文件
-                    fs.unlinkSync(filePath);
-                }
-
-                //文件写入
-                fs.writeFile(filePath, param.htmlData, function (err) {
-                    if (err) {
-                        console.error('文件数据写入失败', err);
-                        res.sendStatus(400);
-                    } else {
-                        console.debug('文件数据写入成功', filePath);
-                        res.sendStatus(200);
-                    }
-                });
-            });
+    let data = {sheet: param.sheet, timestamp: param.timestamp};
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, data, response => {
+            if (response.result.n > 0) {
+                res.send({
+                    status: 200
+                })
+            } else {
+                console.log('更新文档失败');
+                res.send({
+                    status: 401
+                })
+            }
         }
     )
 });
@@ -162,8 +144,8 @@ router.post('/submitResult', function (req, res) {
                     }
                     //多选方式
                     else if (widgetResultClassify.multi.indexOf(widget.type) > -1) {
-                        for (let j in widget.data.option){
-                            if(widget.data.option[j].status){
+                        for (let j in widget.data.option) {
+                            if (widget.data.option[j].status) {
                                 let resultKey = 'result.' + widget.timestamp + '.' + j;
                                 resultData[resultKey] = 1;
                             }
@@ -171,18 +153,18 @@ router.post('/submitResult', function (req, res) {
                     }
                     //矩阵单选
                     else if (widgetResultClassify.matrix_single.indexOf(widget.type) > -1) {
-                        for(let j in widget.data.choice){
+                        for (let j in widget.data.choice) {
                             let selected = widget.data.choice[j].selected;
-                            let resultKey = 'result.' + widget.timestamp + '.' + selected;
+                            let resultKey = 'result.' + widget.timestamp + '.' + j + '.' + selected;
                             resultData[resultKey] = 1;
                         }
 
                     }
                     //矩阵多选
                     else if (widgetResultClassify.matrix_multi.indexOf(widget.type) > -1) {
-                        for(let j in widget.data.choice){
-                            for(let h in widget.data.choice[j].selected){
-                                if(widget.data.choice[j].selected[h]){
+                        for (let j in widget.data.choice) {
+                            for (let h in widget.data.choice[j].selected) {
+                                if (widget.data.choice[j].selected[h]) {
                                     let resultKey = 'result.' + widget.timestamp + '.' + j + '.' + h;
                                     resultData[resultKey] = 1;
                                 }
@@ -191,7 +173,8 @@ router.post('/submitResult', function (req, res) {
 
                     }
                     //填空，暂时只存储在participant不存储在result中
-                    else if (widgetResultClassify.fill.indexOf(widget.type) > -1) {}
+                    else if (widgetResultClassify.fill.indexOf(widget.type) > -1) {
+                    }
                 }
                 //对文档进行数据库操作
                 db.db(dbName).collection(resultDom).updateOne({sheetid: new mongodb.ObjectID(param.sheetid)},

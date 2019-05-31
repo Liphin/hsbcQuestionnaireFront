@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer, DesignGeneralSer) {
+manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer) {
     //检查是否登录状态
     if (!check) return;
 
@@ -56,7 +56,7 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      * 获取问题序号，用于分析统计时使用
      */
     manage.getQuestionnaireNum = function (index) {
-        return DesignGeneralSer.getQuestionnaireNum(index);
+        return AnalyseSer.getQuestionnaireNum(index);
     };
 
     /**
