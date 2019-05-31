@@ -2,15 +2,20 @@
 <div ng-if="manage.overallData.navigation=='analyseSheet'" class="scrollBar-7"
      style="padding: 10px 0 0 50px;position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0; overflow-y:auto">
     <!--针对某个表单数据进行统计分析-->
-    <div ng-repeat="value in manage.allSheetData[manage.analyseData.sheetIndex].sheet track by $index">
-        <!--段落-->
-        <sheet-analyse-paragraph></sheet-analyse-paragraph>
+    <div style="display: flex; flex-direction: row">
+        <div style="flex: 1.5"></div>
+        <div style="flex: 7">
+            <div ng-repeat="value in manage.allSheetData[manage.analyseData.sheetIndex].sheet track by $index">
+                <!--段落-->
+                <sheet-analyse-paragraph></sheet-analyse-paragraph>
 
-        <!--选择题-->
-        <sheet-analyse-select></sheet-analyse-select>
+                <!--选择题-->
+                <sheet-analyse-select></sheet-analyse-select>
 
-        <!--矩阵题-->
-        <sheet-analyse-matrix></sheet-analyse-matrix>
+                <!--矩阵题-->
+                <sheet-analyse-matrix></sheet-analyse-matrix>
+            </div>
+        </div>
+        <div style="flex: 1.5"></div>
     </div>
-</div>
 </div>

@@ -63,7 +63,7 @@
             //遍历问题表单到index前的每个选项，去除所有为paragraph类型的数据
             let paraNum = 0;
             for (let i = 0; i < index; i++) {
-                if (DesignDataSer.sheet[i].type == 'paragraph') {
+                if (design.sheet[i].type == 'paragraph') {
                     paraNum++;
                 }
             }

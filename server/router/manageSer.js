@@ -82,6 +82,39 @@ router.post('/getTargetResult', function (req, res, next) {
 });
 
 
+/**
+ * 手机获取目标表单数据及其结果数据
+ */
+router.post('/getTargetSheetAndResult', function (req, res, next) {
+    let param = req.body;
+    mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, sheetResponse => {
+        //当数据不为空则继续
+        if (sheetResponse.length > 0) {
+            mongo.findDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, resultResponse => {
+                //当数据不为空则返回
+                if (resultResponse.length > 0) {
+                    res.send({
+                        status: 200,
+                        sheet: sheetResponse[0],
+                        result: resultResponse[0],
+                    })
+                } else {
+                    console.log("获取result数据失败");
+                    res.send({
+                        status: 402
+                    })
+                }
+            })
+        } else {
+            console.log("获取sheet数据失败");
+            res.send({
+                status: 401
+            })
+        }
+    })
+});
+
+
 module.exports = router;
 
 
