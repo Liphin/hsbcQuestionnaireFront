@@ -69,7 +69,6 @@
         //2、获取指定表单页面参数
         let _id = getUrlParameter("_id");
         //http获取目标页面表单原始数据的和问卷结果
-        console.log(_id);
         if (_id != undefined && _id != false && _id != null) {
             $http.post("/getTargetSheetAndResult", {_id: _id}).success(function (response) {
                 if (response.status == 200) {
@@ -98,7 +97,6 @@
          * 数据统计分析时一些数据计算
          */
         manage.getStatisticNum = function (type, data, data2) {
-            console.log(data, data2)
             switch (type) {
                 //小计统计
                 case 'selectMinCount': {
