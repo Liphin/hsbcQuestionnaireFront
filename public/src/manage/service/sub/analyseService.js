@@ -116,9 +116,49 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
     };
 
 
+    /**
+     * 下载打印分析结果数据
+     */
+    let downloadResult = function () {
+        let analyseEle = $("#dataAnalyseContent");
+        let height = analyseEle.height();
+        let fileName = ManageDataSer.allSheetData[ManageDataSer.analyseData.sheetIndex].title + "_数据统计分析";
+        html2canvas(analyseEle[0], {
+            height: height,
+            width: 800,
+            windowWidth: 1360,
+            windowHeight: height + 100,
+        }).then(canvas => {
+
+            let imgCanvas = document.createElement("canvas");
+            imgCanvas.width = 900;
+            imgCanvas.height = height + 200;
+            let ctx = imgCanvas.getContext("2d");
+
+            //设置背景颜色
+            ctx.fillStyle  = 'white';
+            ctx.fillRect(0,0,900,height + 200);
+
+            //设置截屏的图片
+            ctx.drawImage(canvas, 50, 50, 800, height + 100);
+
+
+            let dataUrl = imgCanvas.toDataURL("image/jpeg", 1.0);
+            let element = document.createElement('a');
+            //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('href', dataUrl);
+            element.setAttribute('download', fileName);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
+    };
+
     return {
         getQuestionnaireNum: getQuestionnaireNum,
         initAnalyseData: initAnalyseData,
         getStatisticNum: getStatisticNum,
+        downloadResult: downloadResult,
     }
 });

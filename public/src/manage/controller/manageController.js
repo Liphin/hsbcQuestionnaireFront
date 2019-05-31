@@ -70,8 +70,14 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      * 更换目标分析的表单数据
      */
     manage.changeAnalyseSheet = function (sheetid) {
-        console.log(sheetid);
         $location.search('_id', sheetid);
+    };
+
+    /**
+     * 下载打印分析结果数据
+     */
+    manage.downloadResult=function () {
+        AnalyseSer.downloadResult();
     }
 
 });
