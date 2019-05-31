@@ -4,7 +4,7 @@
     <div style="border: 1px solid gainsboro; border-radius: 7px;margin-top: 10px">
         <div ng-repeat="subValue in value.data.option track by $index" style="border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px">
             <label style="width: 100%">
-                <input type="radio" ng-model="value.data.selected" value="{{$index}}">
+                <input type="radio" ng-model="value.data.selected" value="{{$index}}" ng-disabled="design.isDisabled">
                 <span style="font-weight: normal">{{subValue.text}}</span>
             </label>
         </div>

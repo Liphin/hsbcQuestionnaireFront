@@ -3,13 +3,14 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer,
+designModule.controller('DesignCtrl', function (check, $location, DesignDataSer, WidgetSer, DesignSer, DesignGeneralSer,
                                                 $http, OverallGeneralSer) {
 
     //检查是否登录状态
     if (!check) return;
 
     let design = this;
+    design.isDisabled = false; //组件可编辑，不禁用
     design.overallData = DesignDataSer.overallData;
     design.widget = DesignDataSer.widget;
     design.sheet = DesignDataSer.sheet;
@@ -18,14 +19,14 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     /**
      * 添加新组件的操作
      */
-    design.addNewWidget=function (type) {
+    design.addNewWidget = function (type) {
         WidgetSer.addNewWidget(type);
     };
 
     /**
      * 组件操作
      */
-    design.widgetOpt=function (opt, index) {
+    design.widgetOpt = function (opt, index) {
         WidgetSer.widgetOpt(opt, index);
     };
 
@@ -46,15 +47,15 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     /**
      * 添加选项操作
      */
-    design.addOption= function (param) {
+    design.addOption = function (param) {
         WidgetSer.addOptions(param);
     };
 
     /**
      * 删除选项操作
      */
-    design.deleteOption = function (index,param) {
-        WidgetSer.deleteOption(index,param);
+    design.deleteOption = function (index, param) {
+        WidgetSer.deleteOption(index, param);
     };
 
     /**
@@ -67,8 +68,8 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     /**
      * 调整位置，下移一个位置
      */
-    design.positionDown = function (index,param) {
-        WidgetSer.positionDown(index,param);
+    design.positionDown = function (index, param) {
+        WidgetSer.positionDown(index, param);
     };
 
     /**
@@ -81,7 +82,7 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     /**
      * 预览页面数据结果
      */
-    design.viewPage=function (viewType) {
+    design.viewPage = function (viewType) {
         DesignSer.viewPage(viewType);
     };
 
@@ -97,21 +98,21 @@ designModule.controller('DesignCtrl', function (check, $location,  DesignDataSer
     /**
      * 保存页面数据结果
      */
-    design.savePage=function () {
+    design.savePage = function () {
         DesignSer.savePage();
     };
 
     /**
      * 提交问卷
      */
-    design.submitSheet= function () {
+    design.submitSheet = function () {
         DesignSer.submitSheet();
     };
 
     /**
      * 返回管理页面
      */
-    design.backToManage=function () {
+    design.backToManage = function () {
         $location.path('/manage/allSheet');
     }
 });

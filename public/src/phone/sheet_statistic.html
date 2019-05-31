@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="sheet">
+<html lang="en" ng-app="manage">
 <head>
     <link rel="stylesheet" href="/public/assets/css/bootstrap/bootstrap.min.css">
     <script src="/public/assets/js/jquery/jquery-1.11.0.js"></script>
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
 </head>
 <body ng-controller="manageCtrl as manage" style="display: flex;flex-direction: row; font-family: 微软雅黑">
-<div class="scrollBar-7" style="width: 100%">
+<div style="width: 100%">
 
     <div style="display: flex; flex-direction: row">
         <div style="flex: 1"></div>
@@ -37,10 +37,9 @@
      * 获取网页url参数
      */
     let getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
+        let sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+            sParameterName, i;
 
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
@@ -51,7 +50,8 @@
         }
     };
 
-    let sheetModule = angular.module('sheet', []);
+    //****************************** AngularJs ********************************
+    let sheetModule = angular.module('manage', []);
     sheetModule.controller('manageCtrl', function ($http) {
         //1、数据初始化
         let manage = this;
@@ -156,8 +156,6 @@
             }
             return index - paraNum + 1; //从1开始
         };
-
-
 
     });
 </script>

@@ -2,6 +2,6 @@
 <div ng-if="value.type=='detail_fill'">
     <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
     <div style="margin-top: 10px">
-        <textarea style="height: 200px" class="form-control" ng-model="value.data.value"></textarea>
+        <textarea ng-disabled="design.isDisabled" style="height: 200px" class="form-control" ng-model="value.data.value"></textarea>
     </div>
 </div>

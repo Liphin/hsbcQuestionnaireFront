@@ -2,6 +2,6 @@
 <div ng-if="value.type=='single_fill'">
     <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
     <div style="margin-top: 10px">
-        <input type="text" class="form-control" ng-model="value.data.value">
+        <input type="text" class="form-control" ng-model="value.data.value" ng-disabled="design.isDisabled">
     </div>
 </div>

@@ -2,7 +2,7 @@
 <div ng-if="value.type=='pull_single_select'">
     <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
     <div style="margin-top: 10px">
-        <select class="form-control" ng-model="value.data.selected">
+        <select class="form-control" ng-model="value.data.selected" ng-disabled="design.isDisabled">
             <option ng-repeat="subValue in value.data.option track by $index" value="{{$index}}">{{subValue.text}}</option>
         </select>
         <!--<div ng-repeat="subValue in value.data.option track by $index" style="border: 1px solid gainsboro; border-width: 1px 0 0 0; padding: 5px 12px">-->

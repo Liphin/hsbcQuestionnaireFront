@@ -10,6 +10,7 @@ const serverData = require('../serverSerData');
 const router = express.Router();
 const sheetDom = "sheet";//mongodb中的sheet文档库
 const resultDom = "result"; //mongodb中的result文档库
+const participantDom = "participant"; //mongodb中的participant文档库
 
 
 /**
@@ -68,6 +69,7 @@ router.post('/loadAllSheet', function (req, res, next) {
     })
 });
 
+
 /**
  * 获取该表单数据填写数据结果
  */
@@ -78,6 +80,29 @@ router.post('/getTargetResult', function (req, res, next) {
             status: 200,
             data: response
         })
+    })
+});
+
+
+/**
+ * 获取目标参与人员提交的数据
+ */
+router.post('/getTargetParticipant', function (req, res, next) {
+    let param = req.body;
+    mongo.findDocuments(participantDom, {_id: new mongodb.ObjectID(param._id)}, response => {
+        if (response.length > 0) {
+            res.send({
+                status: 200,
+                data: response[0]
+            })
+        }
+        //无数据返回
+        else {
+            console.log("获取参与人员所提交的数据失败：", response);
+            res.send({
+                status: 401,
+            })
+        }
     })
 });
 

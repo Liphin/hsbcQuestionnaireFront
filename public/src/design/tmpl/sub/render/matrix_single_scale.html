@@ -17,7 +17,7 @@
             <td style="font-weight: bold">{{subValue.text}}</td>
             <td ng-repeat="radioValue in value.data.option track by $index" style="padding: 0">
                 <label style="width: 100%; text-align: center; padding: 8px">
-                    <input type="radio" ng-model="subValue.selected" value="{{$index}}"/>
+                    <input type="radio" ng-model="subValue.selected" value="{{$index}}" ng-disabled="design.isDisabled"/>
                 </label>
             </td>
         </tr>

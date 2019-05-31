@@ -12,7 +12,7 @@
             <tr>
                 <td ng-repeat="subValue in value.data.option track by $index" style="padding: 0">
                     <label style="width: 100%; text-align: center; padding: 8px">
-                        <input type="radio" ng-model="value.data.selected" value="{{subValue.value}}">
+                        <input type="radio" ng-model="value.data.selected" value="{{subValue.value}}" ng-disabled="design.isDisabled">
                         <span style="font-weight: normal">{{subValue.value}}</span>
                     </label>
                 </td>
