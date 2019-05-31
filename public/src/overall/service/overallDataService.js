@@ -14,9 +14,8 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         //手机预览操作
         phoneView: {
             showPhoneView: false, //是否展开手机页面
-            sheetFrameData: '', //预览HTML框架页面
-            sheetHtmlData: '', //装载预览时查看的HTML数据
         },
+
         //小程序预览操作
         miniView: {
             showMiniView: false, //是否展开小程序预览页面
@@ -46,7 +45,6 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
     //http请求的具体路径
     let urlData = {
-        getPhoneHtmlFrameUrl: baseUrlData.frontEndHttp + "src/phone/sheet_frame.html", //手机框架HTML数据
         saveSheetDataUrl: baseUrlData.frontEndHttp + "saveSheetData", //保存表单设计数据
         resourceBaseUrl: baseUrlData.frontEndHttp + "resource/", //保存表单设计数据
 

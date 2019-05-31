@@ -117,7 +117,7 @@
 
         <!--数据集合展示-->
         <div ng-if="!design.loading">
-            <div ng-click="design.viewStatisticsResult(value.uniqueid)" ng-repeat="value in design.sheet"
+            <div ng-repeat="value in design.sheet" ng-click="design.viewStatisticsResult(value._id)"
                  style="border-radius: 10px;padding: 10px;margin: 10px;border: 1px solid gainsboro;display: flex; align-items: center">
                 <img src="/public/assets/img/overall/type/{{value.type}}.png" style="width: 30px; height: 30px;"/>
                 <span style="flex: 1;font-size: 15px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; word-break: break-all; margin: 0 10px;">{{value.title}}</span>
@@ -139,7 +139,7 @@
          */
         design.viewStatisticsResult = function (scene) {
             //跳转到小程序页面指定页面
-            wx.miniProgram.navigateTo({url: '/pages/sheet/sheet?scene=' + scene})
+            //wx.miniProgram.navigateTo({url: '/pages/sheet/sheet?scene=' + scene})
         };
 
         /**
@@ -158,7 +158,6 @@
              */
             $http.post("/getAllStatistics", {}).success(function (response) {
                 design.sheet = response;
-                console.log(response)
                 design.loading = false;
 
             }).error(function (err) {
