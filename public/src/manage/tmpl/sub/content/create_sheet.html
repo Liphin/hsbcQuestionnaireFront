@@ -14,7 +14,6 @@
             <!--<div style="text-align: left; padding: 0 60px; font-size: 17px; margin-top: 20px; font-weight: bold; color: #7a96b5">类型</div>-->
             <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
                 <div class="sheetType" ng-repeat="value in manage.allSheetType" sheet-type-frame="{{value.color}}"
-                     ng-click="manage.createNewSheet(value.type)"
                      style="margin: 20px 25px;color: {{value.color}};box-shadow: 0 0 5px {{value.color}};border-radius: 10px">
                     <div style="height: 100px; width: 100%; display: flex; flex-direction: row; padding: 20px">
                         <i class="{{value.fontIcon}}" style="font-size: 50px"></i>
@@ -24,7 +23,8 @@
                         </div>
                     </div>
                     <div style="width: 100%; text-align: center; border-width: 1px 0 0 0;border-style: solid; margin-top: 30px; padding: 14px">
-                        <div sheet-type-btn="{{value.color}}" style="cursor: pointer;border-width: 1px;border-style: solid; border-radius: 5px; padding: 6px 30px; display: inline-block">创建</div>
+                        <div sheet-type-btn="{{value.color}}" style="cursor: pointer;border-width: 1px;border-style: solid; border-radius: 5px; padding: 6px 30px; display: inline-block"
+                             ng-click="manage.createNewSheet(value.type)">创建</div>
                     </div>
                 </div>
             </div>
