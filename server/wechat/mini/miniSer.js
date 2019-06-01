@@ -35,37 +35,34 @@ let getUserOpenId = function (req, response) {
 
 
 /**
- * 获取携带参数的二维码图片
+ * 生成带参数的二维码图片
  */
-let getQrCode = function (req, response) {
-    //解析参数
-    let param = req.body;
-
+let createParamQrCode = function (res, scene, callback) {
     //获取access_token操作
-    miniGeneralSer.getAccessToken(response, () => {
+    miniGeneralSer.getAccessToken(res, () => {
         let getParamQrCodeUrl = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s";
         let url = util.format(getParamQrCodeUrl, serverSerData.overallData.mini.access_token);
-        let filePath = serverSerData.resourcePath + "/qrcode/" + param.scene + ".jpg";
+        let filePath = serverSerData.resourcePath + "/qrcode/" + scene + ".jpg";
         //通过axios方式调用接口
-        axios.post(url, {scene: param.scene}, {responseType: 'stream'})
-            .then((res) => {
+        axios.post(url, {scene: scene}, {responseType: 'stream'})
+            .then((response) => {
                 fs.access(filePath, error => {
                     if (!error) {
                         console.log('带参数图片文件已存在，删除旧文件', filePath);
                         fs.unlinkSync(filePath); //删除旧文件
                     }
 
-                    res.data.pipe(fs.createWriteStream(filePath));
+                    response.data.pipe(fs.createWriteStream(filePath));
                     console.debug('带参数qrCode图片文件数据写入成功', filePath);
-                    if (serverGeneralSer.checkDataNotEmpty(response)) {
-                        response.sendStatus(200);
+                    if (serverGeneralSer.checkDataNotEmpty(res)) {
+                        callback();
                     }
                 })
             })
             .catch(function (error) {
-                console.debug('调用接口获取带参数二维码图片失败', param.scene, error);
-                if (serverGeneralSer.checkDataNotEmpty(response)) {
-                    response.sendStatus(400);
+                console.debug('调用接口获取带参数二维码图片失败', scene, error);
+                if (serverGeneralSer.checkDataNotEmpty(res)) {
+                    res.sendStatus(400);
                 }
             });
     });
@@ -73,6 +70,6 @@ let getQrCode = function (req, response) {
 
 
 module.exports = {
-    getQrCode: getQrCode,
+    createParamQrCode: createParamQrCode,
     getUserOpenId:getUserOpenId,
 };

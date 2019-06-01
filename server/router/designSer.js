@@ -23,13 +23,6 @@ router.post('/getUserOpenId', function (req, res, next) {
     miniSer.getUserOpenId(req, res);
 });
 
-/**
- * 获取带参数的二维码图片
- */
-router.post('/getQrCode', function (req, res, next) {
-    miniSer.getQrCode(req, res);
-});
-
 
 //******************************** 程序数据集操作 ************************************
 

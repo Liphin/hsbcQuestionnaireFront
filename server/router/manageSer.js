@@ -7,6 +7,7 @@ const express = require('express');
 const mongo = require('../db/mongo');
 const mongodb = require('mongodb');
 const serverData = require('../serverSerData');
+const miniSer = require('../wechat/mini/miniSer');
 const router = express.Router();
 const sheetDom = "sheet";//mongodb中的sheet文档库
 const resultDom = "result"; //mongodb中的result文档库
@@ -33,10 +34,14 @@ router.post('/createNewSheet', function (req, res, next) {
                 console.log('插入result状态：', response2.result)
                 //插入result文档成功
                 if (response2.result.n == 1) {
-                    res.send({
-                        status: 200,
-                        data: response.ops[0]._id
-                    })
+                    //TODO 速度优化：三者同步操作
+                    //创建带参数的二维码操作
+                    miniSer.createParamQrCode(res, response.ops[0]._id, () => {
+                        res.send({
+                            status: 200,
+                            data: response.ops[0]._id
+                        })
+                    });
                 }
                 //插入result文档失败
                 else {
@@ -79,6 +84,7 @@ router.post('/deleteSheet', function (req, res, next) {
         if (response.result.n > 0) {
             mongo.deleteManyDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, response2 => {
                 mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response3 => {
+                    //TODO 删除带参数的二维码图片操作
                     res.send({
                         status: 200
                     })
@@ -107,9 +113,13 @@ router.post('/copySheet', function (req, res, next) {
             delete targetSheet._id; //自动创建的_id先对原先进行覆盖
             mongo.insertOneDocuments(sheetDom, targetSheet, response2 => {
                 if (response2.result.n == 1) {
-                    res.send({
-                        status: 200
-                    })
+                    //TODO 速度优化，同步操作；
+                    //生成带参数的二维码
+                    miniSer.createParamQrCode(res, response2.ops[0]._id, () => {
+                        res.send({
+                            status: 200,
+                        })
+                    });
                 }
                 //创建失败
                 else {
@@ -198,6 +208,19 @@ router.post('/getTargetSheetAndResult', function (req, res, next) {
     })
 });
 
+
+/**
+ * 获取目标参与者的所有提交过的表单的记录信息
+ */
+router.post('/getAllTargetParticipantRecord', (req, res, next) => {
+    let param = req.body;
+    mongo.findDocuments(participantDom, {openid: param.openid}, response => {
+        res.send({
+            status: 200,
+            data: response,
+        })
+    })
+});
 
 
 module.exports = router;
