@@ -25,6 +25,7 @@ let getUserOpenId = function (req, response) {
     let uri = util.format(getUserOpenIdUrl, serverSerData.appConfig.appid, serverSerData.appConfig.secret, js_code);
     request.get(uri, function (err, resData, body) {
         if (!err && resData['statusCode'] == 200) {
+            console.log("js_code", js_code, "获取openid body ", body)
             response.send(JSON.parse(body)['openid'])
 
         } else {
@@ -71,5 +72,5 @@ let createParamQrCode = function (res, scene, callback) {
 
 module.exports = {
     createParamQrCode: createParamQrCode,
-    getUserOpenId:getUserOpenId,
+    getUserOpenId: getUserOpenId,
 };

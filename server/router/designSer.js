@@ -19,7 +19,7 @@ const participantDom = "participant";//mongodb中的sheet文档库
 /**
  * 获取用户openid
  */
-router.post('/getUserOpenId', function (req, res, next) {
+router.get('/getUserOpenId', function (req, res, next) {
     miniSer.getUserOpenId(req, res);
 });
 

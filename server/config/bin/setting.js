@@ -21,10 +21,10 @@ var certConfig = {
 
 //小程序应用配置
 var appConfig = {
-    // appid: 'wx6da8ac15c2cf2279',
-    // secret: '49d4f13b66eca5a8a7360168a7b1ac8c',
-    appid: 'wx694cbcac849ec2f0',
-    secret: 'a0e529ca54a1514e04b7dc2f930a6f26',
+    appid: 'wx6da8ac15c2cf2279',
+    secret: '49d4f13b66eca5a8a7360168a7b1ac8c',
+    // appid: 'wx694cbcac849ec2f0',
+    // secret: 'a0e529ca54a1514e04b7dc2f930a6f26',
 };
 
 module.exports = {
