@@ -7,10 +7,77 @@
     <script src="/public/assets/js/angularjs/angular.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
     <meta charset="UTF-8">
-    <title>{{sheet.config.title}}</title>
+    <title>{{design.config.title}}</title>
     <meta name="viewport" content="width=device-width">
 </head>
+<style>
+    /*end demo-specific*/
+    .loader {
+        position: relative;
+        margin: 0 auto;
+        width: 70px;
+    }
+
+    .loader:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+
+    .circular {
+        animation: rotate 2s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .path {
+        stroke-dasharray: 50 10;
+        animation: dash 3s infinite linear, color 6s ease-in-out infinite;
+        stroke-linecap: round;
+    }
+
+    @keyframes rotate {
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 500px;
+        }
+    }
+
+    @keyframes color {
+        100%,
+        0% {
+            stroke: #d62d20;
+        }
+        40% {
+            stroke: #0057e7;
+        }
+        66% {
+            stroke: #008744;
+        }
+        80% {
+            stroke: #5e4492;
+        }
+        90% {
+            stroke: #ffa700;
+        }
+    }
+</style>
 <body style="display: flex;flex-direction: row; font-family: 微软雅黑">
+<!--Loading动画-->
+<div ng-include="'/src/overall/tmpl/loadAnimate.html'"></div>
+
 <div style="flex: 1"></div>
 <div style="flex: 8; margin: 20px 0 50px 0">
 
@@ -77,33 +144,34 @@
     };
 
     let sheetModule = angular.module('sheet', []);
-    sheetModule.controller('designCtrl', function ($http, $location) {
+    sheetModule.controller('designCtrl', function ($scope, $http, $location) {
         let design = this;
         let _id = getUrlParameter("_id");
         let openid = getUrlParameter("openid");
-        design.config = {};
+        design.config = {title: ''};
         design.sheet = [];
+        $scope.overallData = {loadingNum: 0};
 
-        //获取目标表单数据
-        $http.post("/getTargetSheet", {_id: _id}).success(function (response) {
-            if (response.status == 200) {
-                let data = response.data[0];
-                //循环填充config数据
-                for (let i in data) {
-                    design.config[i] = data[i];
+            //获取目标表单数据
+            $http.post("/getTargetSheet", {_id: _id}).success(function (response) {
+                if (response.status == 200) {
+                    let data = response.data[0];
+                    //循环填充config数据
+                    for (let i in data) {
+                        design.config[i] = data[i];
+                    }
+                    //循环填充sheet数据
+                    for (let i in data.sheet) {
+                        design.sheet[i] = data.sheet[i];
+                    }
                 }
-                //循环填充sheet数据
-                for (let i in data.sheet) {
-                    design.sheet[i] = data.sheet[i];
+                //数据获取失败
+                else {
+                    alert("很抱歉，系统出错，请稍后重试");
                 }
-            }
-            //数据获取失败
-            else {
+            }).error(function (err) {
                 alert("很抱歉，系统出错，请稍后重试");
-            }
-        }).error(function (err) {
-            alert("很抱歉，系统出错，请稍后重试");
-        });
+            });
 
 
         /**
@@ -125,6 +193,9 @@
          * 提交问卷
          */
         design.submitSheet = function () {
+            //添加提交loading动画
+            $scope.overallData.loadingNum = 1;
+
             let submitData = {
                 openid: openid,
                 sheetid: design.config._id,
@@ -134,9 +205,12 @@
                 timestamp: new Date().getTime()
             };
             $http.post("/submitResult", submitData).success(function (response) {
+                //取消提交loading动画
+                $scope.overallData.loadingNum = 0;
+
                 if (response.status == 200) {
                     //跳转到小程序页面指定页面
-                    wx.miniProgram.navigateTo({url: '/pages/statistics/statistics'})
+                    wx.miniProgram.switchTab({url: '/pages/statistics/statistics'})
                 }
             }).error(function (err) {
                 alert("很抱歉，提交有误，请稍后重试");
@@ -151,8 +225,8 @@
     sheetModule.directive('designParagraphHtml', [function () {
         return {
             restrict: 'A',
-            scope:{
-                designParagraphHtml:'@',
+            scope: {
+                designParagraphHtml: '@',
             },
             link: function (scope, ele, attrs) {
                 scope.$watch('designParagraphHtml', function (newValue, oldValue) {

@@ -123,10 +123,10 @@
 
         <!--数据集合展示-->
         <div ng-if="!design.loading">
-            <div ng-repeat="value in design.sheet" ng-click="design.viewStatisticsResult(value.title, value._id)"
-                 style="border-radius: 10px;padding: 10px;margin: 10px;border: 1px solid gainsboro;display: flex; align-items: center">
-                <img src="/public/assets/img/overall/type/{{value.type}}.png" style="width: 30px; height: 30px;"/>
-                <span style="flex: 1;font-size: 15px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; word-break: break-all; margin: 0 10px;">{{value.title}}</span>
+            <div ng-repeat="value in design.sheet" ng-click="design.viewHistoryResult(value.title, value._id)"
+                 style="border-radius: 10px;padding: 10px;margin: 14px;border: 1px solid gainsboro;display: flex; align-items: center">
+                <img src="/public/assets/img/overall/type/{{value.type}}.png" style="width: 25px; height: 25px;"/>
+                <span style="flex: 1;font-size: 15px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; word-break: break-all; margin: 0 12px;">{{value.title}}</span>
                 <span style="margin-right: 5px">点击进入查看</span>
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: grey"></span>
             </div>
@@ -184,7 +184,7 @@
              * 获取所有统计数据
              */
             $http.post("/getAllTargetParticipantRecord", {openid: openid}).success(function (response) {
-                design.sheet = response;
+                design.sheet = response.data;
                 design.loading = false;
 
             }).error(function (err) {

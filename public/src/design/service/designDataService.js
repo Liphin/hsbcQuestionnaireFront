@@ -190,19 +190,17 @@ designModule.factory('DesignDataSer', function () {
                 required: true,
                 title: '这里输入题干信息',
                 option: [
-                    {text: '极差'},
-                    {text: '不满'},
-                    {text: '一般'},
-                    {text: '满意'},
-                    {text: '极好'},
+                    {text: '快速更快'},
+                    {text: '准确度高'},
+                    {text: '信息量大'},
                 ],
                 choice: [
                     {
-                        text: '外观',
+                        text: '百度',
                         selected: [],//里面装着每个option对应index的true或false
                     },
                     {
-                        text: '功能',
+                        text: '谷歌',
                         selected: [],
                     },
                 ]
