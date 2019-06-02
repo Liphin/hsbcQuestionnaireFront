@@ -15,11 +15,11 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         phoneView: {
             showPhoneView: false, //是否展开手机页面
         },
-
         //小程序预览操作
         miniView: {
             showMiniView: false, //是否展开小程序预览页面
-            sheetMiniQrCode: '', //小程序二维码
+            sheetMiniQrCodeUrl: '', //小程序二维码
+            downloadName:'',//下载二维码名称
         },
 
         //用户信息

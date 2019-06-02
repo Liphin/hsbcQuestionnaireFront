@@ -56,8 +56,9 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
         }
         //小程序页面预览
         else if (DesignDataSer.overallData.viewType == 'miniView') {
-
-
+            let qrCodeUrl = OverallDataSer.urlData.resourceBaseUrl + 'qrcode/' + DesignDataSer.overallData.sheetConfig._id + ".jpg";
+            OverallDataSer.overallData.miniView.sheetMiniQrCodeUrl = qrCodeUrl;
+            OverallDataSer.overallData.miniView.downloadName = DesignDataSer.overallData.sheetConfig.title + "_二维码";
             OverallDataSer.overallData.miniView.showMiniView = true;
         }
     };
