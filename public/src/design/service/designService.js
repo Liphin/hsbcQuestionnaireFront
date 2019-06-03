@@ -44,15 +44,22 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
     /**
      * 点击预览，快速预览或小程序预览
      * @param viewType
+     * @param design
      */
-    let viewPage = function (viewType) {
+    let viewPage = function (viewType, design) {
         //如果新的viewType不为空则重新赋值
         if (OverallGeneralSer.checkDataNotEmpty(viewType)) {
             DesignDataSer.overallData.viewType = viewType
         }
         //手机页面预览
         if (DesignDataSer.overallData.viewType == 'phoneView') {
+            //拷贝当前组件设置的
+            OverallDataSer.overallData.phoneView.sheetOrigin.length = 0;
+            OverallDataSer.overallData.phoneView.sheetOrigin = angular.copy(DesignDataSer.sheet);
+            //摄者手机页面预览展示
             OverallDataSer.overallData.phoneView.showPhoneView = true;
+            //设置预览页面允许选择按钮
+            design.isDisabled = false;
         }
         //小程序页面预览
         else if (DesignDataSer.overallData.viewType == 'miniView') {
@@ -61,6 +68,26 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
             OverallDataSer.overallData.miniView.downloadName = DesignDataSer.overallData.sheetConfig.title + "_二维码";
             OverallDataSer.overallData.miniView.showMiniView = true;
         }
+    };
+
+
+    /**
+     * 编辑页面关闭手机预览
+     * @param design
+     */
+    let closePhoneView = function (design) {
+        //清空提交的数据
+        DesignDataSer.sheet.length = 0;
+        //重新赋值预览前的数据
+        for (let i in OverallDataSer.overallData.phoneView.sheetOrigin) {
+            DesignDataSer.sheet.push(OverallDataSer.overallData.phoneView.sheetOrigin[i])
+        }
+        //清空sheetOrigin数组
+        OverallDataSer.overallData.phoneView.sheetOrigin.length = 0;
+        //关闭手机预览页面
+        OverallDataSer.overallData.phoneView.showPhoneView = false;
+        //展开编辑页面无法进行直接数据默认选择操作
+        design.isDisabled = true;
     };
 
 
@@ -155,6 +182,7 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
         viewPage: viewPage,
         savePage: savePage,
         publishPage: publishPage,
+        closePhoneView: closePhoneView,
     }
 });
 

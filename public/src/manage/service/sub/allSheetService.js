@@ -123,7 +123,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                 break;
             }
             case 'analyse': {
-                $location.url('/manage/analyseSheet?_id=' + sheet._id)
+                $location.url('/manage/analyseSheet?_id=' + sheet._id);
                 break;
             }
             case 'release': {
@@ -131,6 +131,10 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                 break;
             }
             case 'qrcode': {
+                let qrCodeUrl = OverallDataSer.urlData.resourceBaseUrl + 'qrcode/' + sheet._id + ".jpg";
+                OverallDataSer.overallData.miniView.sheetMiniQrCodeUrl = qrCodeUrl;
+                OverallDataSer.overallData.miniView.downloadName = sheet.title + "_二维码";
+                OverallDataSer.overallData.miniView.showMiniView = true;
                 break;
             }
             case 'copy': {

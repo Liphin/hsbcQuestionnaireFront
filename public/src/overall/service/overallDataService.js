@@ -14,6 +14,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         //手机预览操作
         phoneView: {
             showPhoneView: false, //是否展开手机页面
+            sheetOrigin: [],//记录预览时组件原本的配置，用于关闭手机预览页面时回滚操作
         },
         //小程序预览操作
         miniView: {

@@ -13,6 +13,7 @@ designModule.controller('DesignCtrl', function (check, $location, DesignDataSer,
     design.overallData = DesignDataSer.overallData;
     design.widget = DesignDataSer.widget;
     design.sheet = DesignDataSer.sheet;
+    design.isDisabled = true; //编辑页面面板，不能进行选择操作
     DesignSer.init();
 
     /**
@@ -82,7 +83,7 @@ designModule.controller('DesignCtrl', function (check, $location, DesignDataSer,
      * 预览页面数据结果
      */
     design.viewPage = function (viewType) {
-        DesignSer.viewPage(viewType);
+        DesignSer.viewPage(viewType, design);
     };
 
 
@@ -106,6 +107,13 @@ designModule.controller('DesignCtrl', function (check, $location, DesignDataSer,
      */
     design.submitSheet = function () {
         DesignSer.submitSheet();
+    };
+
+    /**
+     * 编辑页面关闭手机预览
+     */
+    design.closePhoneView = function () {
+        DesignSer.closePhoneView(design);
     };
 
     /**
