@@ -47,7 +47,7 @@ router.post('/getTargetSheet', function (req, res) {
 router.post('/checkAndGetTargetSheet', function (req, res) {
     let param = req.body;
     //查看participant文档是否已经提交过了
-    mongo.findDocuments(participantDom, {openid: param.openid}, response1 => {
+    mongo.findDocuments(participantDom, {openid: param.openid, sheetid: param._id}, response1 => {
         if (response1.length > 0) {
             //已经提交过了，切勿刷单
             console.warn("openid: ", param.openid, "，已经提交过了，切勿刷单");
