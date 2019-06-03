@@ -30,12 +30,42 @@ router.get('/getUserOpenId', function (req, res, next) {
  * 获取指定_id的sheet数据
  */
 router.post('/getTargetSheet', function (req, res) {
-    mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(req.body._id)}, response => {
+    let param = req.body;
+    mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, response => {
         res.send({
             status: 200,
             data: response,
         });
     })
+});
+
+
+/**
+ * 检查是否已经提交过了，若尚未提交过则获取目标表单页面数据
+ * 防止刷单操作
+ */
+router.post('/checkAndGetTargetSheet', function (req, res) {
+    let param = req.body;
+    //查看participant文档是否已经提交过了
+    mongo.findDocuments(participantDom, {openid: param.openid}, response1 => {
+        if (response1.length > 0) {
+            //已经提交过了，切勿刷单
+            console.warn("openid: ", param.openid, "，已经提交过了，切勿刷单");
+            res.send({
+                status: 301,
+                data: response1,
+            })
+        }
+        //尚未提交过，返回表单数据
+        else {
+            mongo.findDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, response2 => {
+                res.send({
+                    status: 200,
+                    data: response2,
+                });
+            })
+        }
+    });
 });
 
 

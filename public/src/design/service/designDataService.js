@@ -77,7 +77,7 @@ designModule.factory('DesignDataSer', function () {
         single_select: {
             type: 'single_select',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 selected: 'none',
                 option: [
@@ -91,7 +91,7 @@ designModule.factory('DesignDataSer', function () {
         single_scale: {
             type: 'single_scale',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 selected: 'none',
                 option: [
@@ -108,7 +108,7 @@ designModule.factory('DesignDataSer', function () {
         matrix_single_select: {
             type: 'matrix_single_select',
             data: {
-                required: true,
+                required: false,
                 title: '这里输入题干信息',
                 option: [
                     {text: '极差'},
@@ -133,7 +133,7 @@ designModule.factory('DesignDataSer', function () {
         matrix_single_scale: {
             type: 'matrix_single_scale',
             data: {
-                required: true,
+                required: false,
                 title: '这里输入题干信息',
                 option: [
                     {text: '极差', value: 0},
@@ -158,7 +158,7 @@ designModule.factory('DesignDataSer', function () {
         pull_single_select: {
             type: 'pull_single_select',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 selected: '0',
                 option: [
@@ -174,7 +174,7 @@ designModule.factory('DesignDataSer', function () {
         multi_select: {
             type: 'multi_select',
             data: {
-                required: true,
+                required: false,
                 title: '这里输入题干信息',
                 option: [
                     {text: '选项1', status: true},
@@ -187,7 +187,7 @@ designModule.factory('DesignDataSer', function () {
         matrix_multi_select: {
             type: 'matrix_multi_select',
             data: {
-                required: true,
+                required: false,
                 title: '这里输入题干信息',
                 option: [
                     {text: '快速更快'},
@@ -212,7 +212,7 @@ designModule.factory('DesignDataSer', function () {
         single_fill: {
             type: 'single_fill',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 value: '',
             }
@@ -221,7 +221,7 @@ designModule.factory('DesignDataSer', function () {
         matrix_fill: {
             type: 'matrix_fill',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 option: [
                     {text: '姓名', value: ''},
@@ -234,7 +234,7 @@ designModule.factory('DesignDataSer', function () {
         detail_fill: {
             type: 'detail_fill',
             data: {
-                required: true, //必答、非必答选项
+                required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 value: '',
             }
