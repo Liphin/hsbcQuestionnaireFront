@@ -21,7 +21,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      */
     let checkDataNotEmpty = function (data) {
         let status = false;
-        if (data != null && data != undefined) {
+        if (data != null && data != undefined && data != 'NaN') {
             //根据变量的不同类型进行判空处理
             switch (Object.prototype.toString.call(data)) {
                 /*String类型数据*/
@@ -214,7 +214,7 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * 上传资源文件信息
      * 用于提交文件操作，并开放callback函数接口
      */
-    var uploadResource = function (obj, callback) {
+    let uploadResource = function (obj, callback) {
         var fd = new FormData();
         //动态装载数据
         for (var i in obj) {
@@ -264,7 +264,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
         });
     };
-
 
 
     /**
@@ -334,6 +333,34 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     };
 
 
+    /**
+     * 模态框弹出及隐藏，展示提示信息数据
+     * @param modalType 'lg'/'sm'，分别为显示大或小的模态框
+     * @param item 大类项
+     * @param subItem 子类项
+     */
+    let modalInfoShow = function (modalType, item, subItem) {
+        //遍历每个模态框使其状态为隐藏
+        for (let type in OverallDataSer.modalSetting[modalType]) {
+            for (let info in OverallDataSer.modalSetting[modalType][type]) {
+                if (OverallDataSer.modalSetting[modalType][type][info]) {
+                    OverallDataSer.modalSetting[modalType][type][info] = false;
+                }
+            }
+        }
+        OverallDataSer.modalSetting[modalType][item][subItem] = true; //单独设置展示某条模态框
+        //根据不同模态框类型展示不同大小模态框面板
+        if (modalType == 'lg') {
+            $('#modal_info_lg').modal({keyboard: true});
+            //$('.modal-backdrop.in').css('z-index', BasicDataSer.zIndexHelper['info_background']);
+
+        } else if (modalType == 'sm') {
+            $('#modal_info_sm').modal({keyboard: true});
+            //$('.modal-backdrop.in').css('z-index', BasicDataSer.zIndexHelper['info_background']);
+        }
+    };
+
+
     return {
         httpGetFiles: httpGetFiles,
         httpPostFormData: httpPostFormData,
@@ -342,9 +369,10 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         getCurrentDataTime: getCurrentDataTime,
         httpPostData2: httpPostData2,
         httpPostData3: httpPostData3,
+        modalInfoShow: modalInfoShow,
         uploadFileToYJW: uploadFileToYJW,
         uploadResource: uploadResource,
-        setFinishAnimation:setFinishAnimation,
+        setFinishAnimation: setFinishAnimation,
         checkDataNotEmpty: checkDataNotEmpty,
         getNewCookiesExpireDate: getNewCookiesExpireDate,
         alertHttpRequestError: alertHttpRequestError,

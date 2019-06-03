@@ -13,6 +13,10 @@
 
 </style>
 <body ng-controller="designCtrl as design" style=" font-family: 微软雅黑">
+
+<!--Loading动画-->
+<div ng-if="design.loading" ng-include="'/src/overall/tmpl/sub/loadAnimate.html'"></div>
+
 <div style="display: flex;flex-direction: row;">
     <div style="flex: 1"></div>
     <div style="flex: 8; margin: 20px 0 50px 0">
@@ -79,6 +83,7 @@
         //1、数据初始化
         let design = this;
         design.sheet = [];
+        design.loading = true;
         design.isDisabled = true; //禁用组件响应事件
 
         //2、获取指定表单页面参数
@@ -99,6 +104,9 @@
                 }
             }).error(function (err) {
                 alert("很抱歉，系统出错，请稍后重试");
+
+            }).finally(function () {
+                design.loading = false;
             });
         }
 

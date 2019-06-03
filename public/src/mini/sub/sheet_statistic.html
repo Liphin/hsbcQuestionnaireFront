@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width">
 </head>
 <body ng-controller="manageCtrl as manage" style="display: flex;flex-direction: row; font-family: 微软雅黑">
+<!--Loading动画-->
+<div ng-if="manage.loading" ng-include="'/src/overall/tmpl/sub/loadAnimate.html'"></div>
+
 <div style="width: 100%">
     <div style="display: flex; flex-direction: row">
         <div style="flex: 1"></div>
@@ -57,6 +60,7 @@
         //1、数据初始化
         let manage = this;
         manage.targetSheet = {};
+        manage.loading = true;
         manage.analyseData = {
             result: {},
             sheetClassify: {
@@ -88,6 +92,9 @@
                 }
             }).error(function (err) {
                 alert("很抱歉，系统出错，请稍后重试");
+
+            }).finally(function () {
+                manage.loading = false;
             });
         }
 

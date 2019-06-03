@@ -24,7 +24,7 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      * 更换左侧导航栏的路由
      */
     manage.changeNavigation = function (path) {
-        $location.path(path)
+        $location.url(path)
     };
 
     /**

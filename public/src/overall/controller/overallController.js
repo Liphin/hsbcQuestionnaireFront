@@ -9,6 +9,7 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
     //$rootScope.loading = OverallDataSer.overallData.loadingNum;
     $rootScope.overallData = OverallDataSer.overallData;
     $rootScope.zIndexHelper = OverallDataSer.zIndexHelper;
+    $rootScope.modalSetting = OverallDataSer.modalSetting;
 
     //全局应用初始化方法
     OverallSer.initData();
@@ -43,6 +44,14 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
      */
     $rootScope.keyboardUpOpt=function ($event) {
         OverallSer.keyboardUpOpt($event)
+    };
+
+
+    /**
+     * 模态框展开，关闭设置
+     */
+    $rootScope.modalInfoShow = function (modalType, item, subItem) {
+        OverallGeneralSer.modalInfoShow(modalType, item, subItem);
     };
 
 

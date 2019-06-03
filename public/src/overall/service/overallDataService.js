@@ -20,7 +20,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         miniView: {
             showMiniView: false, //是否展开小程序预览页面
             sheetMiniQrCodeUrl: '', //小程序二维码
-            downloadName:'',//下载二维码名称
+            downloadName: '',//下载二维码名称
         },
 
         //用户信息
@@ -35,7 +35,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         //执行操作完成后等动画
         finishAnimation: {
             status: false,
-            text:'',
+            text: '',
         },
     };
 
@@ -62,11 +62,11 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
     };
 
     //用于sql注入filter
-    var sqlVerify = [];
+    let sqlVerify = [];
 
 
     //location.path的重定向
-    var redirect = {
+    let redirect = {
         'login': '/login',
         'manage': '/manage',
         'design': '/arbitration/list',
@@ -74,10 +74,11 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
     };
 
 
-    var zIndexHelper = {
+    let zIndexHelper = {
         loading: 5000,
         finishAnimation: 5000,
-        phoneView: 1000
+        phoneView: 1000,
+        info: 1000,
     };
 
     //电脑键盘按键操作
@@ -85,12 +86,22 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         "ctrl": false,
     };
 
+    //模态框提示弹出框
+    let modalSetting = {
+        lg: {},
+        sm: {
+            manage: {
+                emptyAnalyse: false, //清空数据提示模态框
+            }
+        }
+    };
 
     return {
         keyBoard: keyBoard,
         urlData: urlData,
         redirect: redirect,
         sqlVerify: sqlVerify,
+        modalSetting: modalSetting,
         overallData: overallData,
         baseUrlData: baseUrlData,
         zIndexHelper: zIndexHelper,

@@ -228,32 +228,26 @@ router.post('/getAllTargetParticipantRecord', (req, res, next) => {
  */
 router.post('/emptyTargetRecord', (req, res, next) => {
     let param = req.body;
-    Promise.all([() => {
+    Promise.all([new Promise((resolve, reject) => {
         //删除result文档中相关记录
-        return new Promise((resolve, reject) => {
-            mongo.deleteOneDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, response => {
-                resolve(response)
-            })
-        });
-    }, () => {
+        //设置对应result字段为空对象，重置到最初创建状态
+        mongo.updateOneDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, {result: {}}, response => {
+            resolve(response)
+        })
+    }), new Promise((resolve, reject) => {
         //删除participant文档中相关记录
-        return new Promise((resolve, reject) => {
-            mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response => {
-                resolve(response)
-            })
-        });
+        mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response => {
+            console.log('participant', response)
+            resolve(response)
+        })
+    })]).then(([response1, response2]) => {
+        res.send({status: 200})
 
-    }]).then(([response1, response2]) => {
-        if (response1.result.n > 0) {
-            console.log("清空统计记录数据成功");
-            res.send({status: 200})
-        } else {
-            console.log("清空统计记录数据失败: ", response1, ',', response2);
-            res.send({status: 400})
-        }
+    }).catch(err => {
+        console.log("清空数据系统出错: ", err);
+        res.send({status: 402})
     });
 });
-
 
 module.exports = router;
 

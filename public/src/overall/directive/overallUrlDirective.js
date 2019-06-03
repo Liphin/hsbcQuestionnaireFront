@@ -44,6 +44,17 @@ overallModule.directive('loadAnimate', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 模态框设置
+ */
+overallModule.directive('overallModalInfo', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/overall/tmpl/sub/modalInfo.html'
+    };
+}]);
+
+
 
 /**
  * 页面手机渲染视图，在编辑页面、管理页面均有使用到，因此放在overall中

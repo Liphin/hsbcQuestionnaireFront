@@ -10,73 +10,9 @@
     <title>{{design.config.title}}</title>
     <meta name="viewport" content="width=device-width">
 </head>
-<style>
-    /*end demo-specific*/
-    .loader {
-        position: relative;
-        margin: 0 auto;
-        width: 70px;
-    }
-
-    .loader:before {
-        content: '';
-        display: block;
-        padding-top: 100%;
-    }
-
-    .circular {
-        animation: rotate 2s linear infinite;
-        height: 100%;
-        transform-origin: center center;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-
-    .path {
-        stroke-dasharray: 50 10;
-        animation: dash 3s infinite linear, color 6s ease-in-out infinite;
-        stroke-linecap: round;
-    }
-
-    @keyframes rotate {
-        100% {
-            transform: rotate(180deg);
-        }
-    }
-
-    @keyframes dash {
-        to {
-            stroke-dashoffset: 500px;
-        }
-    }
-
-    @keyframes color {
-        100%,
-        0% {
-            stroke: #d62d20;
-        }
-        40% {
-            stroke: #0057e7;
-        }
-        66% {
-            stroke: #008744;
-        }
-        80% {
-            stroke: #5e4492;
-        }
-        90% {
-            stroke: #ffa700;
-        }
-    }
-</style>
 <body style="display: flex;flex-direction: row; font-family: 微软雅黑">
 <!--Loading动画-->
-<div ng-include="'/src/overall/tmpl/loadAnimate.html'"></div>
+<div ng-if="design.loading" ng-include="'/src/overall/tmpl/sub/loadAnimate.html'"></div>
 
 <div style="flex: 1"></div>
 <div style="flex: 8; margin: 20px 0 50px 0">
@@ -110,9 +46,8 @@
         <div style="width: 100%;height: 20px"></div>
     </div>
 
-
     <!--提交按钮-->
-    <div style="margin-top: 40px">
+    <div ng-if="!design.loading" style="margin-top: 40px">
         <button ng-click="design.submitSheet()"
                 style="font-family: 微软雅黑;outline: none; width: 100%; padding: 9px; font-size: 16px; border: none;border-radius: 7px;color: white; background: #4eb3eb">
             提交
@@ -143,6 +78,7 @@
         }
     };
 
+    //**************************** Angularjs ****************************************
     let sheetModule = angular.module('sheet', []);
     sheetModule.controller('designCtrl', function ($scope, $http, $location) {
         let design = this;
@@ -150,28 +86,32 @@
         let openid = getUrlParameter("openid");
         design.config = {title: ''};
         design.sheet = [];
+        design.loading = true;
         $scope.overallData = {loadingNum: 0};
 
-            //获取目标表单数据
-            $http.post("/getTargetSheet", {_id: _id}).success(function (response) {
-                if (response.status == 200) {
-                    let data = response.data[0];
-                    //循环填充config数据
-                    for (let i in data) {
-                        design.config[i] = data[i];
-                    }
-                    //循环填充sheet数据
-                    for (let i in data.sheet) {
-                        design.sheet[i] = data.sheet[i];
-                    }
+        //获取目标表单数据
+        $http.post("/getTargetSheet", {_id: _id}).success(function (response) {
+            if (response.status == 200) {
+                let data = response.data[0];
+                //循环填充config数据
+                for (let i in data) {
+                    design.config[i] = data[i];
                 }
-                //数据获取失败
-                else {
-                    alert("很抱歉，系统出错，请稍后重试");
+                //循环填充sheet数据
+                for (let i in data.sheet) {
+                    design.sheet[i] = data.sheet[i];
                 }
-            }).error(function (err) {
+            }
+            //数据获取失败
+            else {
                 alert("很抱歉，系统出错，请稍后重试");
-            });
+            }
+        }).error(function (err) {
+            alert("很抱歉，系统出错，请稍后重试");
+
+        }).finally(function () {
+            design.loading = false;
+        });
 
 
         /**

@@ -37,9 +37,11 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
         //3、获取提交表单数据结果
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getTargetResultUrl, {sheetid: param._id}, result => {
             if (result.status == 200) {
-                //重新赋值result对象数组
-                for (let i in result.data[0].result) {
-                    ManageDataSer.analyseData.result[i] = result.data[0].result[i];
+                //重新赋值result对象数组，如数据被清空则无需赋值操作
+                if (OverallGeneralSer.checkDataNotEmpty(result.data[0].result)) {
+                    for (let i in result.data[0].result) {
+                        ManageDataSer.analyseData.result[i] = result.data[0].result[i];
+                    }
                 }
             }
             //获取数据失败
@@ -83,7 +85,8 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 for (let i in data2) {
                     total += data2[i];
                 }
-                return (parseFloat(num) / total * 100).toFixed(2);
+                let result = (parseFloat(num) / total * 100).toFixed(2);
+                return OverallGeneralSer.checkDataNotEmpty(result) ? result : 0;
             }
             //总数统计
             case 'selectSum': {
@@ -91,7 +94,7 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 for (let i in data) {
                     total += data[i];
                 }
-                return total
+                return OverallGeneralSer.checkDataNotEmpty(total) ? total : 0;
             }
             //matrix类型百分比计算
             case 'matrixPercent': {
@@ -100,7 +103,8 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 for (let i in data2) {
                     total += data2[i];
                 }
-                return (parseFloat(num) / total * 100).toFixed(2);
+                let result = (parseFloat(num) / total * 100).toFixed(2);
+                return  OverallGeneralSer.checkDataNotEmpty(result) ? result : 0;
             }
             //matrix类型汇总计算
             case 'matrixSum': {
@@ -110,7 +114,7 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                         total += data[i][j];
                     }
                 }
-                return total;
+                return OverallGeneralSer.checkDataNotEmpty(total) ? total : 0;
             }
         }
     };
@@ -164,8 +168,9 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.emptyTargetRecordUrl,
             {_id: param._id}, result => {
                 //清空数据成功
-                if(result.status==200){
-                    OverallGeneralSer.setFinishAnimation(1500, "数据清空成功")
+                if (result.status == 200) {
+                    OverallGeneralSer.setFinishAnimation(1500, "数据清空成功");
+                    initAnalyseData(); //重新初始化数据
                 }
                 //清空数据失败
                 else {
