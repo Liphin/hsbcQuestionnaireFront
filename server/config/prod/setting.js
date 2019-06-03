@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2018/11/3.
  */
-var settingData = {
+let settingData = {
     basePath: "/root/hsbc/questionnaire/front", //基础路径
     domainName: "http://questionnaire.hsbc.liphin.com", //域名设置
     isProd: true, //是否为生产环境
@@ -13,21 +13,26 @@ settingData['resourcePath'] = settingData['basePath'] + "/resource";
 
 
 //http和https服务开启
-var certConfig = {
+let certConfig = {
     key: '/root/hsbc/questionnaire/front/cert/questionnaire.hsbc.liphin.com.key',
-    cert:'/root/hsbc/questionnaire/front/cert/questionnaire.hsbc.liphin.com.crt',
+    cert: '/root/hsbc/questionnaire/front/cert/questionnaire.hsbc.liphin.com.crt',
 };
 
 
 //小程序应用配置
-var appConfig = {
+let appConfig = {
     appid: 'wx6da8ac15c2cf2279',
     secret: '49d4f13b66eca5a8a7360168a7b1ac8c',
 };
 
+//允许的origin
+let allowedOrigin = [
+    'https://questionnaire.hsbc.liphin.com'
+];
 
 module.exports = {
     settingData: settingData,
     appConfig: appConfig,
-    certConfig:certConfig,
+    certConfig: certConfig,
+    allowedOrigin: allowedOrigin,
 };

@@ -78,6 +78,13 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.downloadResult=function () {
         AnalyseSer.downloadResult();
+    };
+
+    /**
+     * 清空统计数据
+     */
+    manage.emptyResult = function () {
+        AnalyseSer.emptyResult();
     }
 
 });

@@ -21,6 +21,13 @@ let overallData = {
     },
 };
 
+let crossOrigin = {
+    'allowedOrigin': targetSetting.allowedOrigin,
+    'methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    'headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    'credentials': true,
+};
+
 
 module.exports = {
     targetSetting: targetSetting,
@@ -30,6 +37,7 @@ module.exports = {
     basePath: basePath,
     projectPath: projectPath,
     resourcePath: resourcePath,
+    crossOrigin: crossOrigin,
     isProd: isProd,
     port: port
 };

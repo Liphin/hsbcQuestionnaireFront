@@ -12,19 +12,23 @@ const serverSerData = require('./serverSerData');
  * @param res
  * @param next
  */
-// this.setCrossOrigin=function (req, res, next) {
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', dataHelper.crossOrigin['origin']);
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', dataHelper.crossOrigin['methods']);
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', dataHelper.crossOrigin['headers']);
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', dataHelper.crossOrigin['credentials']);
-//     // Pass to next layer of middleware
-//     next();
-// };
+let setCrossOrigin = function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', serverSerData.crossOrigin['allowedOrigin']);
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', serverSerData.crossOrigin['methods']);
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', serverSerData.crossOrigin['headers']);
+    // Set to true if you need the website to include cookies in the requests sent to the API
+    res.setHeader('Access-Control-Allow-Credentials', serverSerData.crossOrigin['credentials']);
+    // Pass to next layer of middleware
+    //intercepts OPTIONS method
+    if ('OPTIONS' === req.method) {
+        res.send(200); //respond with 200
+    } else {
+        next(); //move on
+    }
+};
 
 /**
  * 公用实用方法，统一判空检测
@@ -72,7 +76,7 @@ let checkDataNotEmpty = function (data) {
  * 返回当前日期，格式为2018-01-01
  */
 let getDateTime = function () {
-    var date = new Date();
+    let date = new Date();
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "  " + date.getHours() + ":" +
         date.getMinutes() + ":" + date.getSeconds();
 };
@@ -94,10 +98,10 @@ let getRandomStr = function () {
 };
 
 
-
 module.exports = {
     checkDataNotEmpty: checkDataNotEmpty,
     getDateTime: getDateTime,
     getTimestamp: getTimestamp,
     getRandomStr: getRandomStr,
+    setCrossOrigin: setCrossOrigin,
 };

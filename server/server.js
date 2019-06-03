@@ -25,11 +25,15 @@ const bodyParser = require('body-parser');
  * 自定义模块数据
  */
 const serverData = require('./serverSerData');
+const serverGeneralSer = require('./serverGeneralSer');
 const loginRouter = require('./router/loginSer');
 const manageRouter = require('./router/manageSer');
 const designRouter = require('./router/designSer');
-require('./db/mongo');
 
+/**
+ * 数据库模块
+ */
+require('./db/mongo');
 
 /**
  * 初始化操作
@@ -37,6 +41,7 @@ require('./db/mongo');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(serverGeneralSer.setCrossOrigin);
 
 //路由数据访问
 app.use(loginRouter);

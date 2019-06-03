@@ -22,6 +22,7 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
             }
         }
 
+        //初始化目标sheet数组的index
         for (let i in ManageDataSer.allSheetData) {
             if (param._id == ManageDataSer.allSheetData[i]._id) {
                 ManageDataSer.analyseData.sheetIndex = i; //记录目标数据的index
@@ -40,7 +41,6 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                 for (let i in result.data[0].result) {
                     ManageDataSer.analyseData.result[i] = result.data[0].result[i];
                 }
-
             }
             //获取数据失败
             else {
@@ -155,10 +155,31 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
         });
     };
 
+
+    /**
+     * 清空统计数据
+     */
+    let emptyResult = function () {
+        let param = $location.search();
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.emptyTargetRecordUrl,
+            {_id: param._id}, result => {
+                //清空数据成功
+                if(result.status==200){
+                    OverallGeneralSer.setFinishAnimation(1500, "数据清空成功")
+                }
+                //清空数据失败
+                else {
+                    alert("清空数据失败，请稍后重试")
+                }
+            })
+    };
+
+
     return {
         getQuestionnaireNum: getQuestionnaireNum,
         initAnalyseData: initAnalyseData,
         getStatisticNum: getStatisticNum,
         downloadResult: downloadResult,
+        emptyResult: emptyResult,
     }
 });

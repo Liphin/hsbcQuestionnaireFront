@@ -4,7 +4,6 @@
 //let designModule = angular.module('Angular.design');
 
 designModule.controller('DesignCtrl', function (check, $location, DesignDataSer, WidgetSer, DesignSer) {
-
     //检查是否登录状态
     if (!check) return;
 

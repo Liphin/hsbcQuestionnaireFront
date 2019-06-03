@@ -223,6 +223,38 @@ router.post('/getAllTargetParticipantRecord', (req, res, next) => {
 });
 
 
+/**
+ * 清空所有
+ */
+router.post('/emptyTargetRecord', (req, res, next) => {
+    let param = req.body;
+    Promise.all([() => {
+        //删除result文档中相关记录
+        return new Promise((resolve, reject) => {
+            mongo.deleteOneDocuments(resultDom, {sheetid: new mongodb.ObjectID(param._id)}, response => {
+                resolve(response)
+            })
+        });
+    }, () => {
+        //删除participant文档中相关记录
+        return new Promise((resolve, reject) => {
+            mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response => {
+                resolve(response)
+            })
+        });
+
+    }]).then(([response1, response2]) => {
+        if (response1.result.n > 0) {
+            console.log("清空统计记录数据成功");
+            res.send({status: 200})
+        } else {
+            console.log("清空统计记录数据失败: ", response1, ',', response2);
+            res.send({status: 400})
+        }
+    });
+});
+
+
 module.exports = router;
 
 
