@@ -17,11 +17,10 @@ designModule.factory('DesignDataSer', function () {
     //问卷、表单页面
     let sheet = [];
 
-
     //展示在选择列表上的组件
-    let allWidget = [];
+    let widget = [];
     //所有组件信息
-    let widget = [
+    let allWidget = [
         {
             status: true, //展开状态：true、 收回状态：false
             name: '内容',

@@ -3,7 +3,8 @@
  */
 //let designModule = angular.module('Angular.design');
 
-designModule.factory('DesignSer', function ($http, $location, OverallDataSer, OverallGeneralSer, DesignDataSer, $routeParams) {
+designModule.factory('DesignSer', function ($http, $location, OverallDataSer, OverallGeneralSer, DesignDataSer,
+                                            $routeParams, ManageDataSer) {
 
     /**
      * 初始化渲染数据集
@@ -30,8 +31,32 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
                     timestamp: targetSheet.timestamp, //最新保存时间
                 };
 
-                //2. TODO 设置相关渲染页面可选择的编辑组件
+                //2. 编辑页面的组件动态添加操作，针对不同种类问卷类型有不同组件组合
+                for (let i in ManageDataSer.allSheetType) {
+                    //查找 ManageDataSer.allSheetType 中对应问卷类型的widgetType数组
+                    if (ManageDataSer.allSheetType[i].type == targetSheet.type) {
+                        let widgetType = ManageDataSer.allSheetType[i].widgetType;
+                        console.log('widgetType',widgetType)
 
+                        //清空当前数据记录
+                        DesignDataSer.widget.length = 0;
+                        for (let j in DesignDataSer.allWidget) {
+                            //初始化每个allWidget大项都添加
+                            let targetWidget = {
+                                status: DesignDataSer.allWidget[j].status,
+                                name: DesignDataSer.allWidget[j].name,
+                                sub: [],
+                            };
+                            //若对应问卷类型的widgetType数组包含该类型，则添加，否则不添加
+                            for (let h in DesignDataSer.allWidget[j].sub) {
+                                if (widgetType.indexOf(DesignDataSer.allWidget[j].sub[h].type) > -1) {
+                                    targetWidget.sub.push(DesignDataSer.allWidget[j].sub[h]);
+                                }
+                            }
+                            DesignDataSer.widget.push(targetWidget);
+                        }
+                    }
+                }
             }
             //获取失败
             else {
