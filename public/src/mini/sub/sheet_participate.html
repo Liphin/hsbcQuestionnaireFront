@@ -201,7 +201,7 @@
          * 该用户已经提交过了，切勿再次提交。并跳转到我的历史记录页面
          */
         design.jumpToMineHistory = function () {
-            wx.miniProgram.navigateTo({url: '/pages/mine/mine'})
+            wx.miniProgram.switchTab({url: '/pages/mine/mine'})
         }
 
     });
