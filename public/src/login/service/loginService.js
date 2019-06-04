@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,$cookies,
+loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer, $cookies,
                                           OverallDataSer, $location) {
 
     /**
@@ -31,7 +31,7 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,$cooki
                     //保存登录信息
                     saveLoginInfo(res.data);
                     //跳转页面
-                    $location.path('/manage/allSheet');
+                    $location.url('/manage/allSheet');
                 }
                 //账户尚未注册
                 else if (res.status == 401) {
@@ -51,8 +51,9 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,$cooki
         //注册请求
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.registerUrl,
             LoginDataSer.loginInfo, res => {
+
                 //该账号注册成功
-                if (res.status = 200) {
+                if (res.status == 200) {
                     //保存登录信息
                     saveLoginInfo(res.data);
 
@@ -61,14 +62,14 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer,$cooki
                     LoginDataSer.loginInfo.password = '';
 
                     //路由到管理页面
-                    $location.path('/manage');
+                    $location.url('/manage/allSheet');
                 }
                 //插入数据失败
-                else if (res.status = 404) {
+                else if (res.status == 404) {
                     alert("账号注册失败，请稍后重试");
                 }
                 //该账号已经被注册过
-                else if (res.status = 403) {
+                else if (res.status == 403) {
                     alert("该账号已被注册过，请尝试注册不同账号名");
                 }
                 //系统未知出错
