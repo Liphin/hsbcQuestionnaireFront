@@ -142,6 +142,7 @@
                 }
                 //尚未发布状态
                 else {
+                    design.config.title = data.title;
                     design.blockItem = 'notPublish';
                     design.blockContent = true;
                 }
@@ -190,7 +191,7 @@
          */
         design.submitSheet = function () {
             //添加提交loading动画
-            $scope.overallData.loadingNum = 1;
+            design.loading = true;
 
             let submitData = {
                 openid: openid,
@@ -202,7 +203,7 @@
             };
             $http.post("/submitResult", submitData).success(function (response) {
                 //取消提交loading动画
-                $scope.overallData.loadingNum = 0;
+                design.loading = false;
 
                 if (response.status == 200) {
                     //跳转到小程序页面指定页面
