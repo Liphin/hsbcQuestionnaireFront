@@ -24,7 +24,15 @@
             <div style="display: flex; flex-direction: row;">
                 <!--左侧信息展示-->
                 <div style="text-align: left; flex: 1">
-                    <span>{{value.title}}</span>
+                    <div ng-if="!value.rename">
+                        <span>{{value.title}}</span>
+                        <i title="重命名" class="fa fa-pencil" style="color: gray; margin-left: 2px; cursor: pointer" ng-click="value.rename=true"></i>
+                    </div>
+                    <div ng-if="value.rename">
+                        <input ng-model="value.title" style="padding: 3px 10px; outline: none; border: 1px solid gainsboro; min-width: 230px; border-radius: 5px"/>
+                        <i title="确定" ng-click="manage.renameSheet(value._id, $index)" class="fa fa-check-square" style="color: #2a8035; margin-left: 2px; cursor: pointer; font-size: 19px"></i>
+                    </div>
+
                 </div>
 
                 <!--中间按钮-->

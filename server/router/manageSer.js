@@ -154,6 +154,24 @@ router.post('/getTargetResult', function (req, res, next) {
 
 
 /**
+ * 重命名操作
+ */
+router.post('/renameSheet', function (req, res, next) {
+    let param = req.body;
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, {title: param.title}, response => {
+        if (response.result.n == 1) {
+            res.send({status: 200})
+        }
+        //重命名失败
+        else {
+            console.log("重命名失败：", response);
+            res.send({status: 401})
+        }
+    })
+});
+
+
+/**
  * 获取目标参与人员提交的数据
  */
 router.post('/getTargetParticipant', function (req, res, next) {

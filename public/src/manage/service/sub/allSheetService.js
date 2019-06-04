@@ -165,8 +165,33 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
     };
 
 
+    /**
+     * 对表单进行重命名操作
+     * @param _id
+     * @param index
+     */
+    let renameSheet = function (_id, index) {
+        let sheet = ManageDataSer.allSheetData[index];
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.renameSheetUrl, {
+            _id: _id,
+            title: sheet.title
+        }, result => {
+            if (result.status == 200) {
+                OverallGeneralSer.setFinishAnimation(1500, "重命名成功");
+            }
+            //重命名失败
+            else {
+                alert("很抱歉，重命名出错， 请稍后重试");
+            }
+
+            //重新加载页面
+            loadAllSheet();
+        })
+    };
+
     return {
         sheetOpt: sheetOpt,
+        renameSheet: renameSheet,
         loadAllSheet: loadAllSheet,
         getSheetTypeLogo: getSheetTypeLogo,
         getSheetTypeColor: getSheetTypeColor,

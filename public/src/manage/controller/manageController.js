@@ -57,6 +57,13 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
             dataTime.getHours() + ":" + dataTime.getMinutes() + ":" + dataTime.getSeconds();
     };
 
+    /**
+     * 问卷重命名操作
+     */
+    manage.renameSheet = function (_id, index) {
+        AllSheetSer.renameSheet(_id, index);
+    };
+
 
     //************************************ 数据统计分析 ******************************************
     /**
