@@ -18,7 +18,8 @@
 <div ng-if="!design.loading">
 
     <!--已经提交了，设置-->
-    <div ng-if="design.blockContent" style="display: flex;position: fixed; top: 0; right: 0; bottom: 0; left: 0; align-items: center; background: rgba(0,0,0,0.3)">
+    <div ng-if="design.blockContent"
+         style="display: flex;position: fixed; top: 0; right: 0; bottom: 0; left: 0; align-items: center; background: rgba(0,0,0,0.3)">
         <div style="flex: 1"></div>
         <div style="flex: 8;padding: 30px; border: 1px solid gainsboro; border-radius: 15px; background: white;font-size: 16px; line-height: 150%">
             <div style="line-height: 150%">
@@ -35,7 +36,8 @@
                 </div>
             </div>
             <div style="margin-top: 20px" ng-click="design.jumpToMineHistory()">
-                <button class="btn btn-info" style="background: #3392b9; width: 100%;font-size: 15px">点击进入我的个人页面</button>
+                <button class="btn btn-info" style="background: #3392b9; width: 100%;font-size: 15px">点击进入我的个人页面
+                </button>
             </div>
         </div>
         <div style="flex: 1"></div>
@@ -128,7 +130,7 @@
             if (response.status == 200) {
                 let data = response.data[0];
                 //若已发布状态，展示页面数据
-                if(data.status){
+                if (data.status == 2) {
                     //循环填充config数据
                     for (let i in data) {
                         design.config[i] = data[i];
@@ -140,7 +142,7 @@
                 }
                 //尚未发布状态
                 else {
-                    design.blockItem='notPublish';
+                    design.blockItem = 'notPublish';
                     design.blockContent = true;
                 }
             }
@@ -153,7 +155,7 @@
                     design.config[i] = data[i];
                 }
                 //设置已经提交过了的状态
-                design.blockItem='hasSubmitted';
+                design.blockItem = 'hasSubmitted';
                 design.blockContent = true;
             }
             //数据获取失败

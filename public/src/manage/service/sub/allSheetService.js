@@ -10,6 +10,10 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.loadAllSheetUrl,
             {userid: OverallDataSer.overallData.user._id}, function (result) {
                 if (result.status == 200) {
+                    //根据创建时间先后排序
+                    result.data.sort((a, b) => {
+                        return b.timestamp - a.timestamp
+                    });
                     //赋值从后台获取的数据
                     ManageDataSer.allSheetData.length = 0;
                     for (let i in result.data) {
@@ -165,7 +169,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         sheetOpt: sheetOpt,
         loadAllSheet: loadAllSheet,
         getSheetTypeLogo: getSheetTypeLogo,
-        getSheetTypeColor:getSheetTypeColor,
+        getSheetTypeColor: getSheetTypeColor,
     }
 });
 
