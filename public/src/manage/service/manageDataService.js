@@ -8,7 +8,14 @@ manageModule.factory('ManageDataSer', function () {
         //创建新的表单
         newSheet: {
             title: '',
-        }
+        },
+
+        //小程序预览操作
+        miniView: {
+            showMiniView: false, //是否展开小程序预览页面
+            sheetMiniQrCodeUrl: '', //小程序二维码
+            downloadName: '',//下载二维码名称
+        },
     };
 
     //装载该用户发送过的所有问卷表单数据
@@ -23,7 +30,7 @@ manageModule.factory('ManageDataSer', function () {
         sheetClassify: {
             paragraph: ['paragraph'],
             select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
-            matrix: ['matrix_single_select', 'matrix_single_scale','matrix_multi_select'],
+            matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],
             fill: ['single_fill', 'matrix_fill', 'detail_fill']
         }
     };

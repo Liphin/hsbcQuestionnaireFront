@@ -42,6 +42,13 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     };
 
     /**
+     * 获取对应表单类型的logo颜色
+     */
+    manage.getSheetTypeColor = function (type) {
+        return AllSheetSer.getSheetTypeColor(type)
+    };
+
+    /**
      * 解析表单的时间
      */
     manage.parseSheetTime = function (timestamp) {

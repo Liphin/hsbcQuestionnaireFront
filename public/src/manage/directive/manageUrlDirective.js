@@ -92,3 +92,13 @@ manageModule.directive('sheetAnalyseMatrix', function () {
         templateUrl:'src/manage/tmpl/sub/analyse/analyse_matrix.html'
     }
 });
+
+/**
+ * 小程序qrcode
+ */
+overallModule.directive('managePreviewMini', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/mini_qrcode.html'
+    };
+}]);

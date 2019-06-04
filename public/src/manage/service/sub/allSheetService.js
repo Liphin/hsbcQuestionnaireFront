@@ -38,6 +38,18 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         }
     };
 
+    /**
+     * 获取对应表单类型的logo颜色
+     * @param type
+     */
+    let getSheetTypeColor = function (type) {
+        for (let i in ManageDataSer.allSheetType) {
+            if (type == ManageDataSer.allSheetType[i].type) {
+                return ManageDataSer.allSheetType[i].color
+            }
+        }
+    };
+
 
     //**************************************** 表单操作 ********************************************
     /**
@@ -132,9 +144,9 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
             }
             case 'qrcode': {
                 let qrCodeUrl = OverallDataSer.urlData.resourceBaseUrl + 'qrcode/' + sheet._id + ".jpg";
-                OverallDataSer.overallData.miniView.sheetMiniQrCodeUrl = qrCodeUrl;
-                OverallDataSer.overallData.miniView.downloadName = sheet.title + "_二维码";
-                OverallDataSer.overallData.miniView.showMiniView = true;
+                ManageDataSer.overallData.miniView.sheetMiniQrCodeUrl = qrCodeUrl;
+                ManageDataSer.overallData.miniView.downloadName = sheet.title + "_二维码";
+                ManageDataSer.overallData.miniView.showMiniView = true;
                 break;
             }
             case 'copy': {
@@ -153,6 +165,7 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         sheetOpt: sheetOpt,
         loadAllSheet: loadAllSheet,
         getSheetTypeLogo: getSheetTypeLogo,
+        getSheetTypeColor:getSheetTypeColor,
     }
 });
 

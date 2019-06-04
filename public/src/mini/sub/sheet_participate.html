@@ -18,15 +18,20 @@
 <div ng-if="!design.loading">
 
     <!--已经提交了，设置-->
-    <div ng-if="design.hasSubmitted" style="display: flex;position: fixed; top: 0; right: 0; bottom: 0; left: 0; align-items: center; background: rgba(0,0,0,0.3)">
+    <div ng-if="design.blockContent" style="display: flex;position: fixed; top: 0; right: 0; bottom: 0; left: 0; align-items: center; background: rgba(0,0,0,0.3)">
         <div style="flex: 1"></div>
         <div style="flex: 8;padding: 30px; border: 1px solid gainsboro; border-radius: 15px; background: white;font-size: 16px; line-height: 150%">
             <div style="line-height: 150%">
                 <div>尊敬的用户，您好：</div>
                 <div style="text-indent: 2em">
-                    <span>您已参与过</span>
-                    <span style="font-weight: bold; color: #3392b9"> {{design.config.title}} </span>
-                    <span>问卷的填写，无需再次提交，感谢您的参与。</span>
+                    <div ng-if="design.blockItem=='hasSubmitted'">
+                        <span>您已参与过</span>
+                        <span style="font-weight: bold; color: #3392b9"> {{design.config.title}} </span>
+                        <span>问卷的填写，无需再次提交，感谢您的参与。</span>
+                    </div>
+                    <div ng-if="design.blockItem=='notPublish'">
+                        <span>该问卷尚未对外发布，请发布后再阅卷提交，感谢您的参与。</span>
+                    </div>
                 </div>
             </div>
             <div style="margin-top: 20px" ng-click="design.jumpToMineHistory()">
@@ -36,7 +41,7 @@
         <div style="flex: 1"></div>
     </div>
 
-    <div ng-if="!design.hasSubmitted" style="display: flex; flex-direction: row">
+    <div ng-if="!design.blockContent" style="display: flex; flex-direction: row">
         <div style="flex: 1"></div>
         <div style="flex: 8; margin: 20px 0 50px 0">
             <!--问卷表单数据-->
@@ -114,20 +119,29 @@
         design.config = {title: ''};
         design.sheet = [];
         design.loading = true;
-        design.hasSubmitted = false; //记录该用户是否已经提交过了数据
+        design.blockContent = false; //记录该用户是否已经提交过了数据
+        design.blockItem = ""; //记录该用户被block的条目
         $scope.overallData = {loadingNum: 0};
 
         //获取目标表单数据
         $http.post("/checkAndGetTargetSheet", {_id: _id, openid: openid}).success(function (response) {
             if (response.status == 200) {
                 let data = response.data[0];
-                //循环填充config数据
-                for (let i in data) {
-                    design.config[i] = data[i];
+                //若已发布状态，展示页面数据
+                if(data.status){
+                    //循环填充config数据
+                    for (let i in data) {
+                        design.config[i] = data[i];
+                    }
+                    //循环填充sheet数据
+                    for (let i in data.sheet) {
+                        design.sheet[i] = data.sheet[i];
+                    }
                 }
-                //循环填充sheet数据
-                for (let i in data.sheet) {
-                    design.sheet[i] = data.sheet[i];
+                //尚未发布状态
+                else {
+                    design.blockItem='notPublish';
+                    design.blockContent = true;
                 }
             }
             //如果返回码是301，该用户已经提交过了，展示切勿再次提交信息框
@@ -139,7 +153,8 @@
                     design.config[i] = data[i];
                 }
                 //设置已经提交过了的状态
-                design.hasSubmitted = true;
+                design.blockItem='hasSubmitted';
+                design.blockContent = true;
             }
             //数据获取失败
             else {

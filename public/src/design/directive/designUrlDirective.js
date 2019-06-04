@@ -198,3 +198,14 @@ designModule.directive('designEditDetailFill', ['$document', function ($document
         templateUrl: 'src/design/tmpl/sub/edit/detail_fill.html'
     };
 }]);
+
+
+/**
+ * 手机预览页面
+ */
+overallModule.directive('designPreviewPhone', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/design/tmpl/sub/preview/phone.html'
+    };
+}]);

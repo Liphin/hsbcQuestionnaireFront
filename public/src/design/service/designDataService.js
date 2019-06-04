@@ -10,7 +10,13 @@ designModule.factory('DesignDataSer', function () {
         viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
 
         //表单基础数据，每次进入表单时获取
-        sheetConfig: {}
+        sheetConfig: {},
+
+        //手机预览操作
+        phoneView: {
+            showPhoneView: false, //是否展开手机页面
+            sheetOrigin: [],//记录预览时组件原本的配置，用于关闭手机预览页面时回滚操作
+        },
     };
 
 

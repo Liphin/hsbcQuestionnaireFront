@@ -15,8 +15,8 @@
 
 <div style="width: 100%">
     <div style="display: flex; flex-direction: row">
-        <div style="flex: 1"></div>
-        <div style="flex: 8">
+        <div style="flex: 0.5"></div>
+        <div style="flex: 9">
             <!--针对某个表单数据进行统计分析-->
             <div ng-repeat="value in manage.targetSheet.sheet track by $index">
                 <!--段落-->
@@ -29,7 +29,7 @@
                 <div ng-include="'/src/manage/tmpl/sub/analyse/analyse_matrix.html'"></div>
             </div>
         </div>
-        <div style="flex: 1"></div>
+        <div style="flex: 0.5"></div>
     </div>
     <!--占位符-->
     <div style="width: 100%; height: 50px"></div>

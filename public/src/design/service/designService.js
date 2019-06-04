@@ -36,7 +36,6 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
                     //查找 ManageDataSer.allSheetType 中对应问卷类型的widgetType数组
                     if (ManageDataSer.allSheetType[i].type == targetSheet.type) {
                         let widgetType = ManageDataSer.allSheetType[i].widgetType;
-                        console.log('widgetType',widgetType)
 
                         //清空当前数据记录
                         DesignDataSer.widget.length = 0;
@@ -68,31 +67,16 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
 
     /**
      * 点击预览，快速预览或小程序预览
-     * @param viewType
      * @param design
      */
-    let viewPage = function (viewType, design) {
-        //如果新的viewType不为空则重新赋值
-        if (OverallGeneralSer.checkDataNotEmpty(viewType)) {
-            DesignDataSer.overallData.viewType = viewType
-        }
-        //手机页面预览
-        if (DesignDataSer.overallData.viewType == 'phoneView') {
-            //拷贝当前组件设置的
-            OverallDataSer.overallData.phoneView.sheetOrigin.length = 0;
-            OverallDataSer.overallData.phoneView.sheetOrigin = angular.copy(DesignDataSer.sheet);
-            //摄者手机页面预览展示
-            OverallDataSer.overallData.phoneView.showPhoneView = true;
-            //设置预览页面允许选择按钮
-            design.isDisabled = false;
-        }
-        //小程序页面预览
-        else if (DesignDataSer.overallData.viewType == 'miniView') {
-            let qrCodeUrl = OverallDataSer.urlData.resourceBaseUrl + 'qrcode/' + DesignDataSer.overallData.sheetConfig._id + ".jpg";
-            OverallDataSer.overallData.miniView.sheetMiniQrCodeUrl = qrCodeUrl;
-            OverallDataSer.overallData.miniView.downloadName = DesignDataSer.overallData.sheetConfig.title + "_二维码";
-            OverallDataSer.overallData.miniView.showMiniView = true;
-        }
+    let viewPage = function (design) {
+        //拷贝当前组件设置的
+        DesignDataSer.overallData.phoneView.sheetOrigin.length = 0;
+        DesignDataSer.overallData.phoneView.sheetOrigin = angular.copy(DesignDataSer.sheet);
+        //摄者手机页面预览展示
+        DesignDataSer.overallData.phoneView.showPhoneView = true;
+        //设置预览页面允许选择按钮
+        design.isDisabled = false;
     };
 
 
@@ -104,13 +88,13 @@ designModule.factory('DesignSer', function ($http, $location, OverallDataSer, Ov
         //清空提交的数据
         DesignDataSer.sheet.length = 0;
         //重新赋值预览前的数据
-        for (let i in OverallDataSer.overallData.phoneView.sheetOrigin) {
-            DesignDataSer.sheet.push(OverallDataSer.overallData.phoneView.sheetOrigin[i])
+        for (let i in DesignDataSer.overallData.phoneView.sheetOrigin) {
+            DesignDataSer.sheet.push(DesignDataSer.overallData.phoneView.sheetOrigin[i])
         }
         //清空sheetOrigin数组
-        OverallDataSer.overallData.phoneView.sheetOrigin.length = 0;
+        DesignDataSer.overallData.phoneView.sheetOrigin.length = 0;
         //关闭手机预览页面
-        OverallDataSer.overallData.phoneView.showPhoneView = false;
+        DesignDataSer.overallData.phoneView.showPhoneView = false;
         //展开编辑页面无法进行直接数据默认选择操作
         design.isDisabled = true;
     };

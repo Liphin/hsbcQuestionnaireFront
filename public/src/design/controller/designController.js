@@ -81,8 +81,8 @@ designModule.controller('DesignCtrl', function (check, $location, DesignDataSer,
     /**
      * 预览页面数据结果
      */
-    design.viewPage = function (viewType) {
-        DesignSer.viewPage(viewType, design);
+    design.viewPage = function () {
+        DesignSer.viewPage(design);
     };
 
 

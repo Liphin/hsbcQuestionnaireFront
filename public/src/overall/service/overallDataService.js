@@ -11,18 +11,6 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         'requestDataErrorMsg': '尊敬的客户，服务出错，请稍后重试',
         'fileSuffix': ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'png', 'jpeg', 'jpg', 'gif', 'pfx', 'zip'], //文件后缀辅助数据
 
-        //手机预览操作
-        phoneView: {
-            showPhoneView: false, //是否展开手机页面
-            sheetOrigin: [],//记录预览时组件原本的配置，用于关闭手机预览页面时回滚操作
-        },
-        //小程序预览操作
-        miniView: {
-            showMiniView: false, //是否展开小程序预览页面
-            sheetMiniQrCodeUrl: '', //小程序二维码
-            downloadName: '',//下载二维码名称
-        },
-
         //用户信息
         user: {
             _id: '',

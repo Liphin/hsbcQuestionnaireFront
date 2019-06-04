@@ -1,5 +1,5 @@
 <!--手机预览展示区-->
-<div ng-if="overallData.phoneView.showPhoneView" align="center"
+<div ng-if="design.overallData.phoneView.showPhoneView" align="center"
      style="background: rgba(93,93,94,0.55);position: fixed;top: 0;left: 0; right: 0; bottom: 0; width: 100%;z-index: {{zIndexHelper.phoneView}};">
     <div style="max-height: 760px; height: {{overallData.screen.height}}px; position: relative;width: 350px; display: block">
         <!--手机框框标识区-->
@@ -53,7 +53,7 @@
                 <!--提交按钮-->
                 <div style="margin-top: 20px;display: flex">
                     <div style="flex: 1"></div>
-                    <button ng-click="design.submitSheet()" style="flex: 8; font-family: 微软雅黑;outline: none; width: 100%; padding: 9px; font-size: 16px; border: none;border-radius: 7px;color: white; background: #4eb3eb">提交</button>
+                    <button class="btn btn-info" style="flex: 8; font-family: 微软雅黑;outline: none; width: 100%; padding: 9px; font-size: 16px; border: none;border-radius: 7px;color: white; background: #4eb3eb" disabled="disabled">提交</button>
                     <div style="flex: 1"></div>
                 </div>
 
