@@ -39,7 +39,7 @@ manageModule.directive('manageContent', function () {
 manageModule.directive('manageCreateSheet', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/create_sheet.html'
+        templateUrl:'src/manage/tmpl/sub/content/create/create_sheet.html'
     }
 });
 /**
@@ -48,7 +48,7 @@ manageModule.directive('manageCreateSheet', function () {
 manageModule.directive('manageAllSheet', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/all_sheet.html'
+        templateUrl:'src/manage/tmpl/sub/content/all/all_sheet.html'
     }
 });
 
@@ -58,7 +58,7 @@ manageModule.directive('manageAllSheet', function () {
 manageModule.directive('sheetAnalyse', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/sheet_analyse.html'
+        templateUrl:'src/manage/tmpl/sub/content/analyse/sheet_analyse.html'
     }
 });
 
@@ -69,7 +69,7 @@ manageModule.directive('sheetAnalyse', function () {
 manageModule.directive('sheetAnalyseParagraph', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/analyse_paragraph.html'
+        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_paragraph.html'
     }
 });
 
@@ -79,7 +79,7 @@ manageModule.directive('sheetAnalyseParagraph', function () {
 manageModule.directive('sheetAnalyseSelect', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/analyse_select.html'
+        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_select.html'
     }
 });
 
@@ -89,7 +89,7 @@ manageModule.directive('sheetAnalyseSelect', function () {
 manageModule.directive('sheetAnalyseMatrix', function () {
     return {
         restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/analyse/analyse_matrix.html'
+        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_matrix.html'
     }
 });
 
@@ -99,7 +99,7 @@ manageModule.directive('sheetAnalyseMatrix', function () {
 overallModule.directive('managePreviewMini', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/sub/mini_qrcode.html'
+        templateUrl: 'src/manage/tmpl/sub/content/all/sub/mini_qrcode.html'
     };
 }]);
 
@@ -109,6 +109,16 @@ overallModule.directive('managePreviewMini', ['$document', function ($document) 
 overallModule.directive('managePublishConfig', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/sub/publish_config.html'
+        templateUrl: 'src/manage/tmpl/sub/content/all/sub/publish_config.html'
+    };
+}]);
+
+/**
+ * 系统管理
+ */
+overallModule.directive('manageSystemManagement', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/system/system_management.html'
     };
 }]);
