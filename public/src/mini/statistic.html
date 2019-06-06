@@ -92,7 +92,7 @@
             /**
              * 获取所有统计数据
              */
-            $http.post("/getAllStatistics", {}).success(function (response) {
+            $http.post("/getAllOpenStatistics", {}).success(function (response) {
                 design.sheet = response;
 
             }).error(function (err) {

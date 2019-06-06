@@ -99,7 +99,7 @@ router.post('/saveSheetData', (req, res, next) => {
 /**
  * 获取所有开放的统计数据
  */
-router.post('/getAllStatistics', function (req, res) {
+router.post('/getAllOpenStatistics', function (req, res) {
     mongo.findDocuments(sheetDom, {open: true}, response => {
         res.send(response);
     })
