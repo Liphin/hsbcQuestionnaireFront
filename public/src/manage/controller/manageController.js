@@ -13,6 +13,13 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     ManageSer.init();
 
     /**
+     * 初始化数据操作
+     */
+    manage.init = function () {
+        ManageSer.init();
+    };
+
+    /**
      * 创建新的表单类型
      * @param sheetType
      */
@@ -90,7 +97,7 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     /**
      * 下载打印分析结果数据
      */
-    manage.downloadResult=function () {
+    manage.downloadResult = function () {
         AnalyseSer.downloadResult();
     };
 
@@ -99,6 +106,13 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.emptyResult = function () {
         AnalyseSer.emptyResult();
+    };
+
+    /**
+     * 设置发布的问卷内容相关配置
+     */
+    manage.setPublishConfig = function () {
+        AllSheetSer.setPublishConfig();
     }
 
 });

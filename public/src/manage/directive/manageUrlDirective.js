@@ -99,6 +99,16 @@ manageModule.directive('sheetAnalyseMatrix', function () {
 overallModule.directive('managePreviewMini', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/mini_qrcode.html'
+        templateUrl: 'src/manage/tmpl/sub/content/sub/mini_qrcode.html'
+    };
+}]);
+
+/**
+ * 发布问卷等的配置面板
+ */
+overallModule.directive('managePublishConfig', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/sub/publish_config.html'
     };
 }]);

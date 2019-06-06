@@ -67,6 +67,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         loading: 5000,
         finishAnimation: 5000,
         phoneView: 1000,
+        publishConfig: 1000,
         info: 1000,
     };
 

@@ -189,10 +189,20 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         })
     };
 
+
+    /**
+     * 设置发布的问卷内容相关配置
+     */
+    let setPublishConfig = function () {
+
+    };
+
+
     return {
         sheetOpt: sheetOpt,
         renameSheet: renameSheet,
         loadAllSheet: loadAllSheet,
+        setPublishConfig: setPublishConfig,
         getSheetTypeLogo: getSheetTypeLogo,
         getSheetTypeColor: getSheetTypeColor,
     }

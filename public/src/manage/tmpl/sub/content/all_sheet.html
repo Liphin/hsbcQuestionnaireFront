@@ -12,6 +12,16 @@
     .sheetListOpt:hover {
         color: rgba(29, 146, 238, 0.82);
     }
+
+    /*发布设置*/
+    .publishConfig{
+        background: #ff7b15;
+    }
+
+    /*发布设置鼠标hover在上面*/
+    .publishConfig:hover{
+        box-shadow: 0 0 5px #ff7b15;
+    }
 </style>
 
 <div ng-if="manage.overallData.navigation=='allSheet'" class="scrollBar-7"
@@ -94,7 +104,12 @@
             </div>
             <div style="flex: 1; text-align: right">
                 <span style="margin-right: 18px" ng-if="value.status==1">草稿</span>
-                <span style="margin-right: 18px; color: #ff7b15" ng-if="value.status==2">运行中</span>
+                <span class="publishConfig" style="margin-right: 18px; color: white; cursor: pointer;border-radius: 10px; padding: 4px 12px" ng-if="value.status==2"
+                    ng-click="manage.overallData.configPanel.status=true;manage.overallData.configPanel.sheetIndex=$index">
+                    <i class="fa fa-gear"></i>
+                    <span style="margin-left: 2px">发布设置</span>
+                </span>
+                <span style="margin-right: 18px; color: #ff7b15" ng-if="value.status==2">发布中</span>
                 <span>{{manage.parseSheetTime(value.timestamp)}}</span>
             </div>
         </div>
