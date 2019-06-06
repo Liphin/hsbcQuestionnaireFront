@@ -68,6 +68,20 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <!--设置其他选项，用户自定义填空-->
+        <div style="margin-top: 20px">
+            <span style="font-weight: bold; color: #3376ab;">其他选项：</span>
+            <label>
+                <input type="radio" ng-value="true"
+                       ng-model="design.sheet[design.overallData.editRenderIndex].data.cusFill.status"/>
+                <span style="font-weight: normal">添加</span>
+            </label>
+            <label style="margin-left: 10px">
+                <input type="radio" ng-value="false"
+                       ng-model="design.sheet[design.overallData.editRenderIndex].data.cusFill.status"/>
+                <span style="font-weight: normal">不添加</span>
+            </label>
+        </div>
+    </div>
 </div>

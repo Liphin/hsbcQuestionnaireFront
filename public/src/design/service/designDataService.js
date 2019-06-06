@@ -7,7 +7,7 @@ designModule.factory('DesignDataSer', function () {
 
     let overallData = {
         editRenderIndex: 0, //当前正在编辑的渲染的组件的index
-        viewType: 'phoneView',//phonView为快速预览、miniView为小程序预览
+        viewType: 'phoneView', //phonView为快速预览、miniView为小程序预览
 
         //表单基础数据，每次进入表单时获取
         sheetConfig: {},
@@ -85,6 +85,10 @@ designModule.factory('DesignDataSer', function () {
                 required: false, //必答、非必答选项
                 title: '这里输入题干信息',
                 selected: 'none',
+                cusFill: { //自定义文本
+                    status: true, //编辑面板上用到的配置信息
+                    text: '', //渲染面板上绑定的其他信息
+                },
                 option: [
                     {text: '选项1'},
                     {text: '选项2'},
