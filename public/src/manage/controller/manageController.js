@@ -108,6 +108,14 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         AnalyseSer.emptyResult();
     };
 
+
+    /**
+     * 初始化表单发布的设置
+     */
+    manage. initSheetPublishConfig = function (index) {
+        AllSheetSer.initSheetPublishConfig(index);
+    };
+
     /**
      * 设置发布的问卷内容相关配置
      */

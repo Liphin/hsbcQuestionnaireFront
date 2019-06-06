@@ -172,6 +172,24 @@ router.post('/renameSheet', function (req, res, next) {
 
 
 /**
+ * 更改发布配置操作
+ */
+router.post('/updatePublishSheetConfig', function (req, res, next) {
+    let param = req.body;
+    mongo.updateOneDocuments(sheetDom, {_id: new mongodb.ObjectID(param._id)}, param.updateData, response => {
+        if (response.result.n == 1) {
+            res.send({status: 200})
+        }
+        //更改发布配置失败
+        else {
+            console.warn("更改发布配置失败：", response);
+            res.send({status: 401})
+        }
+    })
+});
+
+
+/**
  * 获取目标参与人员提交的数据
  */
 router.post('/getTargetParticipant', function (req, res, next) {

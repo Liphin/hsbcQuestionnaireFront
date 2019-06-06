@@ -191,10 +191,44 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
 
 
     /**
+     * 初始化表单发布配置设置
+     * @param index 表单数组的下标
+     */
+    let initSheetPublishConfig = function (index) {
+        ManageDataSer.overallData.configPanel.sheetIndex = index;
+        //循环赋值需要配置的数据字段
+        for (let i in ManageDataSer.overallData.configPanel.configData) {
+            ManageDataSer.overallData.configPanel.configData[i] = ManageDataSer.allSheetData[index][i];
+        }
+        //展开设置面板
+        ManageDataSer.overallData.configPanel.status = true;
+    };
+
+    /**
      * 设置发布的问卷内容相关配置
      */
     let setPublishConfig = function () {
-
+        //获取目标更新配置的表单数据
+        let widget = ManageDataSer.allSheetData[ManageDataSer.overallData.configPanel.sheetIndex];
+        //初始化即将更新的表单数据
+        let data = {_id: widget._id, updateData: {}};
+        //赋值要更新的配置信息
+        for (let i in ManageDataSer.overallData.configPanel.configData) {
+            data.updateData[i] = ManageDataSer.overallData.configPanel.configData[i];
+        }
+        //数据json发送请求
+        OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.updatePublishSheetConfigUrl, data, result => {
+            //更新发布配置成功
+            if(result.status ==200){
+                OverallGeneralSer.setFinishAnimation(1500, "更新发布配置信息成功");
+                ManageDataSer.overallData.configPanel.status=false; //关闭配置面板
+                loadAllSheet(); //重新加载表单数据
+            }
+            //更新发布配置失败
+            else {
+                alert("很抱歉，更新发布配置信息失败，请稍后重试");
+            }
+        })
     };
 
 
@@ -202,9 +236,10 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         sheetOpt: sheetOpt,
         renameSheet: renameSheet,
         loadAllSheet: loadAllSheet,
-        setPublishConfig: setPublishConfig,
         getSheetTypeLogo: getSheetTypeLogo,
         getSheetTypeColor: getSheetTypeColor,
+        setPublishConfig: setPublishConfig,
+        initSheetPublishConfig: initSheetPublishConfig,
     }
 });
 

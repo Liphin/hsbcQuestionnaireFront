@@ -48,6 +48,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         getTargetResultUrl: baseUrlData.frontEndHttp + "getTargetResult", //获取表单填写结果
         emptyTargetRecordUrl: baseUrlData.frontEndHttp + "emptyTargetRecord", //清空目标数据结果
         renameSheetUrl: baseUrlData.frontEndHttp + "renameSheet", //重命名问卷操作
+        updatePublishSheetConfigUrl: baseUrlData.frontEndHttp + "updatePublishSheetConfig", //更新已发布的表单数据配置信息
     };
 
     //用于sql注入filter
