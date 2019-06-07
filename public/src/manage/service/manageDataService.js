@@ -36,7 +36,7 @@ manageModule.factory('ManageDataSer', function () {
         sheetIndex: '',
         result: {},
         participant: {},
-        sheetClassify: {
+        sheetClassify: {  //根据不同类型对应展示不同的分析结果数据
             paragraph: ['paragraph'],
             select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
             matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],

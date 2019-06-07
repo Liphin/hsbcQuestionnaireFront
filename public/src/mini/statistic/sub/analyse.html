@@ -20,13 +20,13 @@
             <!--针对某个表单数据进行统计分析-->
             <div ng-repeat="value in manage.targetSheet.sheet track by $index">
                 <!--段落-->
-                <div ng-include="'/src/manage/tmpl/sub/analyse/analyse_paragraph.html'"></div>
+                <div ng-include="'/src/manage/tmpl/sub/content/analyse/sub/analyse_paragraph.html'"></div>
 
                 <!--选择题-->
-                <div ng-include="'/src/manage/tmpl/sub/analyse/analyse_select.html'"></div>
+                <div ng-include="'/src/manage/tmpl/sub/content/analyse/sub/analyse_select.html'"></div>
 
                 <!--矩阵题-->
-                <div ng-include="'/src/manage/tmpl/sub/analyse/analyse_matrix.html'"></div>
+                <div ng-include="'/src/manage/tmpl/sub/content/analyse/sub/analyse_matrix.html'"></div>
             </div>
         </div>
         <div style="flex: 0.5"></div>

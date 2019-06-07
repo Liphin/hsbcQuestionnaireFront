@@ -206,7 +206,7 @@ designModule.factory('DesignDataSer', function () {
                 choice: [
                     {
                         text: '百度',
-                        selected: [],//里面装着每个option对应index的true或false
+                        selected: [], //里面装着每个option对应index的true或false
                     },
                     {
                         text: '谷歌',

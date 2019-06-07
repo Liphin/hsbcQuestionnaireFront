@@ -41,6 +41,7 @@ let getUserOpenId = function (req, response) {
 let createParamQrCode = function (res, scene, callback) {
     //获取access_token操作
     miniGeneralSer.getAccessToken(res, () => {
+        console.log("成功获取access token");
         let getParamQrCodeUrl = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s";
         let url = util.format(getParamQrCodeUrl, serverSerData.overallData.mini.access_token);
         let filePath = serverSerData.resourcePath + "/qrcode/" + scene + ".jpg";
