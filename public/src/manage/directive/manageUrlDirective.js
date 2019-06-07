@@ -94,6 +94,27 @@ manageModule.directive('sheetAnalyseMatrix', function () {
 });
 
 /**
+ * 数据统计与分析——单项填空题
+ */
+overallModule.directive('sheetAnalyseFillSingle', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_fill_single.html'
+    };
+}]);
+
+/**
+ * 数据统计与分析——多项填空题
+ */
+overallModule.directive('sheetAnalyseFillMatrix', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_fill_matrix.html'
+    };
+}]);
+
+
+/**
  * 小程序qrcode
  */
 overallModule.directive('managePreviewMini', ['$document', function ($document) {
@@ -122,3 +143,5 @@ overallModule.directive('manageSystemManagement', ['$document', function ($docum
         templateUrl: 'src/manage/tmpl/sub/content/system/system_management.html'
     };
 }]);
+
+

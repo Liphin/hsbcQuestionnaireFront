@@ -40,7 +40,8 @@ manageModule.factory('ManageDataSer', function () {
             paragraph: ['paragraph'],
             select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
             matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],
-            fill: ['single_fill', 'matrix_fill', 'detail_fill']
+            fill_single: ['single_fill', 'detail_fill'],
+            fill_matrix: ['matrix_fill',]
         }
     };
 
