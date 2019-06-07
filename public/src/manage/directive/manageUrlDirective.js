@@ -113,6 +113,16 @@ overallModule.directive('sheetAnalyseFillMatrix', ['$document', function ($docum
     };
 }]);
 
+/**
+ * 数据统计与分析——填空题详情数据
+ */
+overallModule.directive('sheetAnalyseTextDetail', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/text_detail.html'
+    };
+}]);
+
 
 /**
  * 小程序qrcode

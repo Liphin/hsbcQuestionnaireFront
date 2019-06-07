@@ -14,8 +14,13 @@
             </thead>
             <tbody>
             <tr ng-repeat="tdValue in value.data.option track by $index">
-                <td>{{tdValue.text}}</td>
-                <td style="color: #4b9eb6; text-decoration: underline; cursor: pointer">详情</td>
+                <td>
+                    <span>{{tdValue.text}}</span>
+                </td>
+                <td>
+                    <span ng-click="manage.viewFillResultDetail($parent.$index, $index)"
+                          style="color: #4b9eb6; text-decoration: underline; cursor: pointer">详情</span>
+                </td>
             </tr>
             </tbody>
         </table>

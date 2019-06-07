@@ -71,6 +71,20 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         AllSheetSer.renameSheet(_id, index);
     };
 
+    /**
+     * 初始化表单发布的设置
+     */
+    manage.initSheetPublishConfig = function (index) {
+        AllSheetSer.initSheetPublishConfig(index);
+    };
+
+    /**
+     * 设置发布的问卷内容相关配置
+     */
+    manage.setPublishConfig = function () {
+        AllSheetSer.setPublishConfig();
+    }
+
 
     //************************************ 数据统计分析 ******************************************
     /**
@@ -108,19 +122,11 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         AnalyseSer.emptyResult();
     };
 
-
     /**
-     * 初始化表单发布的设置
+     * 查看填空题数据结果详情
      */
-    manage. initSheetPublishConfig = function (index) {
-        AllSheetSer.initSheetPublishConfig(index);
-    };
-
-    /**
-     * 设置发布的问卷内容相关配置
-     */
-    manage.setPublishConfig = function () {
-        AllSheetSer.setPublishConfig();
+    manage.viewFillResultDetail = function (index, subIndex) {
+        AnalyseSer.viewFillResultDetail(index, subIndex);
     }
 
 });

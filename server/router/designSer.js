@@ -8,6 +8,7 @@ const mongo = require('../db/mongo');
 const mongodb = require('mongodb');
 const miniSer = require('../wechat/mini/miniSer');
 const serverData = require('../serverSerData');
+const serverGeneral = require('../serverGeneralSer');
 const router = express.Router();
 const dbName = "hsbc";//mongodb中的数据库
 const resultDom = "result";//mongodb中的sheet文档库
@@ -137,7 +138,8 @@ let widgetResultClassify = {
     multi: ['multi_select'],
     matrix_single: ['matrix_single_select', 'matrix_single_scale'],
     matrix_multi: ['matrix_multi_select'],
-    fill: ['single_fill', 'matrix_fill', 'detail_fill'],
+    fill_single: ['single_fill', 'detail_fill'],
+    fill_matrix: ['matrix_fill',]
 };
 
 /**
@@ -145,14 +147,15 @@ let widgetResultClassify = {
  */
 router.post('/submitResult', function (req, res) {
     let param = req.body;
-
+    //链接mongo数据库
     mongo.connectToMongo(function (db) {
 
         //1、插入participant文档
         db.db(dbName).collection(participantDom).insertOne(param, function (err, response) {
             if (response.result.n == 1) {
                 //2、更新result文档
-                let resultData = {};
+                let incData = {};
+                let pushData = {};
 
                 //对每个表单组件进行数据提交操作
                 for (let i in param.sheet) {
@@ -163,14 +166,14 @@ router.post('/submitResult', function (req, res) {
                     if (widgetResultClassify.single.indexOf(widget.type) > -1) {
                         let selected = widget.data.selected;
                         let resultKey = 'result.' + widget.timestamp + '.' + selected;
-                        resultData[resultKey] = 1;
+                        incData[resultKey] = 1;
                     }
                     //多选方式
                     else if (widgetResultClassify.multi.indexOf(widget.type) > -1) {
                         for (let j in widget.data.option) {
                             if (widget.data.option[j].status) {
                                 let resultKey = 'result.' + widget.timestamp + '.' + j;
-                                resultData[resultKey] = 1;
+                                incData[resultKey] = 1;
                             }
                         }
                     }
@@ -179,9 +182,8 @@ router.post('/submitResult', function (req, res) {
                         for (let j in widget.data.choice) {
                             let selected = widget.data.choice[j].selected;
                             let resultKey = 'result.' + widget.timestamp + '.' + j + '.' + selected;
-                            resultData[resultKey] = 1;
+                            incData[resultKey] = 1;
                         }
-
                     }
                     //矩阵多选
                     else if (widgetResultClassify.matrix_multi.indexOf(widget.type) > -1) {
@@ -189,27 +191,46 @@ router.post('/submitResult', function (req, res) {
                             for (let h in widget.data.choice[j].selected) {
                                 if (widget.data.choice[j].selected[h]) {
                                     let resultKey = 'result.' + widget.timestamp + '.' + j + '.' + h;
-                                    resultData[resultKey] = 1;
+                                    incData[resultKey] = 1;
                                 }
                             }
                         }
-
                     }
-                    //填空，暂时只存储在participant不存储在result中
-                    else if (widgetResultClassify.fill.indexOf(widget.type) > -1) {
+                    //单项填空题
+                    else if (widgetResultClassify.fill_single.indexOf(widget.type) > -1) {
+                        let resultKey = 'result.' + widget.timestamp;
+                        pushData[resultKey] = widget.data.value;
+                    }
+                    //多项填空题
+                    else if (widgetResultClassify.fill_matrix.indexOf(widget.type) > -1) {
+                        for (let j in widget.data.option) {
+                            let resultKey = 'result.' + widget.timestamp + '.' + j;
+                            pushData[resultKey] = widget.data.option[j].value;
+                        }
                     }
                 }
+
+                //整合结果，由于inc或push的内容不能为空，因此需进行checkEmpty操作
+                let updateData = {};
+                if(serverGeneral.checkDataNotEmpty(incData)) updateData.$inc = incData;
+                if(serverGeneral.checkDataNotEmpty(pushData)) updateData.$push = pushData;
+
                 //对文档进行数据库操作
                 db.db(dbName).collection(resultDom).updateOne({sheetid: new mongodb.ObjectID(param.sheetid)},
-                    {$inc: resultData}, function (err, response) {
-                        if (response.result.n == 1) {
+                    updateData, function (err, response) {
+                        if(err) {
+                            console.warn(err, response);
+                            db.close();
+                            res.send({status: 402});
+                        }
+                        else if (response.result.n == 1) {
                             console.log("插入participant及result文档成功");
                             db.close();
                             res.send({status: 200});
                         }
                         //提交失败，返回
                         else {
-                            console.log("插入result文档失败");
+                            console.warn("插入result文档失败");
                             db.close();
                             res.send({status: 401});
                         }

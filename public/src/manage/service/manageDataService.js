@@ -5,13 +5,22 @@ manageModule.factory('ManageDataSer', function () {
     let overallData = {
         navigation: 'allSheet', //导航类型
 
-        //配置面板
+        //在所有问卷表单中，设置打开某个问卷的配置面板
         configPanel: {
             status: false, //是否打开状态
             sheetIndex: '', //需要设置其状态的的index
             configData: {
                 open: '',
             }
+        },
+
+        //在统计分析页面中，查看填空题的详情数据弹框显示数据
+        fillResult: {
+            status: false, //面板展开状态
+             type: '', //该题目类型
+            index: '', //该题目序号
+            title:'', //题目标题
+            data: [], //数据集
         },
 
         //创建新的表单

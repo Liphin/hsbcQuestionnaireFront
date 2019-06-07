@@ -104,7 +104,7 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
                     total += data2[i];
                 }
                 let result = (parseFloat(num) / total * 100).toFixed(2);
-                return  OverallGeneralSer.checkDataNotEmpty(result) ? result : 0;
+                return OverallGeneralSer.checkDataNotEmpty(result) ? result : 0;
             }
             //matrix类型汇总计算
             case 'matrixSum': {
@@ -180,11 +180,43 @@ manageModule.factory('AnalyseSer', function ($location, ManageDataSer, OverallGe
     };
 
 
+    /**
+     * 查看填空题的数据结果
+     * @param index
+     * @param subIndex
+     */
+    let viewFillResultDetail = function (index, subIndex) {
+        let widget = ManageDataSer.allSheetData[ManageDataSer.analyseData.sheetIndex];
+        let widgetItem = widget.sheet[index];
+        ManageDataSer.overallData.fillResult.type = widgetItem.type;
+        ManageDataSer.overallData.fillResult.title = widgetItem.data.title;
+        ManageDataSer.overallData.fillResult.index = index;
+        ManageDataSer.overallData.fillResult.data.length = 0;
+        ManageDataSer.overallData.fillResult.status = true;
+        //单项填空题或单项详情题
+        if (ManageDataSer.analyseData.sheetClassify.fill_single.indexOf(widgetItem.type) > -1) {
+            //循环遍历每个结果数据，并添加到fillResult数组中
+            for (let i in ManageDataSer.analyseData.result[widgetItem.timestamp]) {
+                ManageDataSer.overallData.fillResult.data.push(ManageDataSer.analyseData.result[widgetItem.timestamp][i]);
+            }
+        }
+        //矩阵填空题
+        else if (ManageDataSer.analyseData.sheetClassify.fill_matrix.indexOf(widgetItem.type) > -1) {
+            ManageDataSer.overallData.fillResult.title += (" | " + widgetItem.data.option[subIndex].text);
+            //循环遍历每个矩阵填空子结果数据，并添加到fillResult数组中
+            for (let i in ManageDataSer.analyseData.result[widgetItem.timestamp][subIndex]) {
+                ManageDataSer.overallData.fillResult.data.push(ManageDataSer.analyseData.result[widgetItem.timestamp][subIndex][i]);
+            }
+        }
+    };
+
+
     return {
         getQuestionnaireNum: getQuestionnaireNum,
         initAnalyseData: initAnalyseData,
         getStatisticNum: getStatisticNum,
         downloadResult: downloadResult,
         emptyResult: emptyResult,
+        viewFillResultDetail: viewFillResultDetail,
     }
 });
