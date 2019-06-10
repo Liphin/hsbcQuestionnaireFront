@@ -1,13 +1,33 @@
 <!--问卷信息统计-->
-<div ng-if="manage.systemManage.activeType=='sheet'">
+<div ng-if="manage.systemManage.type=='sheet'">
     <!--所有问卷类型占比——饼状图-->
-    <div ng-if="manage.systemManage.statistic.sheet.selected=='type'">
+    <div ng-if="manage.systemManage.statistic.sheet.item=='type'">
         <sheet-statistic-type sheet-data={{manage.systemManage.statistic.sheet.data}}
-        style="width: 100%; display: flex; justify-content: center"></sheet-statistic-type>
+                              style="width: 100%; display: flex; justify-content: center"></sheet-statistic-type>
     </div>
 
     <!--问卷发布数目——时间折线图，以年为计数单位-->
-    <div ng-if="manage.systemManage.statistic.sheet.selected=='time'">
-        <sheet-statistic-time></sheet-statistic-time>
+    <div ng-if="manage.systemManage.statistic.sheet.item=='time'">
+        <sheet-statistic-time time-data={{manage.systemManage.statistic.sheet.data}}
+                              style="width: 100%; display: flex; justify-content: center"></sheet-statistic-time>
+    </div>
+
+    <!--选择目标分析变量-->
+    <div ng-if="manage.systemManage.statistic.sheet.data.length>0"
+         style="margin: 45px 0 30px 20px;width: 100%; display: flex; justify-content: center">
+        <div>
+            <span style="color: #19626b; font-size: 16px">分析变量选择：</span>
+            <!--饼状图-->
+            <label class="radio-inline" style="margin-left: 20px">
+                <input type="radio" ng-change="manage.changeNavigation('manage/systemManagement?type=sheet&item=type')" ng-model="manage.systemManage.statistic.sheet.item" value="type">
+                <span>问卷类型 </span><i class="fa fa-pie-chart" style="color: #ff5500"></i>
+            </label>
+
+            <!--折线图-->
+            <label class="radio-inline" style="margin-left: 20px">
+                <input type="radio" ng-change="analyse.changeNavigation('manage/systemManagement?type=sheet&item=time')" ng-model="manage.systemManage.statistic.sheet.item" value="time">
+                <span>创建时间 </span><i class="fa fa-line-chart" style="color: #1d94ed"></i>
+            </label>
+        </div>
     </div>
 </div>

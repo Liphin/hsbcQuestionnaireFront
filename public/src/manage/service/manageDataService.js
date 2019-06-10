@@ -57,14 +57,14 @@ manageModule.factory('ManageDataSer', function () {
 
     //系统管理
     let systemManage = {
-        activeType: 'sheet', //选择的系统分析的类型
+        type: 'sheet', //选择的系统分析的类型
         statistic: {
             sheet: { //问卷统计
-                selected: 'type', //问卷统计分析中具体factor中哪个分析类别
+                item: 'type', //问卷统计分析中具体factor中哪个分析类别
                 data: [], //问卷数据分析的相关数据
             },
             person: { //人次数统计
-                selected: 'publish', //人次数统计分析中具体factor中哪个分析类别
+                item: 'publish', //人次数统计分析中具体factor中哪个分析类别
                 data: [], //人次数统计分析的相关数据
             }
         }

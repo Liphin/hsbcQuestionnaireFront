@@ -1,12 +1,16 @@
 <!--系统管理-->
 <div ng-if="manage.overallData.navigation=='systemManagement'" style="display: flex;flex-direction: row;height: 100%; background: white">
     <!--中间统计数据展示-->
-    <div style="flex: 1;align-items: center; margin: 20px 0 0 0;">
-        <!--问卷统计-->
-        <manage-sheet-statistic></manage-sheet-statistic>
+    <div style="flex: 1;margin: 20px 0 0 0;">
 
-        <!--人次数统计-->
-        <manage-person-statistic></manage-person-statistic>
+        <!--highChart展示图-->
+        <div>
+            <!--问卷统计-->
+            <manage-sheet-statistic></manage-sheet-statistic>
+
+            <!--人次数统计-->
+            <manage-person-statistic></manage-person-statistic>
+        </div>
     </div>
 
     <!--右侧数据类型选择-->

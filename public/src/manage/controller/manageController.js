@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer) {
+manageModule.controller('ManageCtrl', function (check, $location, $routeParams, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer) {
     //检查是否登录状态
     if (!check) return;
 
@@ -21,14 +21,6 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     };
 
     /**
-     * 创建新的表单类型
-     * @param sheetType
-     */
-    manage.createNewSheet = function (sheetType) {
-        ManageSer.createNewSheet(sheetType);
-    };
-
-    /**
      * 更换左侧导航栏的路由
      */
     manage.changeNavigation = function (path) {
@@ -36,6 +28,17 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     };
 
 
+    //************************************ 新建问卷 ******************************************
+    /**
+     * 创建新的表单类型
+     * @param sheetType
+     */
+    manage.createNewSheet = function (sheetType) {
+        ManageSer.createNewSheet(sheetType);
+    };
+
+
+    //************************************ 所有问卷 ******************************************
     /**
      * 解析表单的时间
      */
@@ -52,6 +55,15 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         AllSheetSer.renameSheet(_id, index);
     };
 
+
+    /**
+     * 问卷操作
+     */
+    manage.sheetOpt= function (type, index, param) {
+        AllSheetSer.sheetOpt(type, index, param)
+    };
+
+
     /**
      * 初始化表单发布的设置
      */
@@ -64,10 +76,10 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.setPublishConfig = function () {
         AllSheetSer.setPublishConfig();
-    }
+    };
 
 
-    //************************************ 数据统计分析 ******************************************
+    //************************************ 结果统计分析 ******************************************
     /**
      * 获取问题序号，用于分析统计时使用
      */
@@ -108,7 +120,11 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
      */
     manage.viewFillResultDetail = function (index, subIndex) {
         AnalyseSer.viewFillResultDetail(index, subIndex);
-    }
+    };
+
+
+    //************************************ 系统管理 ******************************************
+
 
 });
 
