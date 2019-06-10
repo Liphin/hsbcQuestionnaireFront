@@ -24,7 +24,11 @@ manageModule.factory('SystemManage', function ($location, ManageDataSer, Overall
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.getSystemManagePersonDataUrl, null,
             result => {
                 //保存人次数统计分析数据
-                ManageDataSer.systemManage.statistic.person.data = result;
+                ManageDataSer.systemManage.statistic.person.data.length = 0; //数据情况
+                //循环添加结果数据
+                for (let i in result) {
+                    ManageDataSer.systemManage.statistic.person.data.push(result[i])
+                }
 
                 //设置问卷统计分析数据
                 ManageDataSer.systemManage.statistic.sheet.data.length = 0; //数据清空
