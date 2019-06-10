@@ -34,14 +34,18 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
     //http请求的具体路径
     let urlData = {
-        saveSheetDataUrl: baseUrlData.frontEndHttp + "saveSheetData", //保存表单设计数据
-        resourceBaseUrl: baseUrlData.frontEndHttp + "resource/", //保存表单设计数据
-
+        //注册登录路由
         loginUrl: baseUrlData.frontEndHttp + "login", //登录操作
         registerUrl: baseUrlData.frontEndHttp + "register", //注册操作
-        createNewSheetUrl: baseUrlData.frontEndHttp + "createNewSheet", //创建新的sheet
+
+        //表单问卷设计的交互路由
+        saveSheetDataUrl: baseUrlData.frontEndHttp + "saveSheetData", //保存表单设计数据
+        resourceBaseUrl: baseUrlData.frontEndHttp + "resource/", //资源存放的基路径
         getTargetSheetUrl: baseUrlData.frontEndHttp + "getTargetSheet", //获取指定_id的sheet文档数据
+
+        //表单管理的交互路由
         loadAllSheetUrl: baseUrlData.frontEndHttp + "loadAllSheet", //加载该用户所有表单数据
+        createNewSheetUrl: baseUrlData.frontEndHttp + "createNewSheet", //创建新的sheet
         releaseConfigUrl: baseUrlData.frontEndHttp + "releaseConfig", //设置发布状态
         deleteSheetUrl: baseUrlData.frontEndHttp + "deleteSheet", //删除表单
         copySheetUrl: baseUrlData.frontEndHttp + "copySheet", //拷贝表单
@@ -49,6 +53,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         emptyTargetRecordUrl: baseUrlData.frontEndHttp + "emptyTargetRecord", //清空目标数据结果
         renameSheetUrl: baseUrlData.frontEndHttp + "renameSheet", //重命名问卷操作
         updatePublishSheetConfigUrl: baseUrlData.frontEndHttp + "updatePublishSheetConfig", //更新已发布的表单数据配置信息
+
+        //系统管理的交互路由
+        getSystemManagePersonDataUrl: baseUrlData.frontEndHttp + "getSystemManagePersonData", //系统管理
     };
 
     //用于sql注入filter

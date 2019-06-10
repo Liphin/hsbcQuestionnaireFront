@@ -12,7 +12,7 @@ const mgDataBase = 'hsbc';
  * 连接数据库操作
  * @param callback
  */
-var connectToMongo = function (callback) {
+let connectToMongo = function (callback) {
     MongoClient.connect(url, {useNewUrlParser: true}, function (err, db) {
         assert.equal(null, err);
         callback(db);
@@ -25,11 +25,31 @@ var connectToMongo = function (callback) {
  * @param findObj
  * @param callback
  */
-var findDocuments = function (collection, findObj, callback) {
+let findDocuments = function (collection, findObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         //根据条件查找collection中相应数据
         db.db(mgDataBase).collection(collection).find(findObj).toArray(function (err, docs) {
+            assert.equal(null, err);
+            callback(docs);
+            db.close();
+        });
+    })
+};
+
+
+/**
+ * 查询具体字段数据
+ * @param collection
+ * @param findObj
+ * @param findField
+ * @param callback
+ */
+let findSpecificField = function (collection, findObj, findField, callback) {
+    //连接mongoDB数据库
+    connectToMongo(function (db) {
+        //根据条件查找collection中相应数据
+        db.db(mgDataBase).collection(collection).find(findObj).project(findField).toArray(function (err, docs) {
             assert.equal(null, err);
             callback(docs);
             db.close();
@@ -64,7 +84,7 @@ let getCount = function (collection, callback) {
  * @param insertObj
  * @param callback
  */
-var insertOneDocuments = function (collection, insertObj, callback) {
+let insertOneDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(mgDataBase).collection(collection).insertOne(insertObj, function (err, res) {
@@ -82,7 +102,7 @@ var insertOneDocuments = function (collection, insertObj, callback) {
  * @param insertObj
  * @param callback
  */
-var insertManyDocuments = function (collection, insertObj, callback) {
+let insertManyDocuments = function (collection, insertObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(mgDataBase).collection(collection).insertMany(insertObj, function (err, res) {
@@ -101,10 +121,10 @@ var insertManyDocuments = function (collection, insertObj, callback) {
  * @param updateObj 更新对象
  * @param callback
  */
-var updateOneDocuments = function (collection, whereStr, updateObj, callback) {
+let updateOneDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        var updateStr = {$set: updateObj};
+        let updateStr = {$set: updateObj};
         db.db(mgDataBase).collection(collection).updateOne(whereStr, updateStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
@@ -121,10 +141,10 @@ var updateOneDocuments = function (collection, whereStr, updateObj, callback) {
  * @param updateObj 更新对象
  * @param callback
  */
-var updateManyDocuments = function (collection, whereStr, updateObj, callback) {
+let updateManyDocuments = function (collection, whereStr, updateObj, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
-        var updateStr = {$set: updateObj};
+        let updateStr = {$set: updateObj};
         db.db(mgDataBase).collection(collection).updateMany(whereStr, updateStr, function (err, res) {
             assert.equal(null, err);
             callback(res);
@@ -141,7 +161,7 @@ var updateManyDocuments = function (collection, whereStr, updateObj, callback) {
  * @param whereStr 查询条件
  * @param callback
  */
-var deleteOneDocuments = function (collection, whereStr, callback) {
+let deleteOneDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(mgDataBase).collection(collection).deleteOne(whereStr, function (err, res) {
@@ -159,7 +179,7 @@ var deleteOneDocuments = function (collection, whereStr, callback) {
  * @param whereStr 查询条件
  * @param callback
  */
-var deleteManyDocuments = function (collection, whereStr, callback) {
+let deleteManyDocuments = function (collection, whereStr, callback) {
     //连接mongoDB数据库
     connectToMongo(function (db) {
         db.db(mgDataBase).collection(collection).deleteMany(whereStr, function (err, res) {
@@ -176,6 +196,7 @@ module.exports = {
     dbArbitration: mgDataBase,
     connectToMongo: connectToMongo,
     findDocuments: findDocuments,
+    findSpecificField: findSpecificField,
     insertOneDocuments: insertOneDocuments,
     insertManyDocuments: insertManyDocuments,
     updateOneDocuments: updateOneDocuments,

@@ -2,7 +2,7 @@
  * Created by Administrator on 2019/5/27.
  */
 manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
-                                            AllSheetSer, DesignDataSer, AnalyseSer) {
+                                            AllSheetSer, DesignDataSer, AnalyseSer, SystemManage) {
 
     /**
      * 管理页面初始化操作
@@ -22,6 +22,16 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
                 })
             } else {
                 AnalyseSer.initAnalyseData();
+            }
+        }
+        //若已加载所有表单数据则直接初始化系统管理逻辑，否则先加载表单数据
+        else if($routeParams.option == 'systemManagement'){
+            if (ManageDataSer.allSheetData.length == 0) {
+                AllSheetSer.loadAllSheet(() => {
+                    SystemManage.initSystemManageData();
+                })
+            } else {
+                SystemManage.initSystemManageData();
             }
         }
     };

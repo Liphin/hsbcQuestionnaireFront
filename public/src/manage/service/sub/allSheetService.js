@@ -18,40 +18,16 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
                     ManageDataSer.allSheetData.length = 0;
                     for (let i in result.data) {
                         ManageDataSer.allSheetData.push(result.data[i]);
-                        if (callback != undefined) {
-                            callback();
-                        }
+                    }
+                    //如果callback函数不为空则执行
+                    if (callback != undefined) {
+                        callback();
                     }
                 }
                 else if (result.status == 401) {
                     alert("数据加载失败，请稍后重试")
                 }
             })
-    };
-
-
-    /**
-     * 获取对应表单类型的logo
-     * @param type
-     */
-    let getSheetTypeLogo = function (type) {
-        for (let i in ManageDataSer.allSheetType) {
-            if (type == ManageDataSer.allSheetType[i].type) {
-                return ManageDataSer.allSheetType[i].fontIcon
-            }
-        }
-    };
-
-    /**
-     * 获取对应表单类型的logo颜色
-     * @param type
-     */
-    let getSheetTypeColor = function (type) {
-        for (let i in ManageDataSer.allSheetType) {
-            if (type == ManageDataSer.allSheetType[i].type) {
-                return ManageDataSer.allSheetType[i].color
-            }
-        }
     };
 
 
@@ -236,8 +212,6 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
         sheetOpt: sheetOpt,
         renameSheet: renameSheet,
         loadAllSheet: loadAllSheet,
-        getSheetTypeLogo: getSheetTypeLogo,
-        getSheetTypeColor: getSheetTypeColor,
         setPublishConfig: setPublishConfig,
         initSheetPublishConfig: initSheetPublishConfig,
     }

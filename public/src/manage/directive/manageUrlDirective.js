@@ -153,5 +153,22 @@ overallModule.directive('manageSystemManagement', ['$document', function ($docum
         templateUrl: 'src/manage/tmpl/sub/content/system/system_management.html'
     };
 }]);
-
+/**
+ * 问卷统计
+ */
+overallModule.directive('manageSheetStatistic', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/system/sub/sheet_statistic.html'
+    };
+}]);
+/**
+ * 人次数统计
+ */
+overallModule.directive('managePersonStatistic', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/system/sub/person_statistic.html'
+    };
+}]);
 

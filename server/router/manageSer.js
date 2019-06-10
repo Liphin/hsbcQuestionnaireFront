@@ -285,6 +285,20 @@ router.post('/emptyTargetRecord', (req, res, next) => {
     });
 });
 
+//******************************* 系统管理 **************************************
+/**
+ * 获取系统管理的人次数统计数据
+ */
+router.post('/getSystemManagePersonData', (req, res, next) => {
+    mongo.findSpecificField(participantDom, {}, {_id: false, sheetid: true, timestamp: true}, response => {
+        res.send({
+            status: 200,
+            data: response,
+        })
+    })
+});
+
+
 module.exports = router;
 
 

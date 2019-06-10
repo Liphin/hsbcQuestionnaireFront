@@ -1,0 +1,13 @@
+<!--问卷信息统计-->
+<div ng-if="manage.systemManage.activeType=='sheet'">
+    <!--所有问卷类型占比——饼状图-->
+    <div ng-if="manage.systemManage.statistic.sheet.selected=='type'">
+        <sheet-statistic-type sheet-data={{manage.systemManage.statistic.sheet.data}}
+        style="width: 100%; display: flex; justify-content: center"></sheet-statistic-type>
+    </div>
+
+    <!--问卷发布数目——时间折线图，以年为计数单位-->
+    <div ng-if="manage.systemManage.statistic.sheet.selected=='time'">
+        <sheet-statistic-time></sheet-statistic-time>
+    </div>
+</div>

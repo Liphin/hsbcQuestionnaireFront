@@ -17,9 +17,9 @@ manageModule.factory('ManageDataSer', function () {
         //在统计分析页面中，查看填空题的详情数据弹框显示数据
         fillResult: {
             status: false, //面板展开状态
-             type: '', //该题目类型
+            type: '', //该题目类型
             index: '', //该题目序号
-            title:'', //题目标题
+            title: '', //题目标题
             data: [], //数据集
         },
 
@@ -55,9 +55,25 @@ manageModule.factory('ManageDataSer', function () {
     };
 
 
+    //系统管理
+    let systemManage = {
+        activeType: 'sheet', //选择的系统分析的类型
+        statistic: {
+            sheet: { //问卷统计
+                selected: 'type', //问卷统计分析中具体factor中哪个分析类别
+                data: [], //问卷数据分析的相关数据
+            },
+            person: { //人次数统计
+                selected: 'publish', //人次数统计分析中具体factor中哪个分析类别
+                data: [], //人次数统计分析的相关数据
+            }
+        }
+    };
+
+
     //创建不同类型问卷有不同组件选择类型
-    let allSheetType = [
-        {
+    let allSheetType = {
+        questionnaire: {
             type: 'questionnaire',
             name: '问卷',
             color: '#fd8c42',
@@ -66,7 +82,7 @@ manageModule.factory('ManageDataSer', function () {
             widgetType: ['paragraph', 'single_select', 'single_scale', 'matrix_single_select', 'matrix_single_scale',
                 'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill']
         },
-        {
+        vote: {
             type: 'vote',
             name: '活动事件',
             color: '#508cc7',
@@ -75,7 +91,7 @@ manageModule.factory('ManageDataSer', function () {
             widgetType: ['paragraph', 'single_select', 'single_scale',
                 'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill']
         },
-        {
+        exam: {
             type: 'exam',
             name: '投票',
             color: '#ba5b9f',
@@ -84,7 +100,7 @@ manageModule.factory('ManageDataSer', function () {
             widgetType: ['paragraph', 'single_select', 'single_scale', 'matrix_single_select', 'matrix_single_scale',
                 'pull_single_select', 'multi_select', 'matrix_multi_select']
         },
-        {
+        form: {
             type: 'form',
             name: '考试',
             color: '#12ba57',
@@ -93,7 +109,7 @@ manageModule.factory('ManageDataSer', function () {
             widgetType: ['paragraph', 'single_select', 'single_scale',
                 'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill']
         }
-    ];
+    };
 
 
     return {
@@ -101,5 +117,6 @@ manageModule.factory('ManageDataSer', function () {
         overallData: overallData,
         allSheetType: allSheetType,
         allSheetData: allSheetData,
+        systemManage: systemManage,
     }
 });

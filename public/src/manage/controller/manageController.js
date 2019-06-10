@@ -10,6 +10,7 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
     manage.analyseData = ManageDataSer.analyseData;
     manage.allSheetData = ManageDataSer.allSheetData;
     manage.allSheetType = ManageDataSer.allSheetType;
+    manage.systemManage = ManageDataSer.systemManage;
     ManageSer.init();
 
     /**
@@ -34,26 +35,6 @@ manageModule.controller('ManageCtrl', function (check, $location, ManageDataSer,
         $location.url(path)
     };
 
-    /**
-     * 对创建的表单进行操作
-     */
-    manage.sheetOpt = function (type, index, param) {
-        AllSheetSer.sheetOpt(type, index, param);
-    };
-
-    /**
-     * 获取对应表单类型的logo
-     */
-    manage.getSheetTypeLogo = function (type) {
-        return AllSheetSer.getSheetTypeLogo(type)
-    };
-
-    /**
-     * 获取对应表单类型的logo颜色
-     */
-    manage.getSheetTypeColor = function (type) {
-        return AllSheetSer.getSheetTypeColor(type)
-    };
 
     /**
      * 解析表单的时间
