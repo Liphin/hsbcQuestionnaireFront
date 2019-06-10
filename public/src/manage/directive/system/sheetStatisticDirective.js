@@ -39,14 +39,14 @@ manageModule.directive('sheetStatisticType', function (OverallGeneralSer, Manage
                         });
                     }
                     //对数据进行饼状图渲染
-                    renderPieChar(renArray);
+                    renderChar(renArray);
                 }
             });
 
             /**
              * 饼状图渲染
              */
-            let renderPieChar = function (renArray) {
+            let renderChar = function (renArray) {
                 Highcharts.setOptions({
                     colors: ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"]
                 });
@@ -121,7 +121,7 @@ manageModule.directive('sheetStatisticTime', function (OverallGeneralSer, Manage
                         renArray.push(renObj[j]);
                     }
                     //对数据进行饼状图渲染
-                    renderPieChar(renArray);
+                    renderChar(renArray);
                 }
             });
 
@@ -129,7 +129,7 @@ manageModule.directive('sheetStatisticTime', function (OverallGeneralSer, Manage
             /**
              * 折线图渲染
              */
-            let renderPieChar = function (renArray) {
+            let renderChar = function (renArray) {
                 Highcharts.setOptions({
                     colors: ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"]
                 });

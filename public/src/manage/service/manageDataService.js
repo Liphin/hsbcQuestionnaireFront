@@ -61,13 +61,16 @@ manageModule.factory('ManageDataSer', function () {
         statistic: {
             sheet: { //问卷统计
                 item: 'type', //问卷统计分析中具体factor中哪个分析类别
-                name:'问卷统计', //分析的名称
+                name: '问卷统计', //分析的名称
                 data: [], //问卷数据分析的相关数据
             },
             person: { //人次数统计
-                item: 'participant', //人次数统计分析中具体factor中哪个分析类别
-                name:'人次数统计', //数据分析的名称
+                item: 'time', //人次数统计分析中具体factor中哪个分析类别
+                name: '人次数统计', //数据分析的名称
                 data: [], //人次数统计分析的相关数据
+                append: {  //附加数据
+                    rank:[], //人次数排位统计数据==> sheetid: number
+                }
             }
         }
     };
