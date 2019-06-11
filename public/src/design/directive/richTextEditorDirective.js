@@ -173,7 +173,7 @@ designModule.directive('richTextEditor', ['DesignDataSer', function (DesignDataS
                 fontSizes: ['12', '14', '16', '18', '20', '24', '28', '32'],
 
                 toolbar: [
-                    ['style', ['mybold', 'myitalic', 'myunderline']],
+                    ['style', ['bold', 'italic', 'underline']],
                     ['para', ['myalignleft', 'myaligncenter', 'myalignright']],
                     ['other',['link', 'codeview' ,'fullscreen']],
                     ['front', ['fontname', 'fontsize', 'color']]
