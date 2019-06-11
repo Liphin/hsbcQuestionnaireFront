@@ -7254,7 +7254,7 @@ $$1.summernote = $$1.extend($$1.summernote, {
             'font': 'note-icon-font',
             'frame': 'note-icon-frame',
             'italic': 'note-icon-italic',
-            'link': 'note-icon-link',
+            'link': 'fa fa-link',
             'unlink': 'note-icon-chain-broken',
             'magic': 'note-icon-magic',
             'menuCheck': 'note-icon-menu-check',

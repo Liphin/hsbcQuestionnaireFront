@@ -174,8 +174,9 @@ designModule.directive('richTextEditor', ['DesignDataSer', function (DesignDataS
 
                 toolbar: [
                     ['style', ['mybold', 'myitalic', 'myunderline']],
-                    ['front', ['fontname', 'fontsize', 'color']],
                     ['para', ['myalignleft', 'myaligncenter', 'myalignright']],
+                    ['other',['link', 'codeview' ,'fullscreen']],
+                    ['front', ['fontname', 'fontsize', 'color']]
                 ],
                 buttons: {
                     mybold: myBold,
