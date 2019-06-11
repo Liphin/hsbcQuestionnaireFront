@@ -15,10 +15,10 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
         let newWidget = angular.copy(DesignDataSer.newWidgetData[type]);
         //设置组件的timestamp
         newWidget.timestamp = new Date().getTime();
-        //2、添加此新的组件到表单中
-        DesignDataSer.sheet.push(newWidget);
+        //2、添加此新的组件到表单中，插入位置是正在编辑的组件后面添加
+        DesignDataSer.sheet.splice(DesignDataSer.overallData.editRenderIndex + 1, 0, newWidget);
         //3、对该新添加的组件进行编辑操作
-        editWidgetData(DesignDataSer.sheet.length - 1);
+        editWidgetData(DesignDataSer.overallData.editRenderIndex + 1);
     };
 
 
@@ -34,7 +34,7 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
                 paraNum++;
             }
         }
-        return index - paraNum + 1 ; //从1开始
+        return index - paraNum + 1; //从1开始
     };
 
 
@@ -55,13 +55,39 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
     let widgetOpt = function (opt, index) {
         //对应的表单组件信息
         let widget = DesignDataSer.sheet[index];
-        switch (opt){
-            case 'copy':{
+        switch (opt) {
+            case 'copy': {
                 DesignDataSer.sheet.splice(index, 0, angular.copy(widget));
                 break;
             }
-            case 'delete':{
+            case 'delete': {
                 DesignDataSer.sheet.splice(index, 1);
+                break;
+            }
+            //上移操作
+            case 'positionUp': {
+                //如果不是第一个则可以继续向上移动
+                if (index > 0) {
+                    //拷贝对应组件信息
+                    let newWidget = angular.copy(DesignDataSer.sheet[index]);
+                    //删除当前组件元素
+                    DesignDataSer.sheet.splice(index, 1);
+                    //插入新数据到对应位置
+                    DesignDataSer.sheet.splice(index - 1, 0, newWidget);
+                }
+                break;
+            }
+            //下移操作
+            case 'positionDown': {
+                //如果不是最后一个则可以继续向下移动
+                if (index < DesignDataSer.sheet.length - 1) {
+                    //拷贝对应组件信息
+                    let newWidget = angular.copy(DesignDataSer.sheet[index]);
+                    //删除当前组件元素
+                    DesignDataSer.sheet.splice(index, 1);
+                    //插入新数据到对应位置
+                    DesignDataSer.sheet.splice(index + 1, 0, newWidget);
+                }
                 break;
             }
         }
@@ -208,8 +234,6 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
     };
 
 
-
-
     return {
         widgetOpt: widgetOpt,
         editWidgetData: editWidgetData,
@@ -219,7 +243,7 @@ designModule.factory('WidgetSer', function (DesignDataSer) {
         positionUp: positionUp,
         positionDown: positionDown,
         setAsDefault: setAsDefault,
-        getQuestionnaireNum:getQuestionnaireNum,
+        getQuestionnaireNum: getQuestionnaireNum,
     }
 });
 

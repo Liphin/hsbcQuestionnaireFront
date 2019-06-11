@@ -9,12 +9,22 @@
         border-color: #4eb4ed;
         background: #4eb4ed;
     }
+    /** 组件编辑页面在鼠标放上去时，背景颜色发生变化 */
+    .widgetMouseOn:hover{
+        /*background: #fafafa;*/
+        background: #e8fafa;
+    }
+    .widgetMouseSelected{
+        /*background: #faf7fa;*/
+        /*background: #faf7fa;*/
+        background: #e8fafa;
+    }
 </style>
 <div style="display: flex;flex-direction: row;align-items: stretch;height: 100%; background: #f4f4f4; border: 1px solid gainsboro; border-width: 0 1px 0 1px">
     <div style="flex: 1"></div>
     <div class="scrollBar-7"
          style="overflow-y: auto;background: white; width: 400px; padding: 20px 0 50px 0; box-shadow: 0 0 7px #a8a8a8; margin-top: 15px; ">
-        <div class="widgetMouseOn" ng-click="design.editWidgetData($index)"
+        <div ng-click="design.editWidgetData($index)"
              ng-class="{'widgetMouseSelected':design.overallData.editRenderIndex==$index}"
              ng-repeat="value in design.sheet track by $index" style="position: relative; display: flex;">
             <div style="flex: 1"></div>
@@ -48,9 +58,17 @@
                         <i class="fa fa-copy"></i>
                         <span>复制</span>
                     </div>
-                    <div ng-click="design.widgetOpt('delete',$index)" class="widgetOpt" style="cursor: pointer; padding: 4px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px">
+                    <div ng-click="design.widgetOpt('delete',$index)" class="widgetOpt" style="margin-right: 20px;cursor: pointer; padding: 4px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px">
                         <i class="fa fa-trash-o"></i>
                         <span>删除</span>
+                    </div>
+                    <!--向上移动组件操作-->
+                    <div ng-click="design.widgetOpt('positionUp',$index)" class="widgetOpt" title="上移" style="margin-right: 20px; cursor: pointer; padding: 2px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px; font-size: 15px">
+                        <i class="fa fa-arrow-circle-o-up"></i>
+                    </div>
+                    <!--向下移动组件操作-->
+                    <div ng-click="design.widgetOpt('positionDown',$index)" class="widgetOpt" title="下移" style="cursor: pointer; padding: 2px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px;font-size: 15px">
+                        <i class="fa fa-arrow-circle-o-down"></i>
                     </div>
                 </div>
             </div>
