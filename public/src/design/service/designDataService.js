@@ -61,6 +61,15 @@ designModule.factory('DesignDataSer', function () {
                 {name: '矩阵填空', type: 'matrix_fill', font: 'fa fa-file-text-o'},
                 {name: '详情填写', type: 'detail_fill', font: 'fa fa-file-word-o'}
             ]
+        },
+        {
+            status: true,
+            name: '模板信息',
+            sub: [
+                {name: '部门', type: 'template_company', font: 'fa fa-building'},
+                {name: '姓名', type: 'template_name', font: 'fa fa-address-card-o'},
+                {name: '手机', type: 'template_phone', font: 'fa fa-phone'}
+            ]
         }
     ];
 
@@ -68,7 +77,7 @@ designModule.factory('DesignDataSer', function () {
      * 新添加组件后填充的数据
      */
     let newWidgetData = {
-        //*******************************************************************
+        //****************************** 内容 *************************************
         //文本描述
         paragraph: {
             type: 'paragraph',
@@ -77,7 +86,7 @@ designModule.factory('DesignDataSer', function () {
             },
         },
 
-        //*******************************************************************
+        //******************************* 单选题 ************************************
         //单选题
         single_select: {
             type: 'single_select',
@@ -178,7 +187,7 @@ designModule.factory('DesignDataSer', function () {
             },
         },
 
-        //*******************************************************************
+        //******************************* 多选题 ************************************
         //多选题
         multi_select: {
             type: 'multi_select',
@@ -216,7 +225,7 @@ designModule.factory('DesignDataSer', function () {
             }
         },
 
-        //*******************************************************************
+        //******************************** 填空题 ***********************************
         //单项填空
         single_fill: {
             type: 'single_fill',
@@ -245,6 +254,40 @@ designModule.factory('DesignDataSer', function () {
             data: {
                 required: false, //必答、非必答选项
                 title: '这里输入题干信息',
+                value: '',
+            }
+        },
+
+        //****************************** 模板题 *************************************
+        //模板题：所在部门
+        template_company: {
+            type: 'pull_single_select',
+            data: {
+                required: false, //必答、非必答选项
+                title: '请选择对应的部门',
+                selected: '0',
+                option: [
+                    {text: 'CMB（商业银行）'},
+                    {text: 'RTB（零售银行）'},
+                    {text: 'GMB（环球银行）'},
+                ]
+            },
+        },
+        //模板题：姓名
+        template_name: {
+            type: 'single_fill',
+            data: {
+                required: false, //必答、非必答选项
+                title: '请输入您的姓名',
+                value: '',
+            }
+        },
+        //模板题：手机
+        template_phone: {
+            type: 'single_fill',
+            data: {
+                required: false, //必答、非必答选项
+                title: '请输入您的手机号码',
                 value: '',
             }
         },

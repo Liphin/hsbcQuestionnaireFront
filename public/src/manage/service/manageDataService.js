@@ -69,7 +69,7 @@ manageModule.factory('ManageDataSer', function () {
                 name: '人次数统计', //数据分析的名称
                 data: [], //人次数统计分析的相关数据
                 append: {  //附加数据
-                    rank:[], //人次数排位统计数据==> sheetid: number
+                    rank: [], //人次数排位统计数据==> sheetid: number
                 }
             }
         }
@@ -94,7 +94,8 @@ manageModule.factory('ManageDataSer', function () {
             fontIcon: 'fa fa-futbol-o',
             depict: '活动事件，信息模板，信息统计，数据分析',
             widgetType: ['paragraph', 'single_select', 'single_scale',
-                'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill']
+                'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill',
+                'template_company', 'template_name', 'template_phone']
         },
         exam: {
             type: 'exam',
