@@ -9,6 +9,7 @@ const mongodb = require('mongodb');
 const serverData = require('../serverSerData');
 const miniSer = require('../wechat/mini/miniSer');
 const router = express.Router();
+const userDom = "user";//mongodb中的user文档库
 const sheetDom = "sheet";//mongodb中的sheet文档库
 const resultDom = "result"; //mongodb中的result文档库
 const participantDom = "participant"; //mongodb中的participant文档库
@@ -282,7 +283,7 @@ router.post('/emptyTargetRecord', (req, res, next) => {
     }), new Promise((resolve, reject) => {
         //删除participant文档中相关记录
         mongo.deleteManyDocuments(participantDom, {sheetid: param._id}, response => {
-            console.log('participant', response)
+            console.log('participant', response);
             resolve(response)
         })
     })]).then(([response1, response2]) => {
@@ -294,7 +295,7 @@ router.post('/emptyTargetRecord', (req, res, next) => {
     });
 });
 
-//******************************* 系统管理 **************************************
+//******************************* 数据分析 **************************************
 /**
  * 获取系统管理的人次数统计数据
  */
@@ -304,6 +305,42 @@ router.post('/getSystemManagePersonData', (req, res, next) => {
             status: 200,
             data: response,
         })
+    })
+});
+
+
+//********************************  权限设置  **********************************
+/**
+ * 获取所有管理员账号
+ */
+router.post('/getAdminAccount', (req, res, next) => {
+    mongo.findSpecificField(userDom, {right: 2}, {account: true, right: true}, response => {
+        res.send({
+            status: 200,
+            data: response,
+        })
+    })
+});
+
+/**
+ * 更新管理员权限账号
+ */
+router.post('/updateAdminRight', (req, res, next) => {
+    let param = req.body;
+    mongo.updateOneDocuments(userDom, {account: param.account}, {right: param.right}, response => {
+        if (response.result.n == 1) {
+            res.send({
+                status: 200,
+            })
+        }
+        //更新管理员权限的账号输入有误
+        else {
+            console.log("更新管理员权限的账号输入有误");
+            res.send({
+                status: 401
+            })
+        }
+
     })
 });
 

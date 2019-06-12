@@ -188,6 +188,6 @@ overallModule.directive('manageAnalysePersonStatistic', ['$document', function (
 overallModule.directive('manageRightSetting', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/system/right/right_setting.html'
+        templateUrl: 'src/manage/tmpl/sub/content/right/right_setting.html'
     };
 }]);

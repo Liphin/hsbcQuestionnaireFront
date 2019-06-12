@@ -2,7 +2,7 @@
  * Created by Administrator on 2019/5/27.
  */
 manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
-                                            AllSheetSer, DesignDataSer, ResultSer, AnalyseSer) {
+                                            AllSheetSer, DesignDataSer, ResultSer, AnalyseSer, RightSer) {
 
     /**
      * 管理页面初始化操作
@@ -27,7 +27,7 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
         //若已加载所有表单数据则直接初始化系统管理逻辑，否则先加载表单数据
         else if ($routeParams.option == 'analyseData') {
             //如果该用户级别为2则加载所有表单数据并初始化系统管理数据
-            if(OverallDataSer.overallData.user.right == 2){
+            if (OverallDataSer.overallData.user.right == 2) {
                 if (ManageDataSer.allSheetData.length == 0) {
                     AllSheetSer.loadAllSheet(() => {
                         AnalyseSer.initAnalyseData();
@@ -37,9 +37,14 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
                 }
             }
             //若该用户级别不为2则进入所有表单路由
-            else{
+            else {
                 $location.url('/manage/allSheet')
             }
+        }
+        //进入权限设置页面
+        else if ($routeParams.option == 'rightSetting') {
+            //初始化管理员权限数据
+            RightSer.initRightData();
         }
     };
 

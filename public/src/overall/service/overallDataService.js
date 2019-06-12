@@ -55,8 +55,12 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         renameSheetUrl: baseUrlData.frontEndHttp + "renameSheet", //重命名问卷操作
         updatePublishSheetConfigUrl: baseUrlData.frontEndHttp + "updatePublishSheetConfig", //更新已发布的表单数据配置信息
 
-        //系统管理的交互路由
-        getSystemManagePersonDataUrl: baseUrlData.frontEndHttp + "getSystemManagePersonData", //系统管理
+        //数据分析交互路由
+        getSystemManagePersonDataUrl: baseUrlData.frontEndHttp + "getSystemManagePersonData", //数据分析
+
+        //权限设置
+        getAdminAccountUrl: baseUrlData.frontEndHttp + "getAdminAccount", //获取所有管理员权限的账号
+        updateAdminRightUrl: baseUrlData.frontEndHttp + "updateAdminRight", //更新管理员权限的账号
     };
 
     //用于sql注入filter

@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, $routeParams, ManageDataSer, ManageSer, AllSheetSer, ResultSer) {
+manageModule.controller('ManageCtrl', function (check, $location, $routeParams, ManageDataSer, ManageSer, AllSheetSer,
+                                                ResultSer, RightSer) {
     //检查是否登录状态
     if (!check) return;
 
@@ -11,6 +12,7 @@ manageModule.controller('ManageCtrl', function (check, $location, $routeParams, 
     manage.allSheetData = ManageDataSer.allSheetData;
     manage.allSheetType = ManageDataSer.allSheetType;
     manage.analyseData = ManageDataSer.analyseData;
+    manage.rightSetting = ManageDataSer.rightSetting;
     ManageSer.init();
 
     /**
@@ -123,8 +125,13 @@ manageModule.controller('ManageCtrl', function (check, $location, $routeParams, 
     };
 
 
-    //************************************ 系统管理 ******************************************
-
+    //************************************ 权限设置 ******************************************
+    /**
+     * 管理员权限设置操作
+     */
+    manage.setAdminRight = function (account, right) {
+        RightSer.setAdminRight(account, right)
+    }
 
 });
 

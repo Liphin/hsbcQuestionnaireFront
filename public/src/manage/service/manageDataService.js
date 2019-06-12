@@ -56,7 +56,7 @@ manageModule.factory('ManageDataSer', function () {
 
 
     //数据分析
-    let analyseData= {
+    let analyseData = {
         type: 'sheet', //选择的系统分析的类型
         statistic: {
             sheet: { //问卷统计
@@ -73,6 +73,13 @@ manageModule.factory('ManageDataSer', function () {
                 }
             }
         }
+    };
+
+
+    //权限设置数据
+    let rightSetting = {
+        adminAccount: [], //所有管理员账号装载数据
+        newAdminAccount: '', //新授权的管理员账号数据
     };
 
 
@@ -119,6 +126,7 @@ manageModule.factory('ManageDataSer', function () {
 
 
     return {
+        rightSetting: rightSetting,
         resultData: resultData,
         overallData: overallData,
         allSheetType: allSheetType,
