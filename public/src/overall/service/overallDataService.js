@@ -15,6 +15,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         user: {
             _id: '',
             account: '',
+            right: '',
         },
 
         //http请求时等待加载压栈

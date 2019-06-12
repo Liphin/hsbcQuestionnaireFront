@@ -2,7 +2,7 @@
  * Created by Administrator on 2019/5/27.
  */
 manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, ManageDataSer, OverallGeneralSer, OverallDataSer,
-                                            AllSheetSer, DesignDataSer, AnalyseSer, SystemManage) {
+                                            AllSheetSer, DesignDataSer, ResultSer, AnalyseSer) {
 
     /**
      * 管理页面初始化操作
@@ -15,23 +15,30 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
             });
         }
         //若页面尚未加载所有表单数据，则应先加载所有表单数据后再加载分析数据，否则直接加载分析数据
-        else if ($routeParams.option == 'analyseSheet') {
+        else if ($routeParams.option == 'resultStatistic') {
             if (ManageDataSer.allSheetData.length == 0) {
                 AllSheetSer.loadAllSheet(() => {
-                    AnalyseSer.initAnalyseData();
+                    ResultSer.initResultData();
                 })
             } else {
-                AnalyseSer.initAnalyseData();
+                ResultSer.initResultData();
             }
         }
         //若已加载所有表单数据则直接初始化系统管理逻辑，否则先加载表单数据
-        else if($routeParams.option == 'systemManagement'){
-            if (ManageDataSer.allSheetData.length == 0) {
-                AllSheetSer.loadAllSheet(() => {
-                    SystemManage.initSystemManageData();
-                })
-            } else {
-                SystemManage.initSystemManageData();
+        else if ($routeParams.option == 'analyseData') {
+            //如果该用户级别为2则加载所有表单数据并初始化系统管理数据
+            if(OverallDataSer.overallData.user.right == 2){
+                if (ManageDataSer.allSheetData.length == 0) {
+                    AllSheetSer.loadAllSheet(() => {
+                        AnalyseSer.initAnalyseData();
+                    })
+                } else {
+                    AnalyseSer.initAnalyseData();
+                }
+            }
+            //若该用户级别不为2则进入所有表单路由
+            else{
+                $location.url('/manage/allSheet')
             }
         }
     };

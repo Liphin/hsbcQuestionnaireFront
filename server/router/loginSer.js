@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
         if (response.length > 0) {
             res.send({
                 status: 200,
-                data: response[0]._id, //返回第一条数据
+                data: response[0], //返回第一条数据
             });
         }
         //该账号或密码填写有误
@@ -58,12 +58,13 @@ router.post('/register', function (req, res, next) {
         }
         else {
             //该账号尚未被注册过，进行注册该账号
+            param.right = 1; //设置用户权限，默认普通用户为1
             mongo.insertOneDocuments(userDom, param, response => {
                 //插入数据成功
                 if (response.result.ok == 1) {
                     res.send({
                         status: 200,
-                        data: response.ops[0]._id,
+                        data: response.ops[0],
                     });
                 }
                 //插入数据失败
@@ -76,7 +77,6 @@ router.post('/register', function (req, res, next) {
         }
     });
 });
-
 
 
 module.exports = router;

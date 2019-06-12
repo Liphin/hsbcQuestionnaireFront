@@ -1,16 +1,16 @@
 /**
  * Created by Administrator on 2019/5/27.
  */
-manageModule.controller('ManageCtrl', function (check, $location, $routeParams, ManageDataSer, ManageSer, AllSheetSer, AnalyseSer) {
+manageModule.controller('ManageCtrl', function (check, $location, $routeParams, ManageDataSer, ManageSer, AllSheetSer, ResultSer) {
     //检查是否登录状态
     if (!check) return;
 
     let manage = this;
     manage.overallData = ManageDataSer.overallData;
-    manage.analyseData = ManageDataSer.analyseData;
+    manage.resultData = ManageDataSer.resultData;
     manage.allSheetData = ManageDataSer.allSheetData;
     manage.allSheetType = ManageDataSer.allSheetType;
-    manage.systemManage = ManageDataSer.systemManage;
+    manage.analyseData = ManageDataSer.analyseData;
     ManageSer.init();
 
     /**
@@ -84,14 +84,14 @@ manageModule.controller('ManageCtrl', function (check, $location, $routeParams, 
      * 获取问题序号，用于分析统计时使用
      */
     manage.getQuestionnaireNum = function (index) {
-        return AnalyseSer.getQuestionnaireNum(index);
+        return ResultSer.getQuestionnaireNum(index);
     };
 
     /**
      * 数据统计分析时一些数据计算
      */
     manage.getStatisticNum = function (type, data, data2) {
-        return AnalyseSer.getStatisticNum(type, data, data2)
+        return ResultSer.getStatisticNum(type, data, data2)
     };
 
     /**
@@ -105,21 +105,21 @@ manageModule.controller('ManageCtrl', function (check, $location, $routeParams, 
      * 下载打印分析结果数据
      */
     manage.downloadResult = function () {
-        AnalyseSer.downloadResult();
+        ResultSer.downloadResult();
     };
 
     /**
      * 清空统计数据
      */
     manage.emptyResult = function () {
-        AnalyseSer.emptyResult();
+        ResultSer.emptyResult();
     };
 
     /**
      * 查看填空题数据结果详情
      */
     manage.viewFillResultDetail = function (index, subIndex) {
-        AnalyseSer.viewFillResultDetail(index, subIndex);
+        ResultSer.viewFillResultDetail(index, subIndex);
     };
 
 

@@ -1,5 +1,5 @@
 <!--矩阵多选题：矩阵多选等-->
-<div ng-if="manage.analyseData.sheetClassify.matrix.indexOf(value.type)>-1">
+<div ng-if="manage.resultData.sheetClassify.matrix.indexOf(value.type)>-1">
     <div style="margin: 50px 0;">
         <div style="padding: 10px 0; font-size: 15px">
             <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
@@ -17,8 +17,8 @@
             <tr ng-repeat="tdValue in value.data.choice track by $index">
                 <td>{{tdValue.text}}</td>
                 <td ng-repeat="subValue in value.data.option track by $index">
-                    {{manage.getStatisticNum('selectMinCount', manage.analyseData.result[value.timestamp][$parent.$index][$index])}}
-                    ({{manage.getStatisticNum('matrixPercent',manage.analyseData.result[value.timestamp][$parent.$index][$index], manage.analyseData.result[value.timestamp][$parent.$index])}}%)
+                    {{manage.getStatisticNum('selectMinCount', manage.resultData.result[value.timestamp][$parent.$index][$index])}}
+                    ({{manage.getStatisticNum('matrixPercent',manage.resultData.result[value.timestamp][$parent.$index][$index], manage.resultData.result[value.timestamp][$parent.$index])}}%)
                 </td>
             </tr>
             </tbody>

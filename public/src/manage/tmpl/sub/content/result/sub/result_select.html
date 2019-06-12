@@ -1,5 +1,5 @@
 <!--选择题：包括单选、多选等-->
-<div ng-if="manage.analyseData.sheetClassify.select.indexOf(value.type)>-1">
+<div ng-if="manage.resultData.sheetClassify.select.indexOf(value.type)>-1">
     <div style="margin: 50px 0;">
         <div style="padding: 10px 0; font-size: 15px">
             <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
@@ -16,22 +16,22 @@
             <tbody>
             <tr ng-repeat="tdValue in value.data.option track by $index">
                 <td>{{tdValue.text}}</td>
-                <td>{{manage.getStatisticNum('selectMinCount', manage.analyseData.result[value.timestamp][$index])}}</td>
+                <td>{{manage.getStatisticNum('selectMinCount', manage.resultData.result[value.timestamp][$index])}}</td>
                 <td>
                     <div>
                         <div class="progress" style="width: 150px; display: inline-block; margin-bottom: 0; vertical-align: middle; height: 12px; margin-right: 10px">
                             <div class="progress-bar progress-bar-info" role="progressbar"
-                                 style="position: relative; z-index: 5;height: 12px;width: {{manage.getStatisticNum('selectPercent',manage.analyseData.result[value.timestamp][$index],
-                              manage.analyseData.result[value.timestamp])}}%;"></div>
+                                 style="position: relative; z-index: 5;height: 12px;width: {{manage.getStatisticNum('selectPercent',manage.resultData.result[value.timestamp][$index],
+                              manage.resultData.result[value.timestamp])}}%;"></div>
                         </div>
                         <div style="width: 60px;display: inline-block; vertical-align: middle">{{manage.getStatisticNum('selectPercent',
-                            manage.analyseData.result[value.timestamp][$index], manage.analyseData.result[value.timestamp])}}%</div>
+                            manage.resultData.result[value.timestamp][$index], manage.resultData.result[value.timestamp])}}%</div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>总计</td>
-                <td>{{manage.getStatisticNum('selectSum', manage.analyseData.result[value.timestamp])}}</td>
+                <td>{{manage.getStatisticNum('selectSum', manage.resultData.result[value.timestamp])}}</td>
                 <td></td>
             </tr>
             </tbody>

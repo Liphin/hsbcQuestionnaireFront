@@ -23,10 +23,10 @@
             <span>所有问卷</span>
         </div>
         <!--统计分析-->
-        <div ng-if="manage.overallData.navigation=='analyseSheet'">
+        <div ng-if="manage.overallData.navigation=='resultStatistic'">
             <div class="btn-group"  style="cursor: pointer; display: inline-block; padding: 0 20px; vertical-align: top;" >
                 <div data-toggle="dropdown">
-                    <span>{{manage.allSheetData[manage.analyseData.sheetIndex].title}}</span>
+                    <span>{{manage.allSheetData[manage.resultData.sheetIndex].title}}</span>
                     <i style="margin-left: 7px; position: relative; top: -3px" class="fa fa-sort-down"></i>
                 </div>
                 <div class="dropdown-menu" style="min-width: 202px;margin-left: -2px">
@@ -54,7 +54,12 @@
 
         <!--系统管理-->
         <div ng-if="manage.overallData.navigation=='systemManagement'">
-            <span>系统管理</span>
+            <span>数据分析</span>
+        </div>
+
+        <!--权限设置-->
+        <div ng-if="manage.overallData.navigation=='rightSetting'">
+            <span>权限设置</span>
         </div>
     </div>
 

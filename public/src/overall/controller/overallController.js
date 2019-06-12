@@ -62,8 +62,10 @@ overallModule.controller('OverallCtrl', function ($http, $rootScope, $location, 
         //重置数据
         OverallDataSer.overallData.user._id='';
         OverallDataSer.overallData.user.account='';
+        OverallDataSer.overallData.user.right='';
         $cookies.remove('_id');
         $cookies.remove('account');
+        $cookies.remove('right');
         //跳转至登录页面
         $location.path('/login')
     };

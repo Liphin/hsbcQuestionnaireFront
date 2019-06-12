@@ -33,6 +33,7 @@ manageModule.directive('manageContent', function () {
 });
 
 
+//****************************** 新建问卷 *************************************
 /**
  * 创建新的问卷表单
  */
@@ -42,6 +43,9 @@ manageModule.directive('manageCreateSheet', function () {
         templateUrl:'src/manage/tmpl/sub/content/create/create_sheet.html'
     }
 });
+
+
+//****************************** 所有问卷 *************************************
 /**
  * 查看已有所有问卷表单
  */
@@ -51,78 +55,6 @@ manageModule.directive('manageAllSheet', function () {
         templateUrl:'src/manage/tmpl/sub/content/all/all_sheet.html'
     }
 });
-
-/**
- * 数据统计与分析
- */
-manageModule.directive('sheetAnalyse', function () {
-    return {
-        restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/analyse/sheet_analyse.html'
-    }
-});
-
-
-/**
- * 数据统计与分析——段落描述
- */
-manageModule.directive('sheetAnalyseParagraph', function () {
-    return {
-        restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_paragraph.html'
-    }
-});
-
-/**
- * 数据统计与分析——选择题
- */
-manageModule.directive('sheetAnalyseSelect', function () {
-    return {
-        restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_select.html'
-    }
-});
-
-/**
- * 数据统计与分析——矩阵单选题
- */
-manageModule.directive('sheetAnalyseMatrix', function () {
-    return {
-        restrict: 'E',
-        templateUrl:'src/manage/tmpl/sub/content/analyse/sub/analyse_matrix.html'
-    }
-});
-
-/**
- * 数据统计与分析——单项填空题
- */
-overallModule.directive('sheetAnalyseFillSingle', ['$document', function ($document) {
-    return {
-        restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_fill_single.html'
-    };
-}]);
-
-/**
- * 数据统计与分析——多项填空题
- */
-overallModule.directive('sheetAnalyseFillMatrix', ['$document', function ($document) {
-    return {
-        restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_fill_matrix.html'
-    };
-}]);
-
-/**
- * 数据统计与分析——填空题详情数据
- */
-overallModule.directive('sheetAnalyseTextDetail', ['$document', function ($document) {
-    return {
-        restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/text_detail.html'
-    };
-}]);
-
 
 /**
  * 小程序qrcode
@@ -144,31 +76,118 @@ overallModule.directive('managePublishConfig', ['$document', function ($document
     };
 }]);
 
+
+//********************************** 结果统计 ************************************************
 /**
- * 系统管理
+ * 结果统计
  */
-overallModule.directive('manageSystemManagement', ['$document', function ($document) {
+manageModule.directive('resultStatistic', function () {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/system/system_management.html'
+        templateUrl:'src/manage/tmpl/sub/content/result/result_statistic.html'
+    }
+});
+
+
+/**
+ * 结果统计——段落描述
+ */
+manageModule.directive('resultParagraph', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/content/result/sub/result_paragraph.html'
+    }
+});
+
+/**
+ * 结果统计——选择题
+ */
+manageModule.directive('resultSelect', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/content/result/sub/result_select.html'
+    }
+});
+
+/**
+ * 结果统计——矩阵单选题
+ */
+manageModule.directive('resultMatrix', function () {
+    return {
+        restrict: 'E',
+        templateUrl:'src/manage/tmpl/sub/content/result/sub/result_matrix.html'
+    }
+});
+
+/**
+ * 结果统计——单项填空题
+ */
+overallModule.directive('resultFillSingle', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/result/sub/result_fill_single.html'
+    };
+}]);
+
+/**
+ * 结果统计——多项填空题
+ */
+overallModule.directive('resultFillMatrix', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/result/sub/result_fill_matrix.html'
+    };
+}]);
+
+/**
+ * 结果统计——填空题详情数据
+ */
+overallModule.directive('resultTextDetail', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/result/sub/result_text_detail.html'
+    };
+}]);
+
+
+//*************************************** 数据分析 ***************************************************
+/**
+ * 数据分析主页面
+ */
+overallModule.directive('manageAnalyseData', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/analyse_data.html'
     };
 }]);
 /**
  * 问卷统计
  */
-overallModule.directive('manageSheetStatistic', ['$document', function ($document) {
+overallModule.directive('manageAnalyseSheetStatistic', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/system/sub/sheet_statistic.html'
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_sheet_statistic.html'
     };
 }]);
 /**
  * 人次数统计
  */
-overallModule.directive('managePersonStatistic', ['$document', function ($document) {
+overallModule.directive('manageAnalysePersonStatistic', ['$document', function ($document) {
     return {
         restrict: 'E',
-        templateUrl: 'src/manage/tmpl/sub/content/system/sub/person_statistic.html'
+        templateUrl: 'src/manage/tmpl/sub/content/analyse/sub/analyse_person_statistic.html'
     };
 }]);
 
+
+
+//**************************************** 权限设置 **************************************************
+/**
+ * 权限设置
+ */
+overallModule.directive('manageRightSetting', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/manage/tmpl/sub/content/system/right/right_setting.html'
+    };
+}]);

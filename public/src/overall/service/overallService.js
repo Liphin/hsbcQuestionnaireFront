@@ -125,12 +125,14 @@ overallModule.factory('OverallSer', function ($rootScope, OverallDataSer, $locat
             if (!OverallGeneralSer.checkDataNotEmpty(OverallDataSer.overallData.user._id)) {
                 OverallDataSer.overallData.user._id = $cookies.get('_id');
                 OverallDataSer.overallData.user.account = $cookies.get('account');
+                OverallDataSer.overallData.user.right = $cookies.get('right');
 
             } else {
                 //延长cookie超时时间
                 let newExpireTime = OverallGeneralSer.getNewCookiesExpireDate();
                 $cookies.put('_id', OverallDataSer.overallData.user._id, {'expires': newExpireTime});
                 $cookies.put('account', OverallDataSer.overallData.user.account, {'expires': newExpireTime});
+                $cookies.put('right', OverallDataSer.overallData.user.right, {'expires': newExpireTime});
             }
         }
         return verifiedCamLevel;

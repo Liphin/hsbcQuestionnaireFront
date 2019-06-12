@@ -66,6 +66,15 @@ router.post('/createNewSheet', function (req, res, next) {
  */
 router.post('/loadAllSheet', function (req, res, next) {
     let param = req.body;
+    //如果right权限级别为2则是管理员级别，设置param为空对象即查找所有表单数据
+    if (param.right == 2) {
+        param = {}
+    }
+    //若right级别不为管理员级别则删除right字段，紧根据userid进行查找即可
+    else {
+        delete param.right
+    }
+    //查找对应表单数据
     mongo.findDocuments(sheetDom, param, response => {
         res.send({
             status: 200,

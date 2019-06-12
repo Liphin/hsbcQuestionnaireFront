@@ -1,25 +1,25 @@
 <!--数据统计与分析-->
-<div id="dataAnalyse" ng-if="manage.overallData.navigation=='analyseSheet'" class="scrollBar-7"
+<div id="resultStatistic" ng-if="manage.overallData.navigation=='resultStatistic'" class="scrollBar-7"
      style="padding: 10px 0 0 50px;position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0; overflow-y:auto">
     <!--针对某个表单数据进行统计分析-->
     <div style="display: flex; flex-direction: row">
         <div style="flex: 1.5"></div>
-        <div id="dataAnalyseContent" style="flex: 7">
-            <div ng-repeat="value in manage.allSheetData[manage.analyseData.sheetIndex].sheet track by $index">
+        <div id="resultStatisticContent" style="flex: 7">
+            <div ng-repeat="value in manage.allSheetData[manage.resultData.sheetIndex].sheet track by $index">
                 <!--段落-->
-                <sheet-analyse-paragraph></sheet-analyse-paragraph>
+                <result-paragraph></result-paragraph>
 
                 <!--选择题-->
-                <sheet-analyse-select></sheet-analyse-select>
+                <result-select></result-select>
 
                 <!--矩阵题-->
-                <sheet-analyse-matrix></sheet-analyse-matrix>
+                <result-matrix></result-matrix>
 
                 <!--单项填空题-->
-                <sheet-analyse-fill-single></sheet-analyse-fill-single>
+                <result-fill-single></result-fill-single>
 
                 <!--多项填空题-->
-                <sheet-analyse-fill-matrix></sheet-analyse-fill-matrix>
+                <result-fill-matrix></result-fill-matrix>
             </div>
         </div>
         <div style="flex: 1.5"></div>

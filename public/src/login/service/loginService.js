@@ -7,15 +7,17 @@ loginModule.factory('LoginSer', function (LoginDataSer, OverallGeneralSer, $cook
     /**
      * 保存登录信息
      */
-    let saveLoginInfo = function (_id) {
+    let saveLoginInfo = function (data) {
         //查询有该记录，登录成功，跳转到用户管理界面
-        OverallDataSer.overallData.user._id = _id;
+        OverallDataSer.overallData.user._id = data._id;
         OverallDataSer.overallData.user.account = LoginDataSer.loginInfo.account;
+        OverallDataSer.overallData.user.right = data.right;
 
         //保存至cookie中
         let newExpireTime = OverallGeneralSer.getNewCookiesExpireDate();
         $cookies.put('_id', OverallDataSer.overallData.user._id, {'expires': newExpireTime});
         $cookies.put('account', OverallDataSer.overallData.user.account, {'expires': newExpireTime});
+        $cookies.put('right', OverallDataSer.overallData.user.right, {'expires': newExpireTime});
     };
 
 

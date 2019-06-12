@@ -7,15 +7,15 @@ manageModule.factory('AllSheetSer', function ($cookies, $location, ManageDataSer
      * 加载所有表单数据
      */
     let loadAllSheet = function (callback) {
+        ManageDataSer.allSheetData.length = 0; //数据清空初始化操作
         OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.loadAllSheetUrl,
-            {userid: OverallDataSer.overallData.user._id}, function (result) {
+            {userid: OverallDataSer.overallData.user._id, right: OverallDataSer.overallData.user.right}, function (result) {
                 if (result.status == 200) {
                     //根据创建时间先后排序
                     result.data.sort((a, b) => {
                         return b.timestamp - a.timestamp
                     });
                     //赋值从后台获取的数据
-                    ManageDataSer.allSheetData.length = 0;
                     for (let i in result.data) {
                         ManageDataSer.allSheetData.push(result.data[i]);
                     }

@@ -14,7 +14,7 @@ manageModule.factory('ManageDataSer', function () {
             }
         },
 
-        //在统计分析页面中，查看填空题的详情数据弹框显示数据
+        //在结果页面中，查看填空题的详情数据弹框显示数据
         fillResult: {
             status: false, //面板展开状态
             type: '', //该题目类型
@@ -28,7 +28,7 @@ manageModule.factory('ManageDataSer', function () {
             title: '',
         },
 
-        //小程序预览操作
+        //所有问卷中，小程序预览操作
         miniView: {
             showMiniView: false, //是否展开小程序预览页面
             sheetMiniQrCodeUrl: '', //小程序二维码
@@ -40,8 +40,8 @@ manageModule.factory('ManageDataSer', function () {
     let allSheetData = [];
 
 
-    //目标问卷统计
-    let analyseData = {
+    //结果统计
+    let resultData = {
         sheetIndex: '',
         result: {},
         participant: {},
@@ -55,8 +55,8 @@ manageModule.factory('ManageDataSer', function () {
     };
 
 
-    //系统管理
-    let systemManage = {
+    //数据分析
+    let analyseData= {
         type: 'sheet', //选择的系统分析的类型
         statistic: {
             sheet: { //问卷统计
@@ -119,10 +119,10 @@ manageModule.factory('ManageDataSer', function () {
 
 
     return {
-        analyseData: analyseData,
+        resultData: resultData,
         overallData: overallData,
         allSheetType: allSheetType,
         allSheetData: allSheetData,
-        systemManage: systemManage,
+        analyseData: analyseData,
     }
 });
