@@ -100,7 +100,8 @@
         <!--问卷状态等信息-->
         <div style="background: #e6f0fa;font-size: 12px; color: grey;margin-top: 10px; padding: 10px 30px 15px 30px;display: flex">
             <div style="text-align: left;">
-                <i class="{{manage.allSheetType[value.type].fontIcon}}" style="font-size: 20px; color: {{manage.allSheetType[value.type].color}}"></i>
+                <i class="{{manage.allSheetType[value.type].fontIcon}}" style="vertical-align: middle;font-size: 20px; color: {{manage.allSheetType[value.type].color}}"></i>
+                <span style="margin-left: 10px; vertical-align: middle; font-size: 14px">创建者：{{value.account}}</span>
             </div>
             <div style="flex: 1; text-align: right">
                 <span style="margin-right: 18px" ng-if="value.status==1">草稿</span>

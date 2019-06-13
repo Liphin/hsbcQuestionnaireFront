@@ -63,6 +63,7 @@ manageModule.factory('ManageSer', function ($cookies, $routeParams, $location, M
                 open: true, //对于发布状态的消息，设置open字段记录是否开放结果查询
                 sheet: [DesignDataSer.newWidgetData.paragraph], //初始化操作
                 timestamp: new Date().getTime(), //记录创建时间戳
+                account: OverallDataSer.overallData.user.account, //记录该创建用户的账号信息
             };
             //post发送http请求数据创建新表单数据
             OverallGeneralSer.httpPostJsonData(OverallDataSer.urlData.createNewSheetUrl, data, function (result) {
