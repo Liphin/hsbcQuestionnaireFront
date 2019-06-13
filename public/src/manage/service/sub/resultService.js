@@ -94,7 +94,12 @@ manageModule.factory('ResultSer', function ($location, ManageDataSer, OverallGen
             case 'selectSum': {
                 let total = 0;
                 for (let i in data) {
-                    total += data[i];
+                    //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
+                    if (i == 'other') {
+                        total += data[i].length;
+                    }else {
+                        total += data[i];
+                    }
                 }
                 return OverallGeneralSer.checkDataNotEmpty(total) ? total : 0;
             }

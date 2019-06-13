@@ -14,24 +14,39 @@
             </tr>
             </thead>
             <tbody>
+            <!--一般选项-->
             <tr ng-repeat="tdValue in value.data.option track by $index">
                 <td>{{tdValue.text}}</td>
                 <td>{{manage.getStatisticNum('selectMinCount', manage.resultData.result[value.timestamp][$index])}}</td>
                 <td>
                     <div>
-                        <div class="progress" style="width: 150px; display: inline-block; margin-bottom: 0; vertical-align: middle; height: 12px; margin-right: 10px">
+                        <div class="progress"
+                             style="width: 150px; display: inline-block; margin-bottom: 0; vertical-align: middle; height: 12px; margin-right: 10px">
                             <div class="progress-bar progress-bar-info" role="progressbar"
                                  style="position: relative; z-index: 5;height: 12px;width: {{manage.getStatisticNum('selectPercent',manage.resultData.result[value.timestamp][$index],
                               manage.resultData.result[value.timestamp])}}%;"></div>
                         </div>
-                        <div style="width: 60px;display: inline-block; vertical-align: middle">{{manage.getStatisticNum('selectPercent',
-                            manage.resultData.result[value.timestamp][$index], manage.resultData.result[value.timestamp])}}%</div>
+                        <div style="width: 60px;display: inline-block; vertical-align: middle">
+                            {{manage.getStatisticNum('selectPercent',
+                            manage.resultData.result[value.timestamp][$index],
+                            manage.resultData.result[value.timestamp])}}%
+                        </div>
                     </div>
+                </td>
+            </tr>
+            <!--其他选项-->
+            <tr ng-if="manage.resultData.result.hasOwnProperty('other')">
+                <td>其他</td>
+                <td>{{manage.resultData.result.other.length}}</td>
+                <td>
+                    <button class="btn btn-info" ng-click="manage.viewFillResultDetail($index)"
+                            style="outline: none;padding: 5px 22px;">查看详细信息
+                    </button>
                 </td>
             </tr>
             <tr>
                 <td>总计</td>
-                <td>{{manage.getStatisticNum('selectSum', manage.resultData.result[value.timestamp])}}</td>
+                <td><span>{{manage.getStatisticNum('selectSum', manage.resultData.result[value.timestamp])}}</span></td>
                 <td></td>
             </tr>
             </tbody>

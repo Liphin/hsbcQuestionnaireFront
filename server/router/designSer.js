@@ -165,8 +165,16 @@ router.post('/submitResult', function (req, res) {
                     //单选方式
                     if (widgetResultClassify.single.indexOf(widget.type) > -1) {
                         let selected = widget.data.selected;
-                        let resultKey = 'result.' + widget.timestamp + '.' + selected;
-                        incData[resultKey] = 1;
+                        //如果是其他选项则进行添加到pushData中
+                        if(selected=='other'){
+                            let resultKey = 'result.' + widget.timestamp + '.' + selected;
+                            pushData[resultKey] = widget.data.cusFill.text;
+                        }
+                        //正常选项进入incData中
+                        else {
+                            let resultKey = 'result.' + widget.timestamp + '.' + selected;
+                            incData[resultKey] = 1;
+                        }
                     }
                     //多选方式
                     else if (widgetResultClassify.multi.indexOf(widget.type) > -1) {

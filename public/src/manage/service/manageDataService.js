@@ -95,7 +95,7 @@ manageModule.factory('ManageDataSer', function () {
                 'pull_single_select', 'multi_select', 'matrix_multi_select', 'single_fill', 'matrix_fill', 'detail_fill']
         },
         vote: {
-            type: 'vote',
+            type: 'event',
             name: '活动事件',
             color: '#508cc7',
             fontIcon: 'fa fa-futbol-o',
@@ -105,7 +105,7 @@ manageModule.factory('ManageDataSer', function () {
                 'template_company', 'template_name', 'template_phone']
         },
         exam: {
-            type: 'exam',
+            type: 'vote',
             name: '投票',
             color: '#ba5b9f',
             fontIcon: 'fa fa-bar-chart',
@@ -114,7 +114,7 @@ manageModule.factory('ManageDataSer', function () {
                 'pull_single_select', 'multi_select', 'matrix_multi_select']
         },
         form: {
-            type: 'form',
+            type: 'exam',
             name: '考试',
             color: '#12ba57',
             fontIcon: 'fa fa-file-text-o',
