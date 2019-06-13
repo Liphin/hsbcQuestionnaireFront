@@ -85,7 +85,12 @@ manageModule.factory('ResultSer', function ($location, ManageDataSer, OverallGen
                 let num = data > 0 ? data : 0;
                 let total = 0;
                 for (let i in data2) {
-                    total += data2[i];
+                    //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
+                    if (i == 'other') {
+                        total += data2[i].length;
+                    }else {
+                        total += data2[i];
+                    }
                 }
                 let result = (parseFloat(num) / total * 100).toFixed(2);
                 return OverallGeneralSer.checkDataNotEmpty(result) ? result : 0;
