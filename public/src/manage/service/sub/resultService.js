@@ -88,7 +88,7 @@ manageModule.factory('ResultSer', function ($location, ManageDataSer, OverallGen
                     //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
                     if (i == 'other') {
                         total += data2[i].length;
-                    }else {
+                    } else {
                         total += data2[i];
                     }
                 }
@@ -102,7 +102,7 @@ manageModule.factory('ResultSer', function ($location, ManageDataSer, OverallGen
                     //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
                     if (i == 'other') {
                         total += data[i].length;
-                    }else {
+                    } else {
                         total += data[i];
                     }
                 }
@@ -218,6 +218,13 @@ manageModule.factory('ResultSer', function ($location, ManageDataSer, OverallGen
             //循环遍历每个矩阵填空子结果数据，并添加到fillResult数组中
             for (let i in ManageDataSer.resultData.result[widgetItem.timestamp][subIndex]) {
                 ManageDataSer.overallData.fillResult.data.push(ManageDataSer.resultData.result[widgetItem.timestamp][subIndex][i]);
+            }
+        }
+        //单选题，有other选项数据
+        else if (['single_select'].indexOf(widgetItem.type) > -1) {
+            ManageDataSer.overallData.fillResult.title += " | 其他选项";
+            for (let i in ManageDataSer.resultData.result[widgetItem.timestamp].other) {
+                ManageDataSer.overallData.fillResult.data.push(ManageDataSer.resultData.result[widgetItem.timestamp].other[i]);
             }
         }
     };

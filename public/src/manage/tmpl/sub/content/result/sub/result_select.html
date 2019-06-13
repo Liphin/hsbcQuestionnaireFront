@@ -39,7 +39,7 @@
                 <td>其他</td>
                 <td>{{manage.resultData.result[value.timestamp].other.length}}</td>
                 <td>
-                    <button class="btn btn-info" ng-click="manage.viewFillResultDetail($index)"
+                    <button ng-if="manage.device!='mobile'" class="btn btn-info" ng-click="manage.viewFillResultDetail($index)"
                             style="outline: none;padding: 5px 22px;">查看详细信息
                     </button>
                 </td>
